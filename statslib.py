@@ -7,8 +7,11 @@ class Stat():
         self.O=population
         self.X=statistiques[0]
         self.C=tuple(sorted(list(dict.fromkeys(self.serie())))) #modalitées
-    def __repr__(self): return f"valeur   |{'|'.join([str(Fraction(i).limit_denominator()) for i in self.C])}\neffectif |{'|'.join([' '*(len(str(Fraction(self.C[i-1]).limit_denominator()))-1)+str(self.ef(i)) for i in range(1,len(self.C)+1)])}"
-    #return f"{{ {self.X.__name__} : {(self.O if len(self.O)<10 else 'pop.')} -> {(self.C if len(self.C)<10 else 'mod.')}\n{{ {' '*(len(self.X.__name__)+2)} w -> {self.X.__name__}(w)"
+    def __repr__(self): 
+        return(
+            f"valeur   |{'|'.join([str(Fraction(i).limit_denominator()) for i in self.C])}\n"+
+            f"effectif |{'|'.join([' '*(len(str(Fraction(self.C[i-1]).limit_denominator()))-1)+str(self.ef(i)) for i in range(1,len(self.C)+1)])}"
+            )
     def serie(self):    return [self.X(i) for i in self.O]
     def ef(self,i):     return sum(1 for j in self.O if self.X(j)==self.C[i-1] and i>0)
     def efC(self,i):    return sum(self.ef(j) for j in range(1,i+1))
