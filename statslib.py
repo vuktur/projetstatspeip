@@ -17,26 +17,26 @@ class Stat():
     def efC(self,i):    return sum(self.ef(j) for j in range(1,i+1))
     def fr(self,i):     return (self.ef(i)/len(self.O) if i>0 else 0)
     def frC(self,i):    return sum(self.fr(j) for j in range(1,i+1))
-    def mode(self):pass
+    def mode(self):     return None
 
 # def f(x):return (True if x%2==0 else False)
 # def g(x):return (x+6)%5
 # def h(x):return abs((1/2)*(exp(x)+exp(-x))*sin(x))
-def k(x):return (x**3+3*x**2 if x<=0 else (x**(-1) if x<4 else x**2-7/2*x))
+# def k(x):return (x**3+3*x**2 if x<=0 else (x**(-1) if x<4 else x**2-7/2*x))
 
-exemple=Stat(tuple([i for i in range(-5,6)]),k)
+# exemple=Stat(tuple([i for i in range(-5,6)]),k)
 
-print(exemple.serie())
-print(exemple.C)
+# print(exemple.serie())
+# print(exemple.C)
 
-print(exemple.ef(4))
-print(exemple.efC(5))
-print(exemple.ef(0))
-print(exemple.efC(len(exemple.C))==len(exemple.O))
+# print(exemple.ef(4))
+# print(exemple.efC(5))
+# print(exemple.ef(0))
+# print(exemple.efC(len(exemple.C))==len(exemple.O))
 
-print(exemple.fr(4))
-print(exemple.frC(5))
-print(exemple.fr(0))
-print(exemple.frC(len(exemple.C))==1)
+# print(exemple.fr(4))
+# print(exemple.frC(5))
+# print(exemple.fr(0))
+# print(exemple.frC(len(exemple.C))==1)
 
-print(exemple)
+# print(exemple)
