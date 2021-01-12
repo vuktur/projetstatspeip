@@ -9,8 +9,8 @@ class Stat():
         self.C=tuple(sorted(list(dict.fromkeys(self.serie())))) #modalitées
     def __repr__(self): 
         return(
-            f"valeur   |{'|'.join([str(Fraction(i).limit_denominator()) for i in self.C])}\n"+
-            f"effectif |{'|'.join([' '*(len(str(Fraction(self.C[i-1]).limit_denominator()))-1)+str(self.ef(i)) for i in range(1,len(self.C)+1)])}"
+            f"Valeur   |{'|'.join([str(Fraction(i).limit_denominator()) for i in self.C])}\n"+
+            f"Effectif |{'|'.join([' '*(len(str(Fraction(self.C[i-1]).limit_denominator()))-1)+str(self.ef(i)) for i in range(1,len(self.C)+1)])}"
             )
     def serie(self):    return [self.X(i) for i in self.O]
     def ef(self,i):     return sum(1 for j in self.O if self.X(j)==self.C[i-1] and i>0)
@@ -18,6 +18,7 @@ class Stat():
     def fr(self,i):     return (self.ef(i)/len(self.O) if i>0 else 0)
     def frC(self,i):    return sum(self.fr(j) for j in range(1,i+1))
     def mode(self):pass
+
 # def f(x):return (True if x%2==0 else False)
 # def g(x):return (x+6)%5
 # def h(x):return abs((1/2)*(exp(x)+exp(-x))*sin(x))
