@@ -23,42 +23,14 @@ class Stat():
     def med(self):      return self.quan(2)[0]
     def moy(self):      return sum(i for i in self.serie())/len(self.pop)
     def etnd(self):     return max(i for i in self.serie())-min(i for i in self.serie())
-
-
-
-
-
-
     def quan(self,r):
         l=[]
         s=sorted(self.serie())
-        print(s)
         for i in range(r-1):
-            # print(l)
-            # print(len(s),r-i,len(s)/(r-i),len(s)//(r-i))
-            # print(s[len(s)//(r-i)],(s[len(s)//(r-i)]+s[len(s)//(r-i)-1])/2)
-            # print((len(s)-r+1)%r)
             m=(s[len(s)//(r-i)] if (len(s)-(r-i)+1)%(r-i)==0 else (s[len(s)//(r-i)]+s[len(s)//(r-i)-1])/2)
             l.append(float(m))
-            s=[i for i in s if i>m]
-            print(s)
+            s=[s[j] for j in range(len(s)) if j>(len(s)//(r-i))]
         return sorted(list(dict.fromkeys(l)))
-
-
-
-
-        # print(r)
-        # if not s:
-        #     s=sorted(self.serie())
-        # if r%2==0:
-        #     m=(s[len(s)//2] if len(s)%2!=0 else (s[len(s)//2]+s[len(s)//2-1])/2)
-        #     l.append(float(m))
-        #     s=[[i for i in s if i<m],[i for i in s if i>m]]
-        #     print(s)
-        #     print(l)
-        #     for i in s:self.quan(r/2,i,l) if r/2!=1 else None
-        # else:print('odd')
-        # return sorted(list(dict.fromkeys(l)))
  
 # def f(x):return (True if x%2==0 else False)
 # def g(x):return (x+6)%5
@@ -85,6 +57,8 @@ exemple=Stat(tuple([i for i in range(20)]),p)
 # print(exemple.moy())
 # print(exemple.etnd())
 for i in range(20):
+    print(' - ')
     z={i:randint(0,10) for i in range(20)}
     if(exemple.quan(3)!=[float(sorted(exemple.serie())[6]),float(sorted(exemple.serie())[13])]):
-        print(exemple.quan(3),[float(sorted(exemple.serie())[6]),float(sorted(exemple.serie())[13])],(len(exemple.serie())-2+1)%(2))
+        # print(exemple.quan(3),[float(sorted(exemple.serie())[6]),float(sorted(exemple.serie())[13])],(len(exemple.serie())-2+1)%(2))
+        print('FALSE')
