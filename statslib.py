@@ -38,18 +38,23 @@ class Stat():
     #         print(s)
     #     return sorted(list(dict.fromkeys(l)))
     def quan(self,n):
-        res=[]
+        q=[]
         s=sorted(self.serie())
-        for i in range(n-1):
-            (len(s)/n)+0.5
+        # print(s)
+        for i in range(1,n):
+            # print(s[int(i*(len(s)/n)-0.5)],(s[int(i*(len(s)/n))]+s[int(i*(len(s)/n))-1])/2)
+            # if (i*(len(s)/n)-0.5)%1==0: q.append(s[int(i*(len(s)/n)-0.5)])
+            # else: q.append((s[int(i*(len(s)/n))]+s[int(i*(len(s)/n))-1])/2)
+            q.append(s[int(i*(len(s)/n)-0.5)] if (i*(len(s)/n)-0.5)%1==0 else (s[int(i*(len(s)/n))]+s[int(i*(len(s)/n))-1])/2)
+        return q
 # def f(x):return (True if x%2==0 else False)
 # def g(x):return (x+6)%5
 # def h(x):return abs((1/2)*(exp(x)+exp(-x))*sin(x))
-z={i:randint(0,10) for i in range(100)}
+# z={i:randint(0,10) for i in range(100)}
 def m(x):return [j for i,j in enumerate([i*10 for i in range(50)]) if i==x][0]
 def k(x):return (x**3+3*x**2 if x<=0 else (x**(-1) if x<4 else x**2-7/2*x))
 def p(x):return z[x]
-exemple=Stat(tuple([i for i in range(10)]),p)
+# exemple=Stat(tuple([i for i in range(10)]),p)
 # print(exemple.pop)
 # print(exemple.serie())
 # print(sorted(exemple.serie()))
@@ -67,4 +72,12 @@ exemple=Stat(tuple([i for i in range(10)]),p)
 # print(exemple.med())
 # print(exemple.moy())
 # print(exemple.etnd())
-print(exemple.quan(4))
+# print(exemple.quan(4))
+for i in range(2,10):
+    for j in range(2,50):
+        if j<i:pass
+        else:
+            for _ in range(20):
+                z={i:randint(0,10) for i in range(100)}
+                exemple=Stat(tuple([i for i in range(j)]),p)
+                print(exemple.quan(i))
