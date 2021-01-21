@@ -73,11 +73,16 @@ def p(x):return z[x]
 # print(exemple.moy())
 # print(exemple.etnd())
 # print(exemple.quan(4))
-for i in range(2,10):
-    for j in range(2,50):
-        if j<i:pass
-        else:
-            for _ in range(20):
-                z={i:randint(0,10) for i in range(100)}
-                exemple=Stat(tuple([i for i in range(j)]),p)
-                print(exemple.quan(i))
+# i=3
+# for j in range(2,50):
+#     if j<i:pass
+#     else:
+#         z={i:randint(0,10) for i in range(100)}
+#         exemple=Stat(tuple([i for i in range(j)]),p)
+#         print(sorted(exemple.serie()))
+#         print(exemple.quan(i))
+
+z={i:randint(0,10) for i in range(100)}
+exemple=Stat(tuple([i for i in range(11)]),p)
+print(sorted(exemple.serie()))
+print(exemple.quan(3))
