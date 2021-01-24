@@ -1,13 +1,13 @@
-from math import exp,sin,sqrt
+from math import sqrt
 from fractions import Fraction
 from random import randint
 import statistics
 
 class Stat():
-    def __init__(self,population,*statistiques):
+    def __init__(self,population,statistique):
         self.pop=population
         self.N=len(self.pop)
-        self.X=statistiques[0]
+        self.X=statistique
         self.C=sorted(list(dict.fromkeys(self.serie()))) #modalitées
     def __repr__(self): 
         return(
@@ -49,52 +49,45 @@ class Stat():
             # q.append(s[int(i*(len(s)/n)-0.5)] if (i*(len(s)/n)-0.5)%1==0 else (s[int(i*(len(s)/n))]+s[int(i*(len(s)/n))-1])/2)
             pass
         return q
-    def ecartmoy(self): return sum(abs(i-self.moy()) for i in self.serie())/self.N
-    def variance(self): return sum((i-self.moy()**2) for i in self.serie())/self.N
-    def ecarttyp(self): return sqrt(self.variance())
+    def ecartary(self): return sum(abs(i-self.moy()) for i in self.serie())/self.N
+    def variance(self): return sum((i-self.moy())**2 for i in self.serie())/self.N
+    def ecarttyp(self): return sqrt(abs(self.variance()))
     def moment(self,k): return sum(i**k for i in self.serie())/self.N
     def momentcentre(self,k): return sum((i-self.moy())**k for i in self.serie())/self.N
+    def coeffasy(self): return (self.momentcentre(3)/self.variance()**3)
 
 
 
+def test():
+    # def f(x):return (True if x%2==0 else False)
+    # def g(x):return (x+6)%5
+    # def h(x):return abs((1/2)*(exp(x)+exp(-x))*sin(x))
+    z={i:randint(0,10) for i in range(100)} 
+    def m(x):return [j for i,j in enumerate([i*10 for i in range(50)]) if i==x][0]
+    def k(x):return (x**3+3*x**2 if x<=0 else (x**(-1) if x<4 else x**2-7/2*x))
+    def p(x):return z[x]
+    exemple=Stat(tuple([i for i in range(10)]),p)
+    # print(exemple.quan(4))
+    # i=3
+    # for j in range(2,50):
+    #     if j<i:pass
+    #     else:
+    #         z={i:randint(0,10) for i in range(100)}
+    #         exemple=Stat(tuple([i for i in range(j)]),p)
+    #         print(sorted(exemple.serie()))
+    #         print(exemple.quan(i))
 
-
-# def f(x):return (True if x%2==0 else False)
-# def g(x):return (x+6)%5
-# def h(x):return abs((1/2)*(exp(x)+exp(-x))*sin(x))
-z={i:randint(0,10) for i in range(100)} 
-def m(x):return [j for i,j in enumerate([i*10 for i in range(50)]) if i==x][0]
-def k(x):return (x**3+3*x**2 if x<=0 else (x**(-1) if x<4 else x**2-7/2*x))
-def p(x):return z[x]
-exemple=Stat(tuple([i for i in range(10)]),p)
-# print(exemple.pop)
-# print(exemple.serie())
-# print(sorted(exemple.serie()))
-# print(exemple.C)
-# print(exemple.ef(4))
-# print(exemple.efC(5))
-# print(exemple.ef(0))
-# print(exemple.efC(len(exemple.C))==len(exemple.pop))
-# print(exemple.fr(4))
-# print(exemple.frC(5))
-# print(exemple.fr(0))
-# print(exemple.frC(len(exemple.C))==1)
-# print(exemple)
-# print(exemple.mode())
-# print(exemple.med())
-# print(exemple.moy())
-# print(exemple.etendue())
-# print(exemple.quan(4))
-# i=3
-# for j in range(2,50):
-#     if j<i:pass
-#     else:
-#         z={i:randint(0,10) for i in range(100)}
-#         exemple=Stat(tuple([i for i in range(j)]),p)
-#         print(sorted(exemple.serie()))
-#         print(exemple.quan(i))
-
-# exemple=Stat(tuple([i for i in range(11)]),p)
-# print(sorted(exemple.serie()))
-# print(exemple.quan(3))
-print(exemple.ecart)
+    # exemple=Stat(tuple([i for i in range(11)]),p)
+    # print(sorted(exemple.serie()))
+    # print(exemple.quan(3))
+    # print(exemple.ecartary())
+    # print(exemple.variance())
+    # print(exemple.ecarttyp())
+    # print(exemple.moment(2))
+    # print(exemple.momentcentre(2))
+    # print(exemple.moment(0),exemple.momentcentre(0))
+    # print(exemple.momentcentre(1))
+    # print(exemple.moment(1),exemple.moy())
+    # print(exemple.momentcentre(2),exemple.variance())
+    # print(exemple.variance(),exemple.moment(2)-exemple.moment(1)**2)
+if __name__=='__main__':test()
