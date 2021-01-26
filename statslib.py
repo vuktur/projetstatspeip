@@ -13,7 +13,8 @@ class Stat():
     def __repr__(self): 
         return(
             f"Valeur   |{'|'.join([str(Fraction(i).limit_denominator()) for i in self.C])}\n"+
-            f"Effectif |{'|'.join([' '*(len(str(Fraction(self.C[i-1]).limit_denominator()))-1)+str(self.ef(i)) for i in range(1,len(self.C)+1)])}"
+            f"Effectif |{'|'.join([' '*(len(str(Fraction(self.C[i-1]).limit_denominator()))-1)+str(self.ef(i)) for i in range(1,len(self.C)+1)])}\n\n"+
+            f"Moyenne : {self.moy}\nEcart-type : {self.ecarttyp}\n"
             )
     def serie(self):    return [self.X(i) for i in self.pop]
     def ef(self,n):     return sum(1 for i in self.pop if self.X(i)==self.C[n-1] and n>0)
@@ -27,10 +28,7 @@ class Stat():
         # return (s[l//2] if l%2!=0 else (s[l//2]+s[l//2-1])/2)
     def moy(self):      return sum(i for i in self.v)/self.N
     def etendue(self):  return max(i for i in self.v)-min(i for i in self.v)
-    # def quan(self,r):
-    #     l=[]
-    #     s=sorted(self.v)
-    #     print(s)
+
     #     for i in range(r-1):
     #         print(l)
     #         print(len(s)/(r-i),len(s)//(r-i))
@@ -41,17 +39,23 @@ class Stat():
     #         s=[s[j] for j in range(len(s)) if j>(len(s)//(r-i))]
     #         print(s)
     #     return sorted(list(dict.fromkeys(l)))
+
+    # for i in range(1,n):
+    #         # print(s[int(i*(len(s)/n)-0.5)],(s[int(i*(len(s)/n))]+s[int(i*(len(s)/n))-1])/2)
+    #         # if (i*(len(s)/n)-0.5)%1==0: q.append(s[int(i*(len(s)/n)-0.5)])
+    #         # else: q.append((s[int(i*(len(s)/n))]+s[int(i*(len(s)/n))-1])/2)
+    #         # q.append(s[int(i*(len(s)/n)-0.5)] if (i*(len(s)/n)-0.5)%1==0 else (s[int(i*(len(s)/n))]+s[int(i*(len(s)/n))-1])/2)
+    #         pass
+    #     return q
+    
     def quan(self,n):
         q=[]
         s=sorted(self.v)
-        # print(s)
-        for i in range(1,n):
-            # print(s[int(i*(len(s)/n)-0.5)],(s[int(i*(len(s)/n))]+s[int(i*(len(s)/n))-1])/2)
-            # if (i*(len(s)/n)-0.5)%1==0: q.append(s[int(i*(len(s)/n)-0.5)])
-            # else: q.append((s[int(i*(len(s)/n))]+s[int(i*(len(s)/n))-1])/2)
-            # q.append(s[int(i*(len(s)/n)-0.5)] if (i*(len(s)/n)-0.5)%1==0 else (s[int(i*(len(s)/n))]+s[int(i*(len(s)/n))-1])/2)
+        len(s)/n
+        for _ in range(1,n):
             pass
-        return q
+        pass
+        
     def ecartary(self): return sum(abs(i-self.moy()) for i in self.v)/self.N
     def variance(self): return sum((i-self.moy())**2 for i in self.v)/self.N
     def ecarttyp(self): return sqrt(abs(self.variance()))
@@ -66,12 +70,14 @@ def test():
     # def f(x):return (True if x%2==0 else False)
     # def g(x):return (x+6)%5
     # def h(x):return abs((1/2)*(exp(x)+exp(-x))*sin(x))
-    z={i:randint(0,10) for i in range(100)} 
+    # z={i:randint(0,10) for i in range(100)} 
+    z=[130,140,170,160,136,165,130,135,140,135,161,136,180,190,141,132,165,168,182,177,172,168,175,181,173,169,178,179,175,164]
     # def m(x):return [j for i,j in enumerate([i*10 for i in range(50)]) if i==x][0]
     # def k(x):return (x**3+3*x**2 if x<=0 else (x**(-1) if x<4 else x**2-7/2*x))
     def p(x):return z[x]
     def gauss(x): return exp(-(x**2)/2)/sqrt(2*pi)
-    exemple=Stat(tuple([i for i in range(-3,4)]),gauss)
+    w=[round(float(str(i)+'.'+str(j))-3,1) for i in range(7) for j in range(10)][:-9]
+    exemple=Stat(z,p)
     # print(exemple.quan(4))
     # i=3
     # for j in range(2,50):
@@ -82,6 +88,7 @@ def test():
     #         print(sorted(exemple.v))
     #         print(exemple.quan(i))
     print(exemple)
+
     print(exemple.serie())
     print(exemple.v)
     # print(exemple.quan(3))
