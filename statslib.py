@@ -1,6 +1,7 @@
 from math import pi, sqrt, exp
 from fractions import Fraction
 from random import randint
+from numpy import arange
 # import statistics
 # from decimal import Decimal, ROUND_HALF_UP
 
@@ -9,8 +10,8 @@ class Stat():
         self.pop=population
         self.N=len(self.pop)
         self.X=statistique
-        self.v=[self.X(i) for i in self.pop]
-        self.C=sorted(list(dict.fromkeys(self.v))) #modalitées
+        self.v=[self.X(i) for i in self.pop]       #serie
+        self.C=sorted(list(dict.fromkeys(self.v))) #modalitees
     def __repr__(self): 
         return(
             f"Valeur   |{'|'.join([str(Fraction(i).limit_denominator()) for i in self.C])}\n"+
@@ -34,7 +35,6 @@ class Stat():
         for i in range(1,n):
             a=(i*len(s)/n)
             b=(a-a%0.5+0.5 if (a%0.5<0.25 if a>len(s)/2 else a%0.5<=0.25) else a-a%0.5+1)
-            print(b)
             q.append(s[int(b)-1] if b%1==0 else (s[int(b)]+s[int(b)-1])/2)
         return q 
     def ecartary(self): return sum(abs(i-self.moy()) for i in self.v)/self.N
@@ -51,16 +51,15 @@ def test():
     # def g(x):return (x+6)%5
     # def h(x):return abs((1/2)*(exp(x)+exp(-x))*sin(x))
     # z={i:randint(0,10) for i in range(100)} 
-    # z=[130,140,170,160,136,165,130,135,140,135,161,136,180,190,141,132,165,168,182,177,172,168,175,181,173,169,178,179,175,164]
+    z=[130,140,170,160,136,165,130,135,140,135,161,136,180,190,141,132,165,168,182,177,172,168,175,181,173,169,178,179,175,164]
     # z=[130,140,170,160,136,165,130,135,140,135,161,136,180,190,141,132,165,168,182,177,172,168,175,181,173,169,178,179,175]
-    z=[randint]
+    # z=[randint]
     # def m(x):return [j for i,j in enumerate([i*10 for i in range(50)]) if i==x][0]
     # def k(x):return (x**3+3*x**2 if x<=0 else (x**(-1) if x<4 else x**2-7/2*x))
     def p(x):return z[x]
-    # def gauss(x,u=,o): return exp(-(x**2)/2)/sqrt(2*pi)
+    def gauss(x): return exp(-(x**2)/2)/sqrt(2*pi)
     w=[round(float(str(i)+'.'+str(j))-3,1) for i in range(7) for j in range(10)][:-9]
     exemple=Stat([i for i in range(len(z))],p)
-
     print(exemple)
     # print(exemple.v)
     # print(sorted(exemple.v))
@@ -70,6 +69,7 @@ def test():
     # print(exemple.med())
     # print(exemple.quan(3))
     # print(exemple.quan(4))
+    print(exemple.quan(10))
     # print(exemple.moment(2))
     # print(exemple.momentcentre(2))
     # print(exemple.moment(0),exemple.momentcentre(0))
