@@ -22,8 +22,6 @@ class Stat():
         # l=len(self.serie())
         # s=sorted(self.serie())
         # return (s[l//2] if l%2!=0 else (s[l//2]+s[l//2-1])/2)
-    def moy(self):      return sum(i for i in self.serie)/self.N
-    def etendue(self):  return max(i for i in self.serie)-min(i for i in self.serie)
     def quan(self,n):
         q=[]
         s=sorted(self.serie)
@@ -31,11 +29,15 @@ class Stat():
             a=(i*len(s)/n)
             b=(a-a%0.5+0.5 if (a%0.5<0.25 if a>len(s)/2 else a%0.5<=0.25) else a-a%0.5+1)
             q.append(s[int(b)-1] if b%1==0 else (s[int(b)]+s[int(b)-1])/2)
-        return q 
+        return q
+    def moy(self):      return sum(i for i in self.serie)/self.N
+    def etendue(self):  return max(i for i in self.serie)-min(i for i in self.serie)
+    def quandis(self,p):return self.quan(100)[(100-p)//2]
     def ecartary(self): return sum(abs(i-self.moy()) for i in self.serie)/self.N
     def variance(self): return sum((i-self.moy())**2 for i in self.serie)/self.N
-    def ecarttyp(self): return sqrt(abs(self.variance()))
-    def moment(self,k): return sum(i**k for i in self.serie)/self.N
-    def momentcentre(self,k): return sum((i-self.moy())**k for i in self.serie)/self.N
-    def asymetrie(self): return (self.momentcentre(3)/self.ecarttyp()**3)
-    def aplatissement(self): return (self.momentcentre(4)/self.ecarttyp()**4)
+    def ecarttyp(self): return (abs(self.variance()))**(1/2)
+    def mmt(self,k):    return sum(i**k for i in self.serie)/self.N
+    def mmtctr(self,k): return sum((i-self.moy())**k for i in self.serie)/self.N
+    def asym(self):     return (self.momentcentre(3)/self.ecarttyp()**3)
+    def apla(self):     return (self.momentcentre(4)/self.ecarttyp()**4)
+    
