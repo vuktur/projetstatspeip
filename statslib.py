@@ -32,7 +32,7 @@ class Stat():
         return q
     def moy(self):      return sum(i for i in self.serie)/self.N
     def etendue(self):  return max(i for i in self.serie)-min(i for i in self.serie)
-    def quandis(self,p):return self.quan(100)[(100-p)//2]
+    def quandis(self,p):return self.quan(100)[p-100]
     def ecartary(self): return sum(abs(i-self.moy()) for i in self.serie)/self.N
     def variance(self): return sum((i-self.moy())**2 for i in self.serie)/self.N
     def ecarttyp(self): return (abs(self.variance()))**(1/2)
@@ -40,4 +40,3 @@ class Stat():
     def mmtctr(self,k): return sum((i-self.moy())**k for i in self.serie)/self.N
     def asym(self):     return (self.momentcentre(3)/self.ecarttyp()**3)
     def apla(self):     return (self.momentcentre(4)/self.ecarttyp()**4)
-    
