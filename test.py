@@ -1,7 +1,7 @@
 from statslib import Stat
 from random import randint
 import numpy as np
-# import statistics
+import statistics
 from math import pi, sqrt, exp
 
 # def f(x):return (True if x%2==0 else False)
@@ -16,12 +16,15 @@ z=[130,140,170,160,136,165,130,135,140,135,161,136,180,190,141,132,165,168,182,1
 def p(x):return z[x]
 def gauss(x,u=0,o=1): return exp(-((x-u)**2)/abs(2*o**2))/abs(sqrt(2*pi)*o)
 w=[round(float(str(i)+'.'+str(j))-3,1) for i in range(7) for j in range(10)][:-9]
-# ex=Stat([i for i in range(len(z))],p)
-ex=Stat([i for i in np.arange(-10,10,0.1)],gauss)
+ex=Stat(p,[i for i in range(len(z))])
+# ex=Stat(gauss,[i for i in np.arange(-10,10,0.1)])
 # print(ex)
 # print(ex.serie)
+print(ex.quan(4))
+print(statistics.quantiles([130,140,170,160,136,165,130,135,140,135,161,136,180,190,141,132,165,168,182,177,172,168,175,181,173,169,178,179,175,164]))
+print(sorted(z))
 print(ex.quandis(80))
-# print(ex.ecartary())
+# print(ex.ecartmoy())
 # print(ex.variance())
 # print(ex.ecarttyp())
 # print(ex.med())
