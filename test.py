@@ -1,6 +1,6 @@
 from statslib import Stat
 from random import randint
-import numpy as np
+# import numpy as np
 import statistics
 from math import pi, sqrt, exp
 
@@ -23,7 +23,7 @@ ex=Stat(p,[i for i in range(len(z))])
 print(ex.quan(4))
 print(statistics.quantiles([130,140,170,160,136,165,130,135,140,135,161,136,180,190,141,132,165,168,182,177,172,168,175,181,173,169,178,179,175,164]))
 print(sorted(z))
-print(ex.quandis(80))
+# print(ex.quandis(80))
 # print(ex.ecartmoy())
 # print(ex.variance())
 # print(ex.ecarttyp())
