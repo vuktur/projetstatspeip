@@ -1,12 +1,17 @@
 from fractions import Fraction
+import numpy as np
 # from decimal import Decimal, ROUND_HALF_UP
 
 class Stat():
-    def __init__(self,statistique,population):
-        self.pop=population
+    def __init__(self,stat,pStart,pEnd,pStep=1):
+        if(isinstance(stat,list)):
+            if(pStart==None):pStart=0
+            if(pEnd==None):pEnd=len(stat)
+            self.serie=stat
+        self.pop=[i for i in np.arange(pStart,pEnd,pStep)]
+        if(isinstance(stat,function)):
+            self.serie=[stat(i) for i in self.pop]
         self.N=len(self.pop)
-        self.X=statistique
-        self.serie=[self.X(i) for i in self.pop]
         self.moda=sorted(list(dict.fromkeys(self.serie))) # <- modalites
     # repr renvoie lors du print un tableau avec les modalites dans l'ordre croissant
     # et leur effectif.
@@ -38,7 +43,7 @@ class Stat():
         s=sorted(self.serie)
         for i in range(1,n):
             a=(i*len(s)/n)
-            b=(a-a%0.5+0.5 if (a%0.5<0.25 if a>len(s)/2 else a%0.5<=0.25) else a-a%0.5+1)
+            b=(a-a%.5+.5 if (a%.5<.25 if a>len(s)/2 else a%.5<=.25) else a-a%.5+1)
             q.append(s[int(b)-1] if b%1==0 else (s[int(b)]+s[int(b)-1])/2)
         return q
     # moy rnevoie la moyenne arithmetique de la serie : la somme des valeurs divisee 
@@ -49,8 +54,9 @@ class Stat():
     # def quandis(self,p):return self.quanUnsorted(100)[p-100]
     # ecartmoy renvoie l'ecart moyen : la dispersion des valeurs autour de la moyenne
     def ecartmoy(self): return sum(abs(i-self.moy()) for i in self.serie)/self.N
-    # variance donne la variance de la serie : 
+    # variance donne la variance de la serie, utilisee pour calculer l'ecart type
     def variance(self): return sum((i-self.moy())**2 for i in self.serie)/self.N
+    # ecarttyp donne l'ecart type, une mesure de disperssion des valeurs
     def ecarttyp(self): return (abs(self.variance()))**(1/2)
     def mmt(self,k):    return sum(i**k for i in self.serie)/self.N
     def mmtctr(self,k): return sum((i-self.moy())**k for i in self.serie)/self.N
