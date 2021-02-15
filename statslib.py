@@ -61,6 +61,9 @@ class Stat():
     # NB : apres des recherches, pour obtenir le meme resultat que les methodes de scipy et 
         # statistics, il faudrait appliquer un facteur de correction de n/(n-1) pour eviter
         # des erreurs s'accumulant a chaque iterations : 
+    def variance2(self): return sum(((i-self.mmt(1))**2)*(self.N/(self.N-1)) for i in self.serie)/self.N
+    def ecarttyp2(self): return (abs(self.variance2()))**(1/2)
+        # corrigés a n/(n-1)
     def mmt(self,k):    return sum(i**k for i in self.serie)/self.N
         # mmt donne le moment d'ordre k, une autre valeur de disperssion
     def mmtctr(self,k): return sum((i-self.mmt(1))**k for i in self.serie)/self.N
