@@ -1,6 +1,7 @@
 from fractions import Fraction
 import numpy as np
 # from decimal import Decimal, ROUND_HALF_UP
+import matplotlib as plot
 
 class Stat():
     def __init__(self,stat,pStart=0,pEnd=None,pStep=1):
@@ -20,6 +21,10 @@ class Stat():
         f"Moyenne : {self.moy()}\nEcart-type : {self.ecarttyp()}\n")
         # repr renvoie lors du print un tableau avec les modalites dans l'ordre croissant
         # et leur effectif.
+    def __iter__(self): 
+        yield from self.serie
+    def __getitem__(self,n):
+        return self.serie[n]
     def ef(self,n):     return sum(1 for i in self.serie if i==self.moda[n-1] and n>0)
         # ef renvoie l'effectif d'une certaine valeur
     def efC(self,n):    return sum(self.ef(i) for i in range(1,n+1))
@@ -72,6 +77,7 @@ class Stat():
         # asym donne le coefficient d'asymetrie (skewness)
     def apla(self):     return (self.mmtctr(4)/self.mmtctr(2)**2)
         # apla donne le coefficient d'aplatissement (kurtosis)
-    def decoup(self,*args): 
+    def cla(self,*args): 
         args=[self.pop[0]]+list(args)+[self.pop[-1]]
-        return [[self.serie[j] for j in range(len(self.serie)) if args[i]<self.pop[j]<=args[i+1]] for i in range(len(args)-1)] # str(Fraction(self.serie[j]).limit_denominator())
+        claList=[tuple([self.serie[j] for j in range(len(self.serie)) if args[i]<self.pop[j]<=args[i+1]]) for i in range(len(args)-1)] # str(Fraction(self.serie[j]).limit_denominator())
+        return Stat(claList)
