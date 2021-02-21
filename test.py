@@ -10,8 +10,8 @@ z=[130,140,170,160,136,165,130,135,140,135,161,136,180,190,141,132,165,168,182,1
 # z=[130,140,170,160,136,165,130,135,140,135,161,136,180,190,141,132,165,168,182,177,172,168,175,181,173,169,178,179,175]
 # def k(x):return (x**3+3*x**2 if x<=0 else (x**(-1) if x<4 else x**2-7/2*x))
 def gauss(x,u=0,o=1): return exp(-((x-u)**2)/abs(2*o**2))/abs(sqrt(2*pi)*o)
-ex=Stat(z)
-# ex=Stat(gauss,-10,10,0.1)
+# ex=Stat(z)
+ex=Stat(gauss,-5,5,0.1)
 
 # print(ex.med())
 # print(statistics.median(ex.serie))
@@ -24,5 +24,15 @@ ex=Stat(z)
 # print(ex.ecarttyp(),ex.ecarttyp2())
 # print(statistics.stdev(ex.serie),st.tstd(ex.serie))
 # print(ex.variance(),ex.mmt(2)-ex.mmt(1)**2)
-print(ex.asym(),st.skew(ex.serie))
-print(ex.apla(),st.kurtosis(ex.serie))                          #?
+# print(ex.asym(),st.skew(ex.serie))
+# print(ex.apla(),st.kurtosis(ex.serie))                          #?
+
+print(ex.decoup(-4,-3,1,6)[0])
+print('\n')
+print(ex.decoup(-4,-3,1,6)[1])
+print('\n')
+print(ex.decoup(-4,-3,1,6)[2])
+print('\n')
+print(ex.decoup(-4,-3,1,6)[3])
+print('\n')
+print(ex.decoup(-8,-4,6,7)[4])

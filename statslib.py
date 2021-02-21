@@ -11,11 +11,9 @@ class Stat():
         elif(callable(stat)):
             try:self.serie=[stat(i) for i in np.arange(pStart,pEnd,pStep)]
             except:raise
-        # self.pop=np.arange(pStart,pEnd,pStep).tolist()
+        self.pop=np.arange(pStart,pEnd,pStep).tolist()
         self.N=len(np.arange(pStart,pEnd,pStep))
         self.moda=sorted(list(dict.fromkeys(self.serie))) # <- modalites
-        self.pStart=pStart
-        self.pEnd=pEnd
     def __repr__(self):return(
         f"Valeur   |{'|'.join([str(Fraction(i).limit_denominator()) for i in self.moda])}\n"+
         f"Effectif |{'|'.join([' '*(len(str(Fraction(self.moda[i-1]).limit_denominator()))-1)+str(self.ef(i)) for i in range(1,len(self.moda)+1)])}\n\n"+
@@ -75,5 +73,5 @@ class Stat():
     def apla(self):     return (self.mmtctr(4)/self.mmtctr(2)**2)
         # apla donne le coefficient d'aplatissement (kurtosis)
     def decoup(self,*args): 
-        args=[self.pStart]+args+[self.pEnd]
-        return [[j for j in self.serie if args[i]<j<=args[i+1]] for i in range(len(args-3))]
+        args=[self.pop[0]]+list(args)+[self.pop[-1]]
+        return [[self.serie[j] for j in range(len(self.serie)) if args[i]<self.pop[j]<=args[i+1]] for i in range(len(args)-1)] # str(Fraction(self.serie[j]).limit_denominator())
