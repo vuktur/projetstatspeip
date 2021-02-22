@@ -5,7 +5,8 @@ import matplotlib as plot
 
 class Stat():
     def __init__(self,stat,pStart=0,pEnd=None,pStep=1):
-        if(isinstance(stat,list)):
+        self.serie=[]
+        if(isinstance(stat,list) or isinstance(stat,tuple)):
             if(pStart==None):pStart=0
             if(pEnd==None):pEnd=len(stat)
             self.serie=stat
@@ -25,6 +26,11 @@ class Stat():
         yield from self.serie
     def __getitem__(self,n):
         return self.serie[n]
+    def __enter__(self):
+        return self
+    def __exit__(self,*args):
+        del self
+        return True
     def ef(self,n):     return sum(1 for i in self.serie if i==self.moda[n-1] and n>0)
         # ef renvoie l'effectif d'une certaine valeur
     def efC(self,n):    return sum(self.ef(i) for i in range(1,n+1))
@@ -41,14 +47,24 @@ class Stat():
             # return (s[l//2] if l%2!=0 else (s[l//2]+s[l//2-1])/2)
         # med renvoie la médiane : la valeur de la serie telle qu'il y a autant de valeurs 
         # d'un cote que de l'autre (suivie d'une autre facon, sans utiliser les quantiles)
-    def quan(self,n):
+    def quan(self,n):#return Stat.staticQuan(self.serie,n)
         q=[]
         s=sorted(self.serie)
-        for i in range(1,n):
-            a=(i*len(s)/n)
-            b=(a-a%.5+.5 if (a%.5<.25 if a>len(s)/2 else a%.5<=.25) else a-a%.5+1)
-            q.append(s[int(b)-1] if b%1==0 else (s[int(b)]+s[int(b)-1])/2)
+        if(self):
+            for i in range(1,n):
+                a=(i*len(s)/n)
+                b=(a-a%.5+.5 if (a%.5<.25 if a>len(s)/2 else a%.5<=.25) else a-a%.5+1)
+                q.append(s[int(b)-1] if b%1==0 else (s[int(b)]+s[int(b)-1])/2)
         return q
+    # @staticmethod
+    # def staticQuan(liste,n):
+    #     q=[]
+    #     s=sorted(liste)
+    #     for i in range(1,n):
+    #         a=(i*len(s)/n)
+    #         b=(a-a%.5+.5 if (a%.5<.25 if a>len(s)/2 else a%.5<=.25) else a-a%.5+1)
+    #         q.append(s[int(b)-1] if b%1==0 else (s[int(b)]+s[int(b)-1])/2)
+    #     return q
             # def quan(self,n):return [(sorted(self.serie)[int(((i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+.5 if ((i*len(sorted(self.serie))/n)%.5<.25 if (i*len(sorted(self.serie))/n)>len(sorted(self.serie))/2 else (i*len(sorted(self.serie))/n)%.5<=.25) else (i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+1))-1] if ((i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+.5 if ((i*len(sorted(self.serie))/n)%.5<.25 if (i*len(sorted(self.serie))/n)>len(sorted(self.serie))/2 else (i*len(sorted(self.serie))/n)%.5<=.25) else (i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+1)%1==0 else (sorted(self.serie)[int(((i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+.5 if ((i*len(sorted(self.serie))/n)%.5<.25 if (i*len(sorted(self.serie))/n)>len(sorted(self.serie))/2 else (i*len(sorted(self.serie))/n)%.5<=.25) else (i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+1))]+sorted(self.serie)[int(((i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+.5 if ((i*len(sorted(self.serie))/n)%.5<.25 if (i*len(sorted(self.serie))/n)>len(sorted(self.serie))/2 else (i*len(sorted(self.serie))/n)%.5<=.25) else (i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+1))-1])/2) for i in range(1,n)]
         # quan renvoie les quantiles d'ordre n : les valeurs séparant la série en n parties
         # de meme effectif
@@ -79,5 +95,15 @@ class Stat():
         # apla donne le coefficient d'aplatissement (kurtosis)
     def cla(self,*args): 
         args=[self.pop[0]]+list(args)+[self.pop[-1]]
-        claList=[tuple([self.serie[j] for j in range(len(self.serie)) if args[i]<self.pop[j]<=args[i+1]]) for i in range(len(args)-1)] # str(Fraction(self.serie[j]).limit_denominator())
-        return Stat(claList)
+        claList=[tuple([self.serie[j] for j in range(len(self.serie)) if (args[i]<=self.pop[j]<=args[i+1] if i==0 else args[i]<self.pop[j]<=args[i+1])]) for i in range(len(args)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
+        return ClaStat(claList)
+        # cla renvoie une instance de la classe Cla, derivee de la classe Stat, ou la serie est constituee 
+        # des classes delimitees par les arguments *args de la fonction
+class ClaStat(Stat):
+    def depo(self):
+        l=[]
+        for i in self.serie:
+            with Stat(i) as inst:
+                l.append(inst.med())
+        return l
+    def histogram(self):
