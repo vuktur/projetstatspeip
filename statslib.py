@@ -1,7 +1,7 @@
 from fractions import Fraction
 import numpy as np
 # from decimal import Decimal, ROUND_HALF_UP
-import matplotlib as plot
+import matplotlib.pyplot as plt
 
 class Stat():
     def __init__(self,stat,pStart=0,pEnd=None,pStep=1):
@@ -94,12 +94,15 @@ class Stat():
     def apla(self):     return (self.mmtctr(4)/self.mmtctr(2)**2)
         # apla donne le coefficient d'aplatissement (kurtosis)
     def cla(self,*args): 
-        args=[self.pop[0]]+list(args)+[self.pop[-1]]
-        claList=[tuple([self.serie[j] for j in range(len(self.serie)) if (args[i]<=self.pop[j]<=args[i+1] if i==0 else args[i]<self.pop[j]<=args[i+1])]) for i in range(len(args)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
-        return ClaStat(claList)
+        claScope=[self.pop[0]]+list(args)+[self.pop[-1]]
+        claList=[tuple([self.serie[j] for j in range(len(self.serie)) if (claScope[i]<=self.pop[j]<=claScope[i+1] if i==0 else claScope[i]<self.pop[j]<=claScope[i+1])]) for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
+        return ClaStat(claList,claScope=claScope)
         # cla renvoie une instance de la classe Cla, derivee de la classe Stat, ou la serie est constituee 
         # des classes delimitees par les arguments *args de la fonction
 class ClaStat(Stat):
+    def __init__(self,stat,pStart=0,pEnd=None,pStep=1,claScope=[]):
+        super(ClaStat,self).__init__(stat,pStart=0,pEnd=None,pStep=1)
+        self.claScope=claScope
     def depo(self):
         l=[]
         for i in self.serie:
@@ -107,3 +110,6 @@ class ClaStat(Stat):
                 l.append(inst.med())
         return l
     def histogram(self):
+        print(len(self.serie),len(self.claScope))
+        plt.step(self.claScope, [self.ef(i+1)/self.claScope[i] for i in range(len(self.serie))]+[0])
+        plt.show()
