@@ -128,281 +128,63 @@ similaire.
 
 Intérêt : Élimine les mesures aberrantes.
 
-**L'écart arithmétique moyen** [^1]  
-Calcule la moyenne des écarts à la moyenne
+**L'écart arithmétique moyen** *(peu utilisé)*  
+Calcule la moyenne des écarts à la moyenne.
 $$
 E=\frac{1}{N}\sum_{1≤i≤p}n_i|x_i−\bar{x}|=\sum_{1≤i≤p}f_i|x_i−\bar{x}|=\frac{1}{N}\sum_{1≤i≤p}|v_i−\bar{x}|
 $$
 
-[^1]: peu utilisé.
-
 **L'écart quadratique moyen ou variance**  
-Calcule la moyenne des carrés des écarts à la moyenne
-<!-- 
+Calcule la moyenne des carrés des écarts à la moyenne.
+$$
+V(X)=σ^2_X=\frac{1}{N}\sum_{1≤i≤p}n_i(x_i−\bar{x})^2=\sum_{1≤i≤p}f_i(x_i−\bar{x})^2=\frac{1}{N}\sum_{1≤i≤p}(v_i−\bar{x})^2
+$$  
+Relation de Koenig-Huygens  
+$$
+σ^2_X=\left(\frac{1}{N}\sum_{1≤i≤p}n_i⋅x_i^2\right)-\bar{x}^2=\left(\sum_{1≤i≤p}f_i⋅x_i^2\right)-\bar{x}^2=\left(\frac{1}{N}\sum_{1≤i≤p}v_i^2\right)-\bar{x}^2
+$$
 
+**L'écart type**  
+C'est la racine carré de la variance : même dimension que le caractère étudié.
+$$
+σ_X=\sqrt{V(X)}=\sqrt{\frac{1}{N}\sum_{1≤i≤p}n_i(x_i−\bar{x})^2}=\sqrt{\left(\sum_{1≤i≤p}f_i⋅x_i^2\right)-\bar{x}^2}=...
+$$
 
+#### 1.2.4 Lesmoments
 
- 
-V(X) =σ^2 X=
- 
-#### 1
+**Moment d'ordre k**  
+$$
+m_k(X)=\frac{1}{N}\sum^p_{i=1}(n_i⋅x_i^k)=\sum^p_{i=1}(f_i⋅x_i^k)=\frac{1}{N}\sum^p_{i=1}v_i^k
+$$
 
-#### N
-
-#### ∑
-
- 
-1 ≤i≤p
- 
- 
-ni(xi−x)^2 =
- 
-#### ∑
-
- 
-1 ≤i≤p
- 
- 
-fi(xi−x)^2 =
- 
-#### 1
-
-#### N
-
-#### ∑
-
- 
-1 ≤i≤N
- 
- 
-(vi−x)^2
- 
-RelationdeKo enig-Huygens
-
- 
-σX^2 =
- 
-#### (
-
-#### 1
-
-#### N
-
-#### ∑
-
- 
-1 ≤i≤p
- 
- 
-ni.x^2 i
- 
-#### )
-
- 
-−x^2 =
- 
-#### (
-
-#### ∑
-
- 
-1 ≤i≤p
- 
- 
-fi.x^2 i
- 
-#### )
-
- 
-−x^2 =
- 
-#### (
-
-#### 1
-
-#### N
-
-#### ∑
-
- 
-1 ≤i≤N
- 
- 
-vi^2
- 
-#### )
-
- 
-−x^2
- 
-L'écartty pe
-C'estlaracinecarrédelavariance:mêmedimensionquelecaractèreétudié.
-
- 
-σX=
- 
-#### √
-
-#### V(X) =
-
-#### √
-
-#### 1
-
-#### N
-
-#### ∑
-
- 
-1 ≤i≤p
- 
- 
-ni(xi−x)^2 =
- 
-#### √
-
-#### √
-
-#### √
-
-#### √
-
-#### (
-
-#### ∑
-
- 
-1 ≤i≤p
- 
- 
-fi.x^2 i
- 
-#### )
-
- 
-−x^2 =...
- 
-
-#### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
-
-### 1.2.4 Lesmoments
-
-Momentd'ordrek
-
- 
-mk(X) =
- 
-#### 1
-
-#### N
-
- 
-∑p
- 
- 
-i=
- 
- 
-(ni.xki) =
- 
- 
-∑p
- 
- 
-i=
- 
- 
-(fi.xki) =
- 
-#### 1
-
-#### N
-
-#### ∑N
-
- 
-i=
- 
- 
-vik
- 
-Momentcentréd'ordrek
-
- 
-μk(X) =
- 
-#### 1
-
-#### N
-
- 
-∑p
- 
- 
-i=
- 
- 
-(ni.(xi−x)k) =
- 
- 
-∑p
- 
- 
-i=
- 
- 
-(fi.(xi−x)k) =
- 
-#### 1
-
-#### N
-
-#### ∑N
-
- 
-i=
- 
- 
-(vi−x)k
- 
+**Moment centré d'ordre k**  
+$$
+μ_k(X)=\frac{1}{N}\sum^p_{i=1}(n_i⋅(x_i-\bar{x})^k)=\sum^p_{i=1}(f_i⋅(x_i-\bar{x})^k)=\frac{1}{N}\sum^p_{i=1}(v_i-\bar{x})^k
+$$
 Propriétés:
 
-- m 0 (X) =μ 0 (X) = 1
-- m 1 (X) =xetμ 1 (X) = 0
-- μ 2 (X) =σX^2
-- σ^2 X=m 2 (X)−m 1 (X)^2 (RelationdeKo enig-Huygens)
-- Siunesériestatistique estsymétrique parrap portàsa moyennealors toussesmoments
-centrésd'ordreimpairsontnuls.
-- Par contre il ne sut pas de vérifier que μ 3 (X) = 0  pour conclure que la série est
-symétriqueparrap portàsamoyenne.
+- $m_0(X)=μ_0(X)=1$
+- $m_1(X)=x\text{ et }μ_1(X)=0$
+- $μ_2(X)=σ_X^2$
+- $σ_X^2=m_2(X)−m_1(X)^2$ (Relation de Koenig-Huygens)
+- Si une série statistique est symétrique par rapport à sa moyenne alors tous ses moments centrés d'ordre impair sont nuls.
+- Par contre il ne sufft pas de vérifier que $μ_3(X)=0$ pour conclure que la série est symétrique par rapport à sa moyenne.
 
+#### 1.2.5 Paramètresdeformes
 
-#### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
+**Premier coeffcient de Fisher :coeffcient d'asymétrie**  
+$$
+δ=\frac{μ_3}{σ^3}=\frac{μ_3}{μ_2^{3/2}}
+$$
 
-### 1.2.5 Paramètresdeformes
+- série symétrique $→δ=0$
+- grands écarts positifs % à la moyenne $→δ>0$ ("b osse décalée vers la gauche")
+- grands écarts négatifs % à la moyenne $→δ<0$ ("b osse décalée vers la droite")
+- le coeffcient d'asymétrie est considéré comme significatif lorsque $|δ|>0.5$
+- S'applique essentiellement à une série unimodale.
 
-Premierco ecientdeFisher:co ecientd'asymétrie
-
- 
-δ=
- 
- 
-μ 3
-σ^3
- 
-#### =
-
- 
-μ 3
-μ^32 /^2
- 
-- sériesymétrique→δ= 0
-- grandsécarts positifs%àlamoyenne→δ > 0 ("b ossedécaléeverslagauche")
-- grandsécartsnégatifs%àlamoyenne→δ < 0 ("b ossedécaléeversladroite")
-- leco ecientd'asymétrieestconsidérécommesignificatiflorsque|δ|> 0 , 5
-- S'appliqueessentiellementàunesérieunimo dale.
-
-Secondco ecientdeFisher:co ecientd'aplatissement
+---
+Secondco effcientdeFisher:co effcientd'aplatissement
 
  
 a=
@@ -659,7 +441,7 @@ total f• 1 ... f•j ... f•q 1
 
 #### 1.3. STATISTIQUEDOUBLE(BIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
 
-### 1.3.2 Covarianceetco ecientdecorrélation
+### 1.3.2 Covarianceetco effcientdecorrélation
 
 Covariance
 ElledonneunemesuredulienexistantentrelesdeuxcaractèresXetY.
@@ -715,7 +497,7 @@ nij(xi−x)(yj−y)
 Si les deux caractères sont indé pendants l'un de l'autre alors la covariance est nulle.
 Récipro quefausse.
 
-Co ecientdecorrélation
+Co effcientdecorrélation
 C'estunenormalisationdelacovariancequiéviteleseffetsd'échelle.
 
  
@@ -727,7 +509,7 @@ C'estunenormalisationdelacovariancequiéviteleseffetsd'échelle.
  
 - − 1 ≤ρXY ≤ 1
 - SiXetY sontindé pendantsalorsρXY = 0.Récipro quefausse.
-- S'ilexisteunerelationaneentreXetY alorsρXY =± 1 .Récipro quefausse.
+- S'ilexisteunerelationaffneentreXetY alorsρXY =± 1 .Récipro quefausse.
 
 
 #### 1.3. STATISTIQUEDOUBLE(BIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
@@ -814,13 +596,13 @@ relationentreXetY,toutens'appuyantsurlatechniquedelarégressionlinéaire.
 Sionsoup çonneunerelationdelaformeY =βXα
 Enpassantaulogarithme,larelationdevient:ln(Y) = ln(β) +α·ln(X)
 Oncalculealorsladroitederégressionsurlecouple(X′,Y′) = (ln(X),ln(Y))
-SilerésultatestY′=A·X′+Betqueleco ecientdecorrélationestsatisfaisant
+SilerésultatestY′=A·X′+Betqueleco effcientdecorrélationestsatisfaisant
 AlorsonadmetqueY 'eB·XA(i.e.β=eBetα=A)
 
 Sionsoup çonneunerelationdelaformeY =βαX
 Enpassantaulogarithme,larelationdevient:ln(Y) = ln(β) + ln(α)·X
 Oncalculealorsladroitederégressionsurlecouple(X′,Y′) = (X,ln(Y))
-SilerésultatestY′=A·X′+Betqueleco ecientdecorrélationestsatisfaisant
+SilerésultatestY′=A·X′+Betqueleco effcientdecorrélationestsatisfaisant
 AlorsonadmetqueY 'eB·(eA)X(i.e.β=eBetα=eA)
 
 
@@ -861,5 +643,3 @@ SoitBlevecteurt(T 0 ,T 1 ,...,Tn)
 EtsoitAlevecteurd'inconnuest(a 0 ,a 1 ,...,an)
 
 AestsolutiondusystèmeM·A=B
-
- -->
