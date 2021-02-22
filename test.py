@@ -28,7 +28,8 @@ ex=Stat(gauss,-5,5,0.1)
 # print(ex.asym(),st.skew(ex.serie))
 # print(ex.apla(),st.kurtosis(ex.serie))      #?
 
-classes1=ex.cla(-4,-3,1,3)
+print(ex.serie)
+classes1=ex.cla([0,0.0001,0.003,0.11,0.4])
 # print(classes1[0])
 # print('\n')
 # print(classes1[1])

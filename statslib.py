@@ -15,7 +15,8 @@ class Stat():
             except:raise
         self.pop=np.arange(pStart,pEnd,pStep).tolist()
         self.N=len(np.arange(pStart,pEnd,pStep))
-        self.moda=sorted(list(dict.fromkeys(self.serie))) # <- modalites
+        if isinstance(self.serie[0],list): self.moda=sorted(list(dict.fromkeys((tuple(i) for i in self.serie))))
+        else: self.moda=sorted(list(dict.fromkeys(self.serie))) # <- modalites
     def __repr__(self):return(
         f"Valeur   |{'|'.join([str(Fraction(i).limit_denominator()) for i in self.moda])}\n"+
         f"Effectif |{'|'.join([' '*(len(str(Fraction(self.moda[i-1]).limit_denominator()))-1)+str(self.ef(i)) for i in range(1,len(self.moda)+1)])}\n\n"+
@@ -93,10 +94,13 @@ class Stat():
         # asym donne le coefficient d'asymetrie (skewness)
     def apla(self):     return (self.mmtctr(4)/self.mmtctr(2)**2)
         # apla donne le coefficient d'aplatissement (kurtosis)
-    def cla(self,*args): 
-        claScope=[self.pop[0]]+list(args)+[self.pop[-1]]
-        claList=[tuple([self.serie[j] for j in range(len(self.serie)) if (claScope[i]<=self.pop[j]<=claScope[i+1] if i==0 else claScope[i]<self.pop[j]<=claScope[i+1])]) for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
+    def cla(self,claScope=[]): 
+        claList=[[j for j in self.serie if (claScope[i]<=j<=claScope[i+1] if i==0 else claScope[i]<j<=claScope[i+1])] for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
         return ClaStat(claList,claScope=claScope)
+                # def cla(self,*args): 
+                #     claScope=[self.pop[0]]+list(args)+[self.pop[-1]]
+                #     claList=[tuple([self.serie[j] for j in range(len(self.serie)) if (claScope[i]<=self.pop[j]<=claScope[i+1] if i==0 else claScope[i]<self.pop[j]<=claScope[i+1])]) for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
+                #     return ClaStat(claList,claScope=claScope)
         # cla renvoie une instance de la classe Cla, derivee de la classe Stat, ou la serie est constituee 
         # des classes delimitees par les arguments *args de la fonction
 class ClaStat(Stat):
@@ -110,6 +114,5 @@ class ClaStat(Stat):
                 l.append(inst.med())
         return l
     def histogram(self):
-        print(len(self.serie),len(self.claScope))
-        plt.step(self.claScope, [self.ef(i+1)/self.claScope[i] for i in range(len(self.serie))]+[0])
+        plt.hist(x=[0]+[self.ef(i+1)/abs(self.claScope[i]-self.claScope[i+1]) for i in range(len(self.serie))],bins=self.claScope)
         plt.show()
