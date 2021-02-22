@@ -28,41 +28,28 @@ valeur de son caractère.
 
 #### 1.2.1 Notations
 
-On va se limiter à des statistiques quantitatives.
+>On va se limiter à des statistiques quantitatives.
 
 - Ω population finie de $N$ individus.
 - $C \subset R$
 
 **Première représentation :** Une série statistique est un $N$-uplet $X= (v_1,\,v_2,\,...,\,v_N)$  
-
-**Par exemple :** $X= (2.1,\,5.23,\,0.61,\,2.1,\,7.2,\,0.61)$
-
+**Par exemple :** $X= (2.1,\,5.23,\,0.61,\,2.1,\,7.2,\,0.61)$  
 On parle alors de **série statistique brute**.
 
-**Seconde représentation :**
-→L'ensembledesvaleursobservablesdeXestni.Onp eutécrire:
+**Seconde représentation :**  
+L'ensemble des valeurs observables de $X$ est fini. On peut écrire :
 
-```
-X(Ω) ={x 1 ,x 2 ,...,xp} (1≤p≤N)
-```
-p ourlasuiteonsupp oserax 1 < x 2 < ... < xp.
+$$
+X(Ω) =\{x_1,\,x_2,\,...,\,x_p\}\;(1≤p≤N)
+$$
 
-- Eectifni= #(X−^1 {xi}):nombredefoisquelavaleurxiaétéobservéedanslap opulation
-ounombred'individusadmettantxicommevaleurducaractère.
-- EectifcumuléNi =
+pour la suite on supposera $x_1<x_2<...<x_p$.
 
-```
-∑i
-j=1nj = #(X
-```
-− (^1) {]−∞,x
-i]}): nombred'individusprésentantune
-valeurdecaractèreplusp etitequexi,ouégale.OnalarelationNi=Ni− 1 +nienp osant
-
-
-#### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
-
-N 0 = 0etp eutremarquerqueNp=N
+- Effectif $n_i=\#(X^−1 \{x_i\})$ : nombre de fois que la valeur $x_i$ a été observée dans la population
+ou nombre d'individus admettant $x_i$ comme valeur du caractère.
+- Effectif cumulé $N_i = \sum^i_{j=1} n_j = \#(X^{-1}\{]−\infin,x_i]\})$ : nombre d'individus présentant une
+valeur de caractère plus petite que $x_i$, ou égale.On a la relation $N_i=N_{i−1}+n_i$ en posant $N_0=0$ et peut remarquer que $N_p=N$
 
 - Fréquencefi=ni/N.
 - FréquencecumuléeFi=Ni/N=
@@ -81,7 +68,7 @@ ordonnée..
 ### 1.2.2 Paramètresdep osition
 
 Lemo de
-C'estlavaleurducaractèred'eectifmaximal
+C'estlavaleurducaractèred'effectifmaximal
 
 ```
 mode = xitqni= max
@@ -94,7 +81,7 @@ Attention:iln'estpasforcémentunique.
 
 Lamédiane
 C'estlavaleurducaractèrequiséparelap opulationendeuxpartieségales.
-Attention:parfoisdicileàdénir.
+Attention:parfoisdicileàdéfinir.
 
 ```
 ηtq#{ωi|X(ωi)< η}= #{ωi|X(ωi)> η}
@@ -107,7 +94,7 @@ Attention:parfoisdicileàdénir.
 #### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
 
 Lesquantiles
-Danslemêmeesprit,onp eutdénir
+Danslemêmeesprit,onp eutdéfinir
 
 - lesquartiles: 3 valeursquidécoup entlap opulationen 4 partieségales.Ledeuxièmequartile
 étantalorségalàlamédiane
@@ -204,7 +191,7 @@ Attention:sensibleauxerreursdemesure.
 Lesquantiles
 Danslemêmeordred'idéequel'étendue,onp eutdonnerl'intervalleséparantleplusp etitet
 le plus granddécile(80% delap opulation) ou celui séparant lequartile inférieurQI etle
-quartile sup érieur QS (50% de la p opulation) ou tout autre intervalle déni de manière
+quartile sup érieur QS (50% de la p opulation) ou tout autre intervalle défini de manière
 similaire.
 
 Intérêt:Éliminelesmesuresab errantes.
@@ -486,7 +473,7 @@ Propriétés:
 - σ^2 X=m 2 (X)−m 1 (X)^2 (RelationdeKo enig-Huygens)
 - Siunesériestatistique estsymétrique parrapp ortàsa moyennealors toussesmoments
 centrésd'ordreimpairsontnuls.
-- Par contre il ne sut pas de vérier que μ 3 (X) = 0 p our conclure que la série est
+- Par contre il ne sut pas de vérifier que μ 3 (X) = 0 p our conclure que la série est
 symétriqueparrapp ortàsamoyenne.
 
 
@@ -512,7 +499,7 @@ Premierco ecientdeFisher:co ecientd'asymétrie
 - sériesymétrique→δ= 0
 - grandsécartsp ositifs%àlamoyenne→δ > 0 ("b ossedécaléeverslagauche")
 - grandsécartsnégatifs%àlamoyenne→δ < 0 ("b ossedécaléeversladroite")
-- leco ecientd'asymétrieestconsidérécommesignicatiflorsque|δ|> 0 , 5
+- leco ecientd'asymétrieestconsidérécommesignificatiflorsque|δ|> 0 , 5
 - S'appliqueessentiellementàunesérieunimo dale.
 
 Secondco ecientdeFisher:co ecientd'aplatissement
@@ -550,10 +537,10 @@ avecp′≤peta 0 ≤x 1 < xp≤ap′
 
 Intérêt :Représentationgraphique(histogramme)etmiseenévidenced'uneclassemo dale
 (classedehauteurmaximaledansl'histogramme)
-→Lesclassesp euventêtreéventuellementdelargeursdiérentes.
+→Lesclassesp euventêtreéventuellementdelargeursdifférentes.
 
-- Onnotealorsnil'eectifdelaclasseCi:ni= #{X−^1 ]ai− 1 ,ai]}.
-- Onp eut ensuitedénirNi, fi et Fi commevu précédemmentp ourune sériestatistique
+- Onnotealorsnil'effectifdelaclasseCi:ni= #{X−^1 ]ai− 1 ,ai]}.
+- Onp eut ensuitedéfinirNi, fi et Fi commevu précédemmentp ourune sériestatistique
 dép ouillée.
 
 Lasérieestalorsdonnéesouslaformedelafamille((n 1 ,C 1 ),(n 2 ,C 2 ),...(np′,Cp′))
@@ -570,16 +557,16 @@ oùx′iestlecentredelaclasseCi(x′i= (ai− 1 +ai)/ 2 ).
 
 Lorsquelastatistiqueestdécoup éeenclasses,onnelareprésenteplusparundiagramme
 enbâtons,maisparunhistogramme.Chaqueclasseestreprésentéeparunrectangledontla
-baseestprop ortionnelleàlalargeurdelaclasseetlasurfaceprop ortionnelleàl'eectif(ou,
+baseestprop ortionnelleàlalargeurdelaclasseetlasurfaceprop ortionnelleàl'effectif(ou,
 cequirevientaumême,àlafréquence)delaclasse.C'estbienlasurfaceetnonlahauteurdu
-rectangle qui est prop ortionnelle à l'eectif. Cette remarque prend toute son imp ortance
-lorsquelesclassessontdelargeursdiérentes.
+rectangle qui est prop ortionnelle à l'effectif. Cette remarque prend toute son imp ortance
+lorsquelesclassessontdelargeursdifférentes.
 
 
 #### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
 
 Exemple:ontravaillesurunestatistiquedécoup éesselon lesquatreclasses suivantes:
-[2,4],]4,9],]9,11],]11,12]etchaqueclasseestd'eectif4.
+[2,4],]4,9],]9,11],]11,12]etchaqueclasseestd'effectif4.
 L'axedesordonnéesp eutêtrevucommeunedensité.
 
 
@@ -588,8 +575,8 @@ L'axedesordonnéesp eutêtrevucommeunedensité.
 ### 1.2.8 Laclassemo dale(paramètre dep osition)
 
 C'estlaclassecorresp ondantaurectangleleplushautdansl'histogramme(onparlebien
-icidehauteuretnondesurface).Ellep eutnepasêtreunique.Ilarrivequ'ondénisselemo de
-delastatistiquecommelemilieudelaclassemo dale(cettedénitionn'estpasentièrement
+icidehauteuretnondesurface).Ellep eutnepasêtreunique.Ilarrivequ'ondéfinisselemo de
+delastatistiquecommelemilieudelaclassemo dale(cettedéfinitionn'estpasentièrement
 équivalenteàcelledonnéeplushaut).Dansl'exempleprécédent,laclassemo daleestladernière
 (classe]11,12])etlemo deest11,5.
 
@@ -603,12 +590,12 @@ delastatistiquecommelemilieudelaclassemo dale(cettedénitionn'estpasentièremen
 ```
 Onvaselimiteràdesstatistiquesquantitatives.
 ```
-- Ωp opulationniedeNindividus.
+- Ωp opulationfiniedeNindividus.
 - {UnestatistiquedoubleC estuneapplicationdeΩdansR^2.
     C: Ω −→ R^2
        ω 7−→ C(ω)
 
-C(ω)estdelaforme(x,y).Onp eutdénirdeuxstatistiquessimplesàpartirdeC
+C(ω)estdelaforme(x,y).Onp eutdéfinirdeuxstatistiquessimplesàpartirdeC
 
 Première{ statistiquemarginale
 X: Ω −→ R
@@ -624,7 +611,7 @@ Parabusdelangage,onécritqueC= (X,Y).
 #### 1.3. STATISTIQUEDOUBLE(BIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
 
 ```
-LesensemblesdesvaleursobservablesdeXetY sontnis.Onp eutécrire:
+LesensemblesdesvaleursobservablesdeXetY sontfinis.Onp eutécrire:
 ```
 ```
 X(Ω) ={x 1 ,x 2 ,...,xp} parordrecroissant
@@ -634,11 +621,11 @@ Y(Ω) ={y 1 ,y 2 ,...,xq} parordrecroissant
 ```
 avec 1 ≤p≤N, 1 ≤q≤Netapriorip 6 =q
 
-Eectifsetfréquences
+Effectifsetfréquences
 
-- Eectifnij = #(C−^1 {(xi,yj)}): nombred'individus admettant (xi,yj)commevaleurdu
+- Effectifnij = #(C−^1 {(xi,yj)}): nombred'individus admettant (xi,yj)commevaleurdu
 caractèreC
-- Eectifni• = #(X−^1 {xi}): nombred'individusadmettant xi commepremièrevaleurdu
+- Effectifni• = #(X−^1 {xi}): nombred'individusadmettant xi commepremièrevaleurdu
 caractèreC ounombred'individusadmettantxicommevaleurducaractèreX
     Remarque:ni•=
 
@@ -647,7 +634,7 @@ caractèreC ounombred'individusadmettantxicommevaleurducaractèreX
 ```
 1 ≤j≤qnij
 ```
-- Eectifn•j = #(Y−^1 {yj}): nombre d'individus admettantyj commeseconde valeurdu
+- Effectifn•j = #(Y−^1 {yj}): nombre d'individus admettantyj commeseconde valeurdu
 caractèreC ounombred'individusadmettantyjcommevaleurducaractèreY
     Remarque:n•j=
 
@@ -656,8 +643,8 @@ caractèreC ounombred'individusadmettantyjcommevaleurducaractèreY
 ```
 1 ≤i≤pnij
 ```
-OndénitégalementleseectifscumulésNi•etN•jainsiquelesfréquencesfij,fi•,f•j,Fi•et
-F•j endivisantleseectifscorresp ondantsparN.Ainsi,parexemple
+OndéfinitégalementleseffectifscumulésNi•etN•jainsiquelesfréquencesfij,fi•,f•j,Fi•et
+F•j endivisantleseffectifscorresp ondantsparN.Ainsi,parexemple
 
 ```
 fij=
@@ -829,7 +816,7 @@ Si les deux caractères sont indép endants l'un de l'autre alors la covariance 
 Récipro quefausse.
 
 Co ecientdecorrélation
-C'estunenormalisationdelacovariancequiéviteleseetsd'échelle.
+C'estunenormalisationdelacovariancequiéviteleseffetsd'échelle.
 
 ```
 ρXY =
@@ -969,7 +956,7 @@ i=1yix
 ```
 k
 i
-SoitM lamatricecarréed'ordren+ 1déniepar:[M]`,c=S`+c− 2
+SoitM lamatricecarréed'ordren+ 1définiepar:[M]`,c=S`+c− 2
 SoitBlevecteurt(T 0 ,T 1 ,...,Tn)
 EtsoitAlevecteurd'inconnuest(a 0 ,a 1 ,...,an)
 
