@@ -15,10 +15,16 @@ $$
 \right.
 $$
 
-- $Ω$ : population finie d'individus $ω$. On va mesurer/observer un caractère particulier sur ces individus.
-- $C$ : ensemble des valeurs possibles du caractère, appelées aussi modalités.
+- $Ω$ : population finie d'individus $ω$. On va mesurer/observer un caractère particulier sur ces individus.  
+**`self.pop`**  
+
+- $C$ : ensemble des valeurs possibles du caractère, appelées aussi modalités.  
+**`self.moda`**  
+
 - $X$ : Statistique (parfois appelée aussi caractère). Application qui à tout individu associe la
-valeur de son caractère.
+valeur de son caractère.  
+**`self.serie`**  
+
 <!---->
 - Une statistique peut être quantitative ou
 qualitative.
@@ -48,17 +54,21 @@ $$
 pour la suite on supposera $x_1<x_2<...<x_p$.
 
 - Effectif $n_i=\#(X^−1 \{x_i\})$ : nombre de fois que la valeur $x_i$ a été observée dans la population
-ou nombre d'individus admettant $x_i$ comme valeur du caractère.
+ou nombre d'individus admettant $x_i$ comme valeur du caractère.  
+**`self.ef(i)`**
 
 - Effectif cumulé $N_i = \sum^i_{j=1} n_j = \#(X^{-1}\{]−\infin,x_i]\})$ : nombre d'individus présentant une
-valeur de caractère plus petite que $x_i$, ou égale.On a la relation $N_i=N_{i−1}+n_i$ en posant $N_0=0$ et peut remarquer que $N_p=N$
+valeur de caractère plus petite que $x_i$, ou égale.On a la relation $N_i=N_{i−1}+n_i$ en posant $N_0=0$ et peut remarquer que $N_p=N$  
+**`self.efC(i)`**
 
-- Fréquence $f_i=n_i/N$.
+- Fréquence $f_i=n_i/N$.  
+  **`self.fr(i)`**
 
 - Fréquence cumulée $F_i=N_i/N=\sum^i_{j=1} f_j=F_{i−1}+f_i$ en posant $F_0=0$. On remarque que
-$F_p=1$
+$F_p=1$  
+**`self.frC(i)`**
 
-- Une série statistique est une famille de la forme $(x_i,n_i)_{i\in [1,p]}$ ou $(x_i,f_i)_{i\in [1,p]}$  
+Une série statistique est une famille de la forme $(x_i,n_i)_{i\in [1,p]}$ ou $(x_i,f_i)_{i\in [1,p]}$  
 On parle parfois de **série statistique dépouillée** ou de **série statistique regroupée et
 ordonnée**.
 
@@ -101,88 +111,36 @@ $$
 \sum^p_{i=1}(n_ix_i)=n·X^t\text{ et }m(X)=\frac{1}{N}n·X^t
 $$
 
+#### 1.2.3 Paramètres de dispersion
+
+**L'étendue**  
+C'est la plage de valeur du caractère observée sur la population :
+$$
+w=\max_{1≤i≤p}(x_i)−\min_{1≤i≤p}(x_i)=\max_{1≤i≤N}(v_i)−\min_{1≤i≤N}(v_i)
+$$  
+Attention : sensible aux erreurs de mesure.
+
+**Les quantiles**  
+Dans le même ordre d'idée que l'étendue, on peut donner l'intervalle séparant le plus petit et
+le plus grand décile (80% de la population) ou celui séparant le quartile inférieur $Q_I$ et le
+quartile supérieur $Q_S$ (50% de la population) ou tout autre intervalle définie de manière
+similaire.  
+
+Intérêt : Élimine les mesures aberrantes.
+
+**L'écart arithmétique moyen** [^1]  
+Calcule la moyenne des écarts à la moyenne
+$$
+E=\frac{1}{N}\sum_{1≤i≤p}n_i|x_i−\bar{x}|=\sum_{1≤i≤p}f_i|x_i−\bar{x}|=\frac{1}{N}\sum_{1≤i≤p}|v_i−\bar{x}|
+$$
+
+[^1]: peu utilisé.
+
+**L'écart quadratique moyen ou variance**  
+Calcule la moyenne des carrés des écarts à la moyenne
 <!-- 
-#### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
-
-### 1.2.3 Paramètresdedis persion
-
-L'étendue
-C'estlaplagedevaleurducaractèreobservéesurla population
-
- 
-w= max
-1 ≤i≤p
- 
- 
-(xi)−min
-1 ≤i≤p
- 
- 
-(xi) = max
-1 ≤i≤N
- 
- 
-(vi)− min
-1 ≤i≤N
- 
- 
-(vi)
- 
-Attention:sensibleauxerreursdemesure.
-
-Lesquantiles
-Danslemêmeordred'idéequel'étendue,on peutdonnerl'intervalleséparantleplus petitet
-le plus granddécile(80% dela population) ou celui séparant lequartile inférieurQI etle
-quartile sup érieur QS (50% de la  population) ou tout autre intervalle défini de manière
-similaire.
-
-Intérêt:Éliminelesmesuresab errantes.
-
-L'écartarithmétiquemoyen
-Calculelamoyennedesécartsàlamoyenne
-
- 
-E=
- 
-#### 1
-
-#### N
-
-#### ∑
-
- 
-1 ≤i≤p
- 
- 
-ni|xi−x|=
- 
-#### ∑
-
- 
-1 ≤i≤p
- 
- 
-fi|xi−x|=
- 
-#### 1
-
-#### N
-
-#### ∑
-
- 
-1 ≤i≤N
- 
- 
-|vi−x|
- 
- peuutilisé.
 
 
-#### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
-
-L'écartquadratiquemoyenouvariance
-Calculelamoyennedescarrésdesécartsàlamoyenne
 
  
 V(X) =σ^2 X=
