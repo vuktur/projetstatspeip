@@ -83,78 +83,28 @@ $$
 η=x_i\text{ tq }N_{i−1}<N/2≤N_i
 $$
 
+**Les quantiles**  
+Dans le même esprit, on peut définir :
+
+- les quartiles : 3 valeurs qui découpent la population en 4 parties égales. Le deuxième quartile
+étant alors égal à la médiane.
+- les déciles : 9 valeurs qui découpent la population en 10 parties égales.
+- les centiles : 99 valeurs qui découpent la population en 100 parties égales.
+- ou tout autre découpage.
+
+**La moyenne arithmétique**  
+$$
+m(X)=\bar{x}=\frac{1}{N}\sum^p_{i=1}(n_ix_i)=\sum^p_{i=1}(f_ix_i)=\frac{1}{N}\sum^N_{i=1}v_i
+$$
+Remarque : si on pose $n=(n_1,\,n_2,\,...,\,n_p)$ et $X=(x_1,\,x_2,\,...,\,x_p)$ alors :
+$$
+\sum^p_{i=1}(n_ix_i)=n·X^t\text{ et }m(X)=\frac{1}{N}n·X^t
+$$
+
+<!-- 
 #### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
 
-Lesquantiles
-Danslemêmeesprit,onp eutdéfinir
-
-- lesquartiles: 3 valeursquidécoup entla populationen 4 partieségales.Ledeuxièmequartile
-étantalorségalàlamédiane
-- lesdéciles: 9 valeursquidécoup entla populationen 10 partieségales.
-- lescentiles: 99 valeursquidécoup entla populationen 100 partieségales.
-- outoutautredécoupage.
-
-Lamoyennearithmétique
-
- 
-m(X) =x=
- 
-#### 1
-
-#### N
-
- 
-∑p
- 
- 
-i=
- 
- 
-(nixi) =
- 
- 
-∑p
- 
- 
-i=
- 
- 
-(fixi) =
- 
-#### 1
-
-#### N
-
-#### ∑N
-
- 
-i=
- 
- 
-vi
- 
-Remarque:sion posen=(n 1 ,n 2 ,...np)etX=(x 1 ,x 2 ,...xp)alors
-
- 
-∑p
- 
- 
-i=
- 
- 
-(nixi) = n·Xt et m(X) =
- 
-#### 1
-
-#### N
-
- 
-n·Xt
- 
-
-#### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
-
-### 1.2.3 Paramètresdedisp ersion
+### 1.2.3 Paramètresdedis persion
 
 L'étendue
 C'estlaplagedevaleurducaractèreobservéesurla population
@@ -181,7 +131,7 @@ w= max
 Attention:sensibleauxerreursdemesure.
 
 Lesquantiles
-Danslemêmeordred'idéequel'étendue,onp eutdonnerl'intervalleséparantleplusp etitet
+Danslemêmeordred'idéequel'étendue,on peutdonnerl'intervalleséparantleplus petitet
 le plus granddécile(80% dela population) ou celui séparant lequartile inférieurQI etle
 quartile sup érieur QS (50% de la  population) ou tout autre intervalle défini de manière
 similaire.
@@ -226,7 +176,7 @@ fi|xi−x|=
  
 |vi−x|
  
-p euutilisé.
+ peuutilisé.
 
 
 #### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
@@ -327,7 +277,7 @@ vi^2
  
 −x^2
  
-L'écarttyp e
+L'écartty pe
 C'estlaracinecarrédelavariance:mêmedimensionquelecaractèreétudié.
 
  
@@ -510,7 +460,7 @@ a=
 μ^22
  
 - Unegrandevaleurdeatraduitunresserrementautourdelamoyenne("courb eenpic")
-- Unep etitevaleurdeatraduitunétalementdelasérie("courb eplate")
+- Une petitevaleurdeatraduitunétalementdelasérie("courb eplate")
 - Siladistributionestnormalealorsa=
 - S'appliqueessentiellementàunesérieunimo dale.
 
@@ -520,7 +470,7 @@ a=
 ### 1.2.6 Découpageenclasses
 
 LorsqueXestuncaractèrecontinuouquelesfréquencesfisontfaibles(ppro chedeN)
-onestamenéàdécoup erledomainedevaleursdeXenclasses(sous-intervalles).
+onestamenéàdécouperledomainedevaleursdeXenclasses(sous-intervalles).
 
  
 C 1 = [a 0 ,a 1 ],C 2 =]a 1 ,a 2 ],...,Cp′=]ap′− 1 ,ap′]
@@ -529,17 +479,17 @@ avecp′≤peta 0 ≤x 1 < xp≤ap′
 
 Intérêt :Représentationgraphique(histogramme)etmiseenévidenced'uneclassemo dale
 (classedehauteurmaximaledansl'histogramme)
-→Lesclassesp euventêtreéventuellementdelargeursdifférentes.
+→Lesclasses peuventêtreéventuellementdelargeursdifférentes.
 
 - Onnotealorsnil'effectifdelaclasseCi:ni= #{X−^1 ]ai− 1 ,ai]}.
-- Onp eut ensuitedéfinirNi, fi et Fi commevu précédemment pourune sériestatistique
+- On peut ensuitedéfinirNi, fi et Fi commevuprécédemment pourune sériestatistique
 dé pouillée.
 
 Lasérieestalorsdonnéesouslaformedelafamille((n 1 ,C 1 ),(n 2 ,C 2 ),...(np′,Cp′))
 On parle alors d'une série statistique en classes ou regroup ée en classes ou encore,
 parfois,classée.
 
-- Àtoutesérieclasséeonp eutfairecorres pondreunesériestatistiquedé pouillée(x′i,ni)i∈J 1 ,p′K
+- Àtoutesérieclasséeon peutfairecorres pondreunesériestatistiquedé pouillée(x′i,ni)i∈J 1 ,p′K
 oùx′iestlecentredelaclasseCi(x′i= (ai− 1 +ai)/ 2 ).
 
 
@@ -559,7 +509,7 @@ lorsquelesclassessontdelargeursdifférentes.
 
 Exemple:ontravaillesurunestatistiquedécoup éesselon lesquatreclasses suivantes:
 [2,4],]4,9],]9,11],]11,12]etchaqueclasseestd'effectif4.
-L'axedesordonnéesp eutêtrevucommeunedensité.
+L'axedesordonnées peutêtrevucommeunedensité.
 
 
 #### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
@@ -567,7 +517,7 @@ L'axedesordonnéesp eutêtrevucommeunedensité.
 ### 1.2.8 Laclassemo dale(paramètre de position)
 
 C'estlaclassecorres pondantaurectangleleplushautdansl'histogramme(onparlebien
-icidehauteuretnondesurface).Ellep eutnepasêtreunique.Ilarrivequ'ondéfinisselemo de
+icidehauteuretnondesurface).Elle peutnepasêtreunique.Ilarrivequ'ondéfinisselemo de
 delastatistiquecommelemilieudelaclassemo dale(cettedéfinitionn'estpasentièrement
 équivalenteàcelledonnéeplushaut).Dansl'exempleprécédent,laclassemo daleestladernière
 (classe]11,12])etlemo deest11,5.
@@ -587,7 +537,7 @@ Onvaselimiteràdesstatistiquesquantitatives.
     C: Ω −→ R^2
        ω 7−→ C(ω)
 
-C(ω)estdelaforme(x,y).Onp eutdéfinirdeuxstatistiquessimplesàpartirdeC
+C(ω)estdelaforme(x,y).On peutdéfinirdeuxstatistiquessimplesàpartirdeC
 
 Première{ statistiquemarginale
 X: Ω −→ R
@@ -603,7 +553,7 @@ Parabusdelangage,onécritqueC= (X,Y).
 #### 1.3. STATISTIQUEDOUBLE(BIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
 
  
-LesensemblesdesvaleursobservablesdeXetY sontfinis.Onp eutécrire:
+LesensemblesdesvaleursobservablesdeXetY sontfinis.On peutécrire:
  
  
 X(Ω) ={x 1 ,x 2 ,...,xp} parordrecroissant
@@ -804,7 +754,7 @@ j=
  
 nij(xi−x)(yj−y)
  
-Si les deux caractères sont indép endants l'un de l'autre alors la covariance est nulle.
+Si les deux caractères sont indé pendants l'un de l'autre alors la covariance est nulle.
 Récipro quefausse.
 
 Co ecientdecorrélation
@@ -818,7 +768,7 @@ C'estunenormalisationdelacovariancequiéviteleseffetsd'échelle.
 σXσY
  
 - − 1 ≤ρXY ≤ 1
-- SiXetY sontindép endantsalorsρXY = 0.Récipro quefausse.
+- SiXetY sontindé pendantsalorsρXY = 0.Récipro quefausse.
 - S'ilexisteunerelationaneentreXetY alorsρXY =± 1 .Récipro quefausse.
 
 
@@ -900,7 +850,7 @@ ssi
 
 ### 1.3.4 Régressionlogarithmique
 
-Lorsque le nuagede points nesemble pasrectiligne, on p eutchercher d'autres typ e de
+Lorsque le nuagede points nesemble pasrectiligne, on  peutchercher d'autres ty pe de
 relationentreXetY,toutens'appuyantsurlatechniquedelarégressionlinéaire.
 
 Sionsoup çonneunerelationdelaformeY =βXα
@@ -954,4 +904,4 @@ EtsoitAlevecteurd'inconnuest(a 0 ,a 1 ,...,an)
 
 AestsolutiondusystèmeM·A=B
 
-
+ -->
