@@ -6,7 +6,7 @@
 
 Une statistique est une application d'une population $Ω$ vers un ensemble de valeurs $C$.
 
-![formula](https://render.githubusercontent.com/render/math?math=\left\{\begin{array}{ll}%20X:%20&%20\Omega%20→%20C\\%20&%20\omega%20→%20X(\omega)%20\end{array}%20\right.)
+![formula](https://render.githubusercontent.com/render/math?math=\left\{\begin{array}{ll}%20X:%20%26%20\Omega%20\rightarrow%20C\\%20%26%20\omega%20\rightarrow%20X(\omega)%20\end{array}%20\right.)
 
 - $Ω$ : population finie d'individus $\omega$. On va mesurer/observer un caractère particulier sur ces individus.  
 **`self.pop`**  
@@ -168,9 +168,9 @@ Propriétés:
 δ=\frac{μ_3}{σ^3}=\frac{μ_3}{μ_2^{3/2}}
 ">
 
-- série symétrique $→δ=0$
-- grands écarts positifs % à la moyenne $→δ>0$ ("b osse décalée vers la gauche")
-- grands écarts négatifs % à la moyenne $→δ<0$ ("b osse décalée vers la droite")
+- série symétrique $\rightarrowδ=0$
+- grands écarts positifs % à la moyenne $\rightarrowδ>0$ ("b osse décalée vers la gauche")
+- grands écarts négatifs % à la moyenne $\rightarrowδ<0$ ("b osse décalée vers la droite")
 - le coeffcient d'asymétrie est considéré comme significatif lorsque $|δ|>0.5$
 - S'applique essentiellement à une série unimodale.
 
@@ -199,7 +199,7 @@ avecp′≤peta 0 ≤x 1 < xp≤ap′
 
 Intérêt :Représentationgraphique(histogramme)etmiseenévidenced'uneclassemo dale
 (classedehauteurmaximaledansl'histogramme)
-→Lesclasses peuventêtreéventuellementdelargeursdifférentes.
+\rightarrowLesclasses peuventêtreéventuellementdelargeursdifférentes.
 
 - Onnotealorsnil'effectifdelaclasseCi:ni= #{X−^1 ]ai− 1 ,ai]}.
 - On peut ensuitedéfinirNi, fi et Fi commevuprécédemment pourune sériestatistique
@@ -254,18 +254,18 @@ Onvaselimiteràdesstatistiquesquantitatives.
  
 - Ω populationfiniedeNindividus.
 - {UnestatistiquedoubleC estuneapplicationdeΩdansR^2.
-    C: Ω −→ R^2
-       \omega 7−→ C(\omega)
+    C: Ω −\rightarrow R^2
+       \omega 7−\rightarrow C(\omega)
 
 C(\omega)estdelaforme(x,y).On peutdéfinirdeuxstatistiquessimplesàpartirdeC
 
 Première{ statistiquemarginale
-X: Ω −→ R
-\omega 7−→ lapremièrevaleurducoupleC(\omega)
+X: Ω −\rightarrow R
+\omega 7−\rightarrow lapremièrevaleurducoupleC(\omega)
 
 Seconde{ statistiquemarginale
-Y : Ω −→ R
-\omega 7−→ lasecondevaleurducoupleC(\omega)
+Y : Ω −\rightarrow R
+\omega 7−\rightarrow lasecondevaleurducoupleC(\omega)
 
 Parabusdelangage,onécritqueC= (X,Y).
 
