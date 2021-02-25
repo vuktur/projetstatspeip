@@ -6,16 +6,11 @@
 
 Une statistique est une application d'une population $Ω$ vers un ensemble de valeurs $C$.
 
-$$
-\left\{
-    \begin{array}{ll}
-        X: & Ω → C\\
-        & ω → X(ω)
-    \end{array}
-\right.
-$$
+<img src"https://render.githubusercontent.com/render/math?math=\left\{\begin{array}{ll}X:&Ω→C\\&\omega→X(\omega)\end{array}\right.">
 
-- $Ω$ : population finie d'individus $ω$. On va mesurer/observer un caractère particulier sur ces individus.  
+![formula](https://render.githubusercontent.com/render/math?math=\left\{\begin{array}{ll}%20X:%20&%20\Omega%20→%20C\\%20&%20\omega%20→%20X(\omega)%20\end{array}%20\right.)
+
+- $Ω$ : population finie d'individus $\omega$. On va mesurer/observer un caractère particulier sur ces individus.  
 **`self.pop`**  
 
 - $C$ : ensemble des valeurs possibles du caractère, appelées aussi modalités.  
@@ -47,9 +42,7 @@ On parle alors de **série statistique brute**.
 **Seconde représentation :**  
 L'ensemble des valeurs observables de $X$ est fini. On peut écrire :
 
-$$
-X(Ω) =\{x_1,\,x_2,\,...,\,x_p\}\;(1≤p≤N)
-$$
+<img src"https://render.githubusercontent.com/render/math?math=X(Ω)=\{x_1,\,x_2,\,...,\,x_p\}\;(1≤p≤N)">
 
 pour la suite on supposera $x_1<x_2<...<x_p$.
 
@@ -77,9 +70,9 @@ ordonnée**.
 **Le mode**  
 C'est la valeur du caractère d'effectif maximal
 
-$$
+<img src"https://render.githubusercontent.com/render/math?math=
 mode = x_i \text{ tq } n_i=\max_{1≤j≤p}(n_j)
-$$
+">
 
 Attention : il n'est pas forcément unique.
 
@@ -87,11 +80,11 @@ Attention : il n'est pas forcément unique.
 C'est la valeur du caractère qui sépare la population en deux parties égales.  
 Attention : parfois dificile à définir.
 
-$$
-η\text{ tq }\#\{ω_i\,|\,X(ω_i)<η\}=\#\{ω_i\,|\,X(ω_i)>η\}\\
-η\text{ tq }\#\{ω_i\,|\,X(ω_i)≤η\}=\#\{ω_i\,|\,X(ω_i)≥η\}\\
+<img src"https://render.githubusercontent.com/render/math?math=
+η\text{ tq }\#\{\omega_i\,|\,X(\omega_i)<η\}=\#\{\omega_i\,|\,X(\omega_i)>η\}\\
+η\text{ tq }\#\{\omega_i\,|\,X(\omega_i)≤η\}=\#\{\omega_i\,|\,X(\omega_i)≥η\}\\
 η=x_i\text{ tq }N_{i−1}<N/2≤N_i
-$$
+">
 
 **Les quantiles**  
 Dans le même esprit, on peut définir :
@@ -103,21 +96,21 @@ Dans le même esprit, on peut définir :
 - ou tout autre découpage.
 
 **La moyenne arithmétique**  
-$$
+<img src"https://render.githubusercontent.com/render/math?math=
 m(X)=\bar{x}=\frac{1}{N}\sum^p_{i=1}(n_ix_i)=\sum^p_{i=1}(f_ix_i)=\frac{1}{N}\sum^N_{i=1}v_i
-$$
+">
 Remarque : si on pose $n=(n_1,\,n_2,\,...,\,n_p)$ et $X=(x_1,\,x_2,\,...,\,x_p)$ alors :
-$$
+<img src"https://render.githubusercontent.com/render/math?math=
 \sum^p_{i=1}(n_ix_i)=n·X^t\text{ et }m(X)=\frac{1}{N}n·X^t
-$$
+">
 
 #### 1.2.3 Paramètres de dispersion
 
 **L'étendue**  
 C'est la plage de valeur du caractère observée sur la population :
-$$
+<img src"https://render.githubusercontent.com/render/math?math=
 w=\max_{1≤i≤p}(x_i)−\min_{1≤i≤p}(x_i)=\max_{1≤i≤N}(v_i)−\min_{1≤i≤N}(v_i)
-$$  
+">
 Attention : sensible aux erreurs de mesure.
 
 **Les quantiles**  
@@ -130,37 +123,37 @@ Intérêt : Élimine les mesures aberrantes.
 
 **L'écart arithmétique moyen** *(peu utilisé)*  
 Calcule la moyenne des écarts à la moyenne.
-$$
+<img src"https://render.githubusercontent.com/render/math?math=
 E=\frac{1}{N}\sum_{1≤i≤p}n_i|x_i−\bar{x}|=\sum_{1≤i≤p}f_i|x_i−\bar{x}|=\frac{1}{N}\sum_{1≤i≤p}|v_i−\bar{x}|
-$$
+">
 
 **L'écart quadratique moyen ou variance**  
 Calcule la moyenne des carrés des écarts à la moyenne.
-$$
+<img src"https://render.githubusercontent.com/render/math?math=
 V(X)=σ^2_X=\frac{1}{N}\sum_{1≤i≤p}n_i(x_i−\bar{x})^2=\sum_{1≤i≤p}f_i(x_i−\bar{x})^2=\frac{1}{N}\sum_{1≤i≤p}(v_i−\bar{x})^2
-$$  
+">
 Relation de Koenig-Huygens  
-$$
+<img src"https://render.githubusercontent.com/render/math?math=
 σ^2_X=\left(\frac{1}{N}\sum_{1≤i≤p}n_i⋅x_i^2\right)-\bar{x}^2=\left(\sum_{1≤i≤p}f_i⋅x_i^2\right)-\bar{x}^2=\left(\frac{1}{N}\sum_{1≤i≤p}v_i^2\right)-\bar{x}^2
-$$
+">
 
 **L'écart type**  
 C'est la racine carré de la variance : même dimension que le caractère étudié.
-$$
+<img src"https://render.githubusercontent.com/render/math?math=
 σ_X=\sqrt{V(X)}=\sqrt{\frac{1}{N}\sum_{1≤i≤p}n_i(x_i−\bar{x})^2}=\sqrt{\left(\sum_{1≤i≤p}f_i⋅x_i^2\right)-\bar{x}^2}=...
-$$
+">
 
 #### 1.2.4 Lesmoments
 
 **Moment d'ordre k**  
-$$
+<img src"https://render.githubusercontent.com/render/math?math=
 m_k(X)=\frac{1}{N}\sum^p_{i=1}(n_i⋅x_i^k)=\sum^p_{i=1}(f_i⋅x_i^k)=\frac{1}{N}\sum^p_{i=1}v_i^k
-$$
+">
 
 **Moment centré d'ordre k**  
-$$
+<img src"https://render.githubusercontent.com/render/math?math=
 μ_k(X)=\frac{1}{N}\sum^p_{i=1}(n_i⋅(x_i-\bar{x})^k)=\sum^p_{i=1}(f_i⋅(x_i-\bar{x})^k)=\frac{1}{N}\sum^p_{i=1}(v_i-\bar{x})^k
-$$
+">
 Propriétés:
 
 - $m_0(X)=μ_0(X)=1$
@@ -173,9 +166,9 @@ Propriétés:
 #### 1.2.5 Paramètresdeformes
 
 **Premier coeffcient de Fisher :coeffcient d'asymétrie**  
-$$
+<img src"https://render.githubusercontent.com/render/math?math=
 δ=\frac{μ_3}{σ^3}=\frac{μ_3}{μ_2^{3/2}}
-$$
+">
 
 - série symétrique $→δ=0$
 - grands écarts positifs % à la moyenne $→δ>0$ ("b osse décalée vers la gauche")
@@ -184,9 +177,9 @@ $$
 - S'applique essentiellement à une série unimodale.
 
 **Second coeffcient de Fisher : coeffcient d'aplatissement**
-$$
+<img src"https://render.githubusercontent.com/render/math?math=
 \alpha=\frac{μ_4}{σ^4}=\frac{μ_4}{μ^2_2}
-$$
+">
 
 - Une grande valeur de $\alpha$ traduit un resserrement autour de la moyenne ("courbe en pic")
 - Une petite valeur de $\alpha$ traduit un étalement de la série ("courbe plate")
@@ -264,17 +257,17 @@ Onvaselimiteràdesstatistiquesquantitatives.
 - Ω populationfiniedeNindividus.
 - {UnestatistiquedoubleC estuneapplicationdeΩdansR^2.
     C: Ω −→ R^2
-       ω 7−→ C(ω)
+       \omega 7−→ C(\omega)
 
-C(ω)estdelaforme(x,y).On peutdéfinirdeuxstatistiquessimplesàpartirdeC
+C(\omega)estdelaforme(x,y).On peutdéfinirdeuxstatistiquessimplesàpartirdeC
 
 Première{ statistiquemarginale
 X: Ω −→ R
-ω 7−→ lapremièrevaleurducoupleC(ω)
+\omega 7−→ lapremièrevaleurducoupleC(\omega)
 
 Seconde{ statistiquemarginale
 Y : Ω −→ R
-ω 7−→ lasecondevaleurducoupleC(ω)
+\omega 7−→ lasecondevaleurducoupleC(\omega)
 
 Parabusdelangage,onécritqueC= (X,Y).
 
