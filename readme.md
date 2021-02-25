@@ -6,8 +6,6 @@
 
 Une statistique est une application d'une population $Ω$ vers un ensemble de valeurs $C$.
 
-<img src"https://render.githubusercontent.com/render/math?math=\left\{\begin{array}{ll}X:&Ω→C\\&\omega→X(\omega)\end{array}\right.">
-
 ![formula](https://render.githubusercontent.com/render/math?math=\left\{\begin{array}{ll}%20X:%20&%20\Omega%20→%20C\\%20&%20\omega%20→%20X(\omega)%20\end{array}%20\right.)
 
 - $Ω$ : population finie d'individus $\omega$. On va mesurer/observer un caractère particulier sur ces individus.  
