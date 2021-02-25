@@ -183,25 +183,14 @@ $$
 - le coeffcient d'asymétrie est considéré comme significatif lorsque $|δ|>0.5$
 - S'applique essentiellement à une série unimodale.
 
----
-Secondco effcientdeFisher:co effcientd'aplatissement
+**Second coeffcient de Fisher : coeffcient d'aplatissement**
+$$
+\alpha=\frac{μ_4}{σ^4}=\frac{μ_4}{μ^2_2}
+$$
 
- 
-a=
- 
- 
-μ 4
-σ^4
- 
-#### =
-
- 
-μ 4
-μ^22
- 
-- Unegrandevaleurdeatraduitunresserrementautourdelamoyenne("courb eenpic")
-- Une petitevaleurdeatraduitunétalementdelasérie("courb eplate")
-- Siladistributionestnormalealorsa=
+- Une grande valeur de $\alpha$ traduit un resserrement autour de la moyenne ("courbe en pic")
+- Une petite valeur de $\alpha$ traduit un étalement de la série ("courbe plate")
+- Si la distribution est normale alors $\alpha$ =
 - S'appliqueessentiellementàunesérieunimo dale.
 
 
