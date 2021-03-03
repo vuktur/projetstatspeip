@@ -4,11 +4,11 @@
 
 ### 1.1 Généralités
 
-Une statistique est une application d'une population $Ω$ vers un ensemble de valeurs $C$.
+Une statistique est une application d'une population $\Omega$ vers un ensemble de valeurs $C$.
 
-![formula](https://render.githubusercontent.com/render/math?math=\left\{\begin{array}{ll}%20X:%20%26%20\Omega%20\rightarrow%20C\\%20%26%20\omega%20\rightarrow%20X(\omega)%20\end{array}%20\right.)
+![formula](https://render.githubusercontent.com/render/math?math=\left\{\begin{array}{ll}%20X%3A%20%26%20\Omega%20\rightarrow%20C\\%20%26%20\omega%20\rightarrow%20X(\omega)%20\end{array}%20\right%2E)
 
-- $Ω$ : population finie d'individus $\omega$. On va mesurer/observer un caractère particulier sur ces individus.  
+- $\Omega$ : population finie d'individus $\omega$. On va mesurer/observer un caractère particulier sur ces individus.  
 **`self.pop`**  
 
 - $C$ : ensemble des valeurs possibles du caractère, appelées aussi modalités.  
@@ -30,7 +30,7 @@ qualitative.
 
 >On va se limiter à des statistiques quantitatives.
 
-- Ω population finie de $N$ individus.
+- \Omega population finie de $N$ individus.
 - $C \subset R$
 
 **Première représentation :** Une série statistique est un $N$-uplet $X= (v_1,\,v_2,\,...,\,v_N)$  
@@ -40,7 +40,10 @@ On parle alors de **série statistique brute**.
 **Seconde représentation :**  
 L'ensemble des valeurs observables de $X$ est fini. On peut écrire :
 
-<img src"https://render.githubusercontent.com/render/math?math=X(Ω)=\{x_1,\,x_2,\,...,\,x_p\}\;(1≤p≤N)">
+![formula](https://render.githubusercontent.com/render/math?math=X(\Omega)=\{x_1,\,x_2,\,...,\,x_p\}\;(1\leq \leq N))
+
+![formula](https://render.githubusercontent.com/render/math?math=X%28%5COmega%29%3D%5C%7Bx_1%2C%5C%2Cx_2%2C%5C%2C...%2C%5C%2Cx_p%5C%7D%5C%3B%281%5Cleq+p 
+$^;,%5Cleq+N%29)
 
 pour la suite on supposera $x_1<x_2<...<x_p$.
 
@@ -68,9 +71,9 @@ ordonnée**.
 **Le mode**  
 C'est la valeur du caractère d'effectif maximal
 
-<img src"https://render.githubusercontent.com/render/math?math=
-mode = x_i \text{ tq } n_i=\max_{1≤j≤p}(n_j)
-">
+![formula](https://render.githubusercontent.com/render/math?math=
+mode = x_i \text{ tq } n_i=\max_{1\leq%20j\leq%20p}(n_j)
+)
 
 Attention : il n'est pas forcément unique.
 
@@ -78,11 +81,11 @@ Attention : il n'est pas forcément unique.
 C'est la valeur du caractère qui sépare la population en deux parties égales.  
 Attention : parfois dificile à définir.
 
-<img src"https://render.githubusercontent.com/render/math?math=
+![formula](https://render.githubusercontent.com/render/math?math=
 η\text{ tq }\#\{\omega_i\,|\,X(\omega_i)<η\}=\#\{\omega_i\,|\,X(\omega_i)>η\}\\
-η\text{ tq }\#\{\omega_i\,|\,X(\omega_i)≤η\}=\#\{\omega_i\,|\,X(\omega_i)≥η\}\\
-η=x_i\text{ tq }N_{i−1}<N/2≤N_i
-">
+η\text{ tq }\#\{\omega_i\,|\,X(\omega_i)\leq%20η\}=\#\{\omega_i\,|\,X(\omega_i)≥η\}\\
+η=x_i\text{ tq }N_{i−1}<N/2\leq%20N_i
+)
 
 **Les quantiles**  
 Dans le même esprit, on peut définir :
@@ -94,21 +97,21 @@ Dans le même esprit, on peut définir :
 - ou tout autre découpage.
 
 **La moyenne arithmétique**  
-<img src"https://render.githubusercontent.com/render/math?math=
+![formula](https://render.githubusercontent.com/render/math?math=
 m(X)=\bar{x}=\frac{1}{N}\sum^p_{i=1}(n_ix_i)=\sum^p_{i=1}(f_ix_i)=\frac{1}{N}\sum^N_{i=1}v_i
-">
+)
 Remarque : si on pose $n=(n_1,\,n_2,\,...,\,n_p)$ et $X=(x_1,\,x_2,\,...,\,x_p)$ alors :
-<img src"https://render.githubusercontent.com/render/math?math=
+![formula](https://render.githubusercontent.com/render/math?math=
 \sum^p_{i=1}(n_ix_i)=n·X^t\text{ et }m(X)=\frac{1}{N}n·X^t
-">
+)
 
 #### 1.2.3 Paramètres de dispersion
 
 **L'étendue**  
 C'est la plage de valeur du caractère observée sur la population :
-<img src"https://render.githubusercontent.com/render/math?math=
-w=\max_{1≤i≤p}(x_i)−\min_{1≤i≤p}(x_i)=\max_{1≤i≤N}(v_i)−\min_{1≤i≤N}(v_i)
-">
+![formula](https://render.githubusercontent.com/render/math?math=
+w=\max_{1\leq%20i\leq%20p}(x_i)−\min_{1\leq%20i\leq%20p}(x_i)=\max_{1\leq%20i\leq%20N}(v_i)−\min_{1\leq%20i\leq%20N}(v_i)
+)
 Attention : sensible aux erreurs de mesure.
 
 **Les quantiles**  
@@ -121,37 +124,37 @@ Intérêt : Élimine les mesures aberrantes.
 
 **L'écart arithmétique moyen** *(peu utilisé)*  
 Calcule la moyenne des écarts à la moyenne.
-<img src"https://render.githubusercontent.com/render/math?math=
-E=\frac{1}{N}\sum_{1≤i≤p}n_i|x_i−\bar{x}|=\sum_{1≤i≤p}f_i|x_i−\bar{x}|=\frac{1}{N}\sum_{1≤i≤p}|v_i−\bar{x}|
-">
+![formula](https://render.githubusercontent.com/render/math?math=
+E=\frac{1}{N}\sum_{1\leq%20i\leq%20p}n_i|x_i−\bar{x}|=\sum_{1\leq%20i\leq%20p}f_i|x_i−\bar{x}|=\frac{1}{N}\sum_{1\leq%20i\leq%20p}|v_i−\bar{x}|
+)
 
 **L'écart quadratique moyen ou variance**  
 Calcule la moyenne des carrés des écarts à la moyenne.
-<img src"https://render.githubusercontent.com/render/math?math=
-V(X)=σ^2_X=\frac{1}{N}\sum_{1≤i≤p}n_i(x_i−\bar{x})^2=\sum_{1≤i≤p}f_i(x_i−\bar{x})^2=\frac{1}{N}\sum_{1≤i≤p}(v_i−\bar{x})^2
-">
+![formula](https://render.githubusercontent.com/render/math?math=
+V(X)=σ^2_X=\frac{1}{N}\sum_{1\leq%20i\leq%20p}n_i(x_i−\bar{x})^2=\sum_{1\leq%20i\leq%20p}f_i(x_i−\bar{x})^2=\frac{1}{N}\sum_{1\leq%20i\leq%20p}(v_i−\bar{x})^2
+)
 Relation de Koenig-Huygens  
-<img src"https://render.githubusercontent.com/render/math?math=
-σ^2_X=\left(\frac{1}{N}\sum_{1≤i≤p}n_i⋅x_i^2\right)-\bar{x}^2=\left(\sum_{1≤i≤p}f_i⋅x_i^2\right)-\bar{x}^2=\left(\frac{1}{N}\sum_{1≤i≤p}v_i^2\right)-\bar{x}^2
-">
+![formula](https://render.githubusercontent.com/render/math?math=
+σ^2_X=\left(\frac{1}{N}\sum_{1\leq%20i\leq%20p}n_i⋅x_i^2\right)-\bar{x}^2=\left(\sum_{1\leq%20i\leq%20p}f_i⋅x_i^2\right)-\bar{x}^2=\left(\frac{1}{N}\sum_{1\leq%20i\leq%20p}v_i^2\right)-\bar{x}^2
+)
 
 **L'écart type**  
 C'est la racine carré de la variance : même dimension que le caractère étudié.
-<img src"https://render.githubusercontent.com/render/math?math=
-σ_X=\sqrt{V(X)}=\sqrt{\frac{1}{N}\sum_{1≤i≤p}n_i(x_i−\bar{x})^2}=\sqrt{\left(\sum_{1≤i≤p}f_i⋅x_i^2\right)-\bar{x}^2}=...
-">
+![formula](https://render.githubusercontent.com/render/math?math=
+σ_X=\sqrt{V(X)}=\sqrt{\frac{1}{N}\sum_{1\leq%20i\leq%20p}n_i(x_i−\bar{x})^2}=\sqrt{\left(\sum_{1\leq%20i\leq%20p}f_i⋅x_i^2\right)-\bar{x}^2}=...
+)
 
 #### 1.2.4 Lesmoments
 
 **Moment d'ordre k**  
-<img src"https://render.githubusercontent.com/render/math?math=
+![formula](https://render.githubusercontent.com/render/math?math=
 m_k(X)=\frac{1}{N}\sum^p_{i=1}(n_i⋅x_i^k)=\sum^p_{i=1}(f_i⋅x_i^k)=\frac{1}{N}\sum^p_{i=1}v_i^k
-">
+)
 
 **Moment centré d'ordre k**  
-<img src"https://render.githubusercontent.com/render/math?math=
+![formula](https://render.githubusercontent.com/render/math?math=
 μ_k(X)=\frac{1}{N}\sum^p_{i=1}(n_i⋅(x_i-\bar{x})^k)=\sum^p_{i=1}(f_i⋅(x_i-\bar{x})^k)=\frac{1}{N}\sum^p_{i=1}(v_i-\bar{x})^k
-">
+)
 Propriétés:
 
 - $m_0(X)=μ_0(X)=1$
@@ -164,9 +167,9 @@ Propriétés:
 #### 1.2.5 Paramètresdeformes
 
 **Premier coeffcient de Fisher :coeffcient d'asymétrie**  
-<img src"https://render.githubusercontent.com/render/math?math=
+![formula](https://render.githubusercontent.com/render/math?math=
 δ=\frac{μ_3}{σ^3}=\frac{μ_3}{μ_2^{3/2}}
-">
+)
 
 - série symétrique $\rightarrowδ=0$
 - grands écarts positifs % à la moyenne $\rightarrowδ>0$ ("b osse décalée vers la gauche")
@@ -175,9 +178,9 @@ Propriétés:
 - S'applique essentiellement à une série unimodale.
 
 **Second coeffcient de Fisher : coeffcient d'aplatissement**
-<img src"https://render.githubusercontent.com/render/math?math=
+![formula](https://render.githubusercontent.com/render/math?math=
 \alpha=\frac{μ_4}{σ^4}=\frac{μ_4}{μ^2_2}
-">
+)
 
 - Une grande valeur de $\alpha$ traduit un resserrement autour de la moyenne ("courbe en pic")
 - Une petite valeur de $\alpha$ traduit un étalement de la série ("courbe plate")
@@ -195,7 +198,7 @@ onestamenéàdécouperledomainedevaleursdeXenclasses(sous-intervalles).
  
 C 1 = [a 0 ,a 1 ],C 2 =]a 1 ,a 2 ],...,Cp′=]ap′− 1 ,ap′]
  
-avecp′≤peta 0 ≤x 1 < xp≤ap′
+avecp′\leq%20peta 0 \leq%20x 1 < xp\leq%20ap′
 
 Intérêt :Représentationgraphique(histogramme)etmiseenévidenced'uneclassemo dale
 (classedehauteurmaximaledansl'histogramme)
@@ -252,19 +255,19 @@ delastatistiquecommelemilieudelaclassemo dale(cettedéfinitionn'estpasentièreme
  
 Onvaselimiteràdesstatistiquesquantitatives.
  
-- Ω populationfiniedeNindividus.
-- {UnestatistiquedoubleC estuneapplicationdeΩdansR^2.
-    C: Ω −\rightarrow R^2
+- \Omega populationfiniedeNindividus.
+- {UnestatistiquedoubleC estuneapplicationde\OmegadansR^2.
+    C: \Omega −\rightarrow R^2
        \omega 7−\rightarrow C(\omega)
 
 C(\omega)estdelaforme(x,y).On peutdéfinirdeuxstatistiquessimplesàpartirdeC
 
 Première{ statistiquemarginale
-X: Ω −\rightarrow R
+X: \Omega −\rightarrow R
 \omega 7−\rightarrow lapremièrevaleurducoupleC(\omega)
 
 Seconde{ statistiquemarginale
-Y : Ω −\rightarrow R
+Y : \Omega −\rightarrow R
 \omega 7−\rightarrow lasecondevaleurducoupleC(\omega)
 
 Parabusdelangage,onécritqueC= (X,Y).
@@ -276,12 +279,12 @@ Parabusdelangage,onécritqueC= (X,Y).
 LesensemblesdesvaleursobservablesdeXetY sontfinis.On peutécrire:
  
  
-X(Ω) ={x 1 ,x 2 ,...,xp} parordrecroissant
+X(\Omega) ={x 1 ,x 2 ,...,xp} parordrecroissant
  
  
-Y(Ω) ={y 1 ,y 2 ,...,xq} parordrecroissant
+Y(\Omega) ={y 1 ,y 2 ,...,xq} parordrecroissant
  
-avec 1 ≤p≤N, 1 ≤q≤Netapriorip 6 =q
+avec 1 \leq%20p\leq%20N, 1 \leq%20q\leq%20Netapriorip 6 =q
 
 Effectifsetfréquences
 
@@ -294,7 +297,7 @@ caractèreC ounombred'individusadmettantxicommevaleurducaractèreX
 #### ∑
 
  
-1 ≤j≤qnij
+1 \leq%20j\leq%20qnij
  
 - Effectifn•j = #(Y−^1 {yj}): nombre d'individus admettantyj commeseconde valeurdu
 caractèreC ounombred'individusadmettantyjcommevaleurducaractèreY
@@ -303,7 +306,7 @@ caractèreC ounombred'individusadmettantyjcommevaleurducaractèreY
 #### ∑
 
  
-1 ≤i≤pnij
+1 \leq%20i\leq%20pnij
  
 OndéfinitégalementleseffectifscumulésNi•etN•jainsiquelesfréquencesfij,fi•,f•j,Fi•et
 F•j endivisantleseffectifscorres pondantsparN.Ainsi,parexemple
@@ -487,7 +490,7 @@ C'estunenormalisationdelacovariancequiéviteleseffetsd'échelle.
 σXY
 σXσY
  
-- − 1 ≤ρXY ≤ 1
+- − 1 \leq%20ρXY \leq%20 1
 - SiXetY sontindé pendantsalorsρXY = 0.Récipro quefausse.
 - S'ilexisteunerelationaffneentreXetY alorsρXY =± 1 .Récipro quefausse.
 
