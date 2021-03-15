@@ -32,7 +32,9 @@ class Stat():
     def __exit__(self,*args):
         del self
         return True
-    def ef(self,n):     return sum(1 for i in self.serie if i==self.moda[n-1] and n>0)
+    def ef(self,n):
+        if not(isinstance(self.serie[0],list)): return sum(1 for i in self.serie if i==self.moda[n-1] and n>0)
+        else: return len(self.serie[n-1])
         # ef renvoie l'effectif d'une certaine valeur
     def efC(self,n):    return sum(self.ef(i) for i in range(1,n+1))
         # efC fait la somme des effectifs pour les valeurs inferieures ou egales
@@ -72,7 +74,7 @@ class Stat():
     def moy(self):      return self.mmt(1)#sum(i for i in self.serie)/self.N
         # moy rnevoie la moyenne arithmetique de la serie : la somme des valeurs divisee 
         # par la taille de l'echantillon
-    def etendue(self):  return max(i for i in self.serie)-min(i for i in self.serie)
+    def etendue(self):  return max(self.serie)-min(self.serie)
         # etendue renvoie l'ecart entre la plus petite et la plus grande valeur de la serie
     def ecartmoy(self): return sum(abs(i-self.mmt(1)) for i in self.serie)/self.N
         # ecartmoy renvoie l'ecart moyen : la dispersion des valeurs autour de la moyenne
@@ -95,20 +97,11 @@ class Stat():
     def apla(self):     return (self.mmtctr(4)/self.mmtctr(2)**2)
         # apla donne le coefficient d'aplatissement (kurtosis)
     def cla(self,claScope=[]): 
-        claList,n=[[]],0
-        for i in range(len(self.serie)-1):
-            claList[n].append(self.serie[i])
-            if self.serie[i+1]==self.serie[-1]:claList[n].append(self.serie[i+1])
-            for j in range(len(claScope)):
-                if self.serie[i]<=claScope[j]<=self.serie[i+1] or self.serie[i]>=claScope[j]>=self.serie[i+1]:
-                    claList.append([])
-                    n+=1
-        # claList=[[j for j in self.serie if (claScope[i]<=j<=claScope[i+1] if i==0 else claScope[i]<j<=claScope[i+1])] for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
+        claScope=sorted(claScope)
+        print(sorted(self.serie))
+        claList=[[j for j in sorted(self.serie) if (claScope[i]<=j<=claScope[i+1] if i==0 else claScope[i]<j<=claScope[i+1])] for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
+        print(claList)
         return ClaStat(claList,claScope=claScope)
-                # def cla(self,*args): 
-                #     claScope=[self.pop[0]]+list(args)+[self.pop[-1]]
-                #     claList=[tuple([self.serie[j] for j in range(len(self.serie)) if (claScope[i]<=self.pop[j]<=claScope[i+1] if i==0 else claScope[i]<self.pop[j]<=claScope[i+1])]) for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
-                #     return ClaStat(claList,claScope=claScope)
         # cla renvoie une instance de la classe Cla, derivee de la classe Stat, ou la serie est constituee 
         # des classes delimitees par les arguments *args de la fonction
 class ClaStat(Stat):
@@ -122,14 +115,13 @@ class ClaStat(Stat):
                 l.append(inst.med())
         return l
     def histogram(self):
-        print(self.depo())
+        # print(self.depo())
         # n, bins, patches = plt.hist(self.completeSerie, [self.ef(i+1) for i in range(len(self.serie))])
-        n,bins,patches=plt.hist(self.depo(),bins=len(self.depo())+1)
-        print(n)
-        print(bins)
+        width=[self.claScope[i+1]-self.claScope[i] for i in range(len(self.claScope)-1)]
+        print(width)
+        height=[self.ef(i+1)/width[i] for i in range(len(self.serie))]
+        print(height)
+        plt.bar([(self.claScope[i+1]+self.claScope[i])/2 for i in range(len(self.claScope)-1)],height=height,width=width,color='#4287f5',edgecolor='#0041a8',linewidth=1,alpha=.7)
+        plt.grid(axis='y',alpha=.7)
+        plt.xticks(np.arange(min(self.claScope),max(self.claScope),.01))#max(self.ef(i+1)/max(len(j) for j in self.serie) for i in range(len(self.serie)))])
         plt.show()
-        # plt.axis([min(self.claScope),max(self.claScope),0,10])#max(self.ef(i+1)/max(len(j) for j in self.serie) for i in range(len(self.serie)))])
-        # plt.hist(x=[0]+[self.ef(i+1)/abs(self.claScope[i]-self.claScope[i+1]) for i in range(len(self.serie))],bins=self.claScope)
-    #  def histogram(self):
-    #     plt.hist(x=[0]+[self.ef(i+1)/abs(self.claScope[i]-self.claScope[i+1]) for i in range(len(self.serie))],bins=self.claScope)
-    #     plt.show()

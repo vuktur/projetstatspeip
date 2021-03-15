@@ -9,10 +9,11 @@ from math import pi, sqrt, exp
 z=[130,140,170,160,136,165,130,135,140,135,161,136,180,190,141,132,165,168,182,177,172,168,175,181,173,169,178,179,175,164]
 # z=[130,140,170,160,136,165,130,135,140,135,161,136,180,190,141,132,165,168,182,177,172,168,175,181,173,169,178,179,175]
 # def k(x):return (x**3+3*x**2 if x<=0 else (x**(-1) if x<4 else x**2-7/2*x))
-def gauss(x,u=0,o=1): return 10000*exp(-((x-u)**2)/abs(2*o**2))/abs(sqrt(2*pi)*o)
+def gauss(x,u=0,o=1): return exp(-((x-u)**2)/abs(2*o**2))/abs(sqrt(2*pi)*o)
 # ex=Stat(z)
 ex=Stat(gauss,-5,5,0.1)
 # ex=Stat([2,],-5,5,0.1)
+# ex=Stat([2,3,4,4,5,7,8,9,10,10,11,11,12,12,12,12])
 
 # print(ex.med())
 # print(statistics.median(ex.serie))
@@ -29,7 +30,8 @@ ex=Stat(gauss,-5,5,0.1)
 # print(ex.apla(),st.kurtosis(ex.serie))      #?
 # ex.histogram()
 # print(ex.serie)
-classes1=ex.cla([0,0.0001,0.003,0.11,0.4])
+classes1=ex.cla([0,.0001,.003,.11,.4])
+# classes1=ex.cla([2,4,9,11,12])
 # print('\n')
 # print(classes1[1])
 # print('\n')
