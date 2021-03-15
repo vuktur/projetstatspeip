@@ -6,7 +6,9 @@ import matplotlib.pyplot as plt
 class Stat():
     def __init__(self,stat,pStart=0,pEnd=None,pStep=1):
         self.serie=[]
-        if(isinstance(stat,list) or isinstance(stat,tuple)):
+        if (isinstance(stat,tuple)):
+            pass
+        if(isinstance(stat,list)):
             if(pStart==None):pStart=0
             if(pEnd==None):pEnd=len(stat)
             self.serie=stat
@@ -101,12 +103,12 @@ class Stat():
     def cla(self,claScope=[]): 
         claScope=sorted(claScope)
         claList=[[j for j in sorted(self.serie) if (claScope[i]<=j<=claScope[i+1] if i==0 else claScope[i]<j<=claScope[i+1])] for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
-        return ClaStat(claList,claScope=claScope)
+        return StatCla(claList,claScope=claScope)
         # cla renvoie une instance de la classe Cla, derivee de la classe Stat, ou la serie est constituee 
         # des classes delimitees par les arguments *args de la fonction
-class ClaStat(Stat):
+class StatCla(Stat):
     def __init__(self,stat,pStart=0,pEnd=None,pStep=1,claScope=[]):
-        super(ClaStat,self).__init__(stat,pStart=0,pEnd=None,pStep=1)
+        super(StatCla,self).__init__(stat,pStart=0,pEnd=None,pStep=1)
         self.claScope=claScope
         self.widths=[self.claScope[i+1]-self.claScope[i] for i in range(len(self.claScope)-1)]
         self.heights=[self.ef(i+1)/self.widths[i] for i in range(len(self.serie))]
