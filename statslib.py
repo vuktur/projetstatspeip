@@ -20,7 +20,7 @@ class Stat():
     def __repr__(self):return(
         f"Valeur   |{'|'.join([str(Fraction(i).limit_denominator()) for i in self.moda])}\n"+
         f"Effectif |{'|'.join([' '*(len(str(Fraction(self.moda[i-1]).limit_denominator()))-1)+str(self.ef(i)) for i in range(1,len(self.moda)+1)])}\n\n"+
-        f"Moyenne : {self.moy()}\nEcart-type : {self.ecarttyp()}\n")
+        f"Moyenne : {self.moy()} , Mode : {self.mode()} , Médiane : {self.med()}\nVariance : {self.variance()} , Ecart-type : {self.ecarttyp()} , Etendue : {self.etendue()}\nCourbe : {self.apla()} , Distribution : {self.asym()}")
         # repr renvoie lors du print un tableau avec les modalites dans l'ordre croissant
         # et leur effectif.
     def __iter__(self): 
@@ -33,8 +33,7 @@ class Stat():
         del self
         return True
     def ef(self,n):
-        if not(isinstance(self.serie[0],list)): return sum(1 for i in self.serie if i==self.moda[n-1] and n>0)
-        else: return len(self.serie[n-1])
+        return sum(1 for i in self.serie if i==self.moda[n-1] and n>0)
         # ef renvoie l'effectif d'une certaine valeur
     def efC(self,n):    return sum(self.ef(i) for i in range(1,n+1))
         # efC fait la somme des effectifs pour les valeurs inferieures ou egales
@@ -42,7 +41,10 @@ class Stat():
         # fr renvoie la frequence a laquelle aparait une valeur donnee
     def frC(self,n):    return sum(self.fr(i) for i in range(1,n+1))
         # frC fait le somme des frequences pour les valeurs inferieures ou egales
-    def mode(self):     return [self.moda[i-1] for i in range(len(self.moda)) if self.ef(i)==max([self.ef(j) for j in range(1,len(self.moda)+1)])]
+    def mode(self):
+        m=[self.moda[i] for i in range(len(self.moda)) if self.ef(i+1)==max([self.ef(j+1) for j in range(len(self.moda))])]
+        if len(m)==1:return m[0]
+        else:return m
         # mode renvoie la valeur la plus fréquente
     def med(self):      return self.quan(2)[0]
             # l=len(self.serie())
@@ -98,9 +100,7 @@ class Stat():
         # apla donne le coefficient d'aplatissement (kurtosis)
     def cla(self,claScope=[]): 
         claScope=sorted(claScope)
-        print(sorted(self.serie))
         claList=[[j for j in sorted(self.serie) if (claScope[i]<=j<=claScope[i+1] if i==0 else claScope[i]<j<=claScope[i+1])] for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
-        print(claList)
         return ClaStat(claList,claScope=claScope)
         # cla renvoie une instance de la classe Cla, derivee de la classe Stat, ou la serie est constituee 
         # des classes delimitees par les arguments *args de la fonction
@@ -108,6 +108,11 @@ class ClaStat(Stat):
     def __init__(self,stat,pStart=0,pEnd=None,pStep=1,claScope=[]):
         super(ClaStat,self).__init__(stat,pStart=0,pEnd=None,pStep=1)
         self.claScope=claScope
+        self.widths=[self.claScope[i+1]-self.claScope[i] for i in range(len(self.claScope)-1)]
+        self.heights=[self.ef(i+1)/self.widths[i] for i in range(len(self.serie))]
+    def ef(self,n):      return len(self.serie[n-1])
+    def mode(self):      return max(self.heights)
+    def claMod(self):    return [self.serie[i] for i in range(len(self.serie)) if self.heights[i]==self.mode()]
     def depo(self):
         l=[]
         for i in self.serie:
@@ -115,13 +120,7 @@ class ClaStat(Stat):
                 l.append(inst.med())
         return l
     def histogram(self):
-        # print(self.depo())
-        # n, bins, patches = plt.hist(self.completeSerie, [self.ef(i+1) for i in range(len(self.serie))])
-        width=[self.claScope[i+1]-self.claScope[i] for i in range(len(self.claScope)-1)]
-        print(width)
-        height=[self.ef(i+1)/width[i] for i in range(len(self.serie))]
-        print(height)
-        plt.bar([(self.claScope[i+1]+self.claScope[i])/2 for i in range(len(self.claScope)-1)],height=height,width=width,color='#4287f5',edgecolor='#0041a8',linewidth=1,alpha=.7)
+        plt.bar([(self.claScope[i+1]+self.claScope[i])/2 for i in range(len(self.claScope)-1)],height=self.heights,width=self.widths,color='#4287f5',edgecolor='#0041a8',linewidth=1,alpha=.7)
         plt.grid(axis='y',alpha=.7)
-        plt.xticks(np.arange(min(self.claScope),max(self.claScope),.01))#max(self.ef(i+1)/max(len(j) for j in self.serie) for i in range(len(self.serie)))])
+        plt.xticks(np.arange(min(self.claScope)-2,max(self.claScope)+3,1))#max(self.ef(i+1)/max(len(j) for j in self.serie) for i in range(len(self.serie)))])
         plt.show()
