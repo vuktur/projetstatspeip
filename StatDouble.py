@@ -1,103 +1,5 @@
 from math import sqrt
-
-class Stats():
-    def __init__(self,NbObservation,SérieStatistique):
-        self.O=NbObservation
-        self.X=SérieStatistique
-        self.M=[]
-        for x in self.X:
-            if x not in self.M :
-                self.M.append(x)
-
-    def effectif(self,i):
-        return self.X.count(i)
-
-    def fréquence(self,i):
-        return self.effectif(i)/self.O
-
-    def moyenne(self):
-        moy = 0
-        for i in self.M:
-            moy += self.fréquence(i)*i
-        return round(moy,2)
-
-    def médiane(self):
-        L=sorted(self.X)
-        if len(L)%2==0:
-            return round((L[round(len(L)/2)]+L[round(len(L)/2)-1])/2)
-        else :
-            return L[round(len(L)/2)]
-
-    def Quartiles(self):
-        L = sorted(self.X)
-        if len(L)>=3:
-            if len(L) % 2 == 0:
-                p=round((L[round(len(L)/4)]+L[round(len(L)/4)-1])/2)
-                d=round((L[round(len(L)/2)]+L[round(len(L)/2)-1])/2)
-                t=round((L[round(len(L)/4)*3]+L[(round(len(L)/4)*3)-1])/2)
-            else:
-                p=L[round(len(L)/4)]
-                d=L[round(len(L)/2)]
-                t=L[round(len(L)/4*3)]
-        else:
-            print("Il n'y a pas assez d'observations")
-        return (p,d,t)
-
-    def Variance(self):
-        V=0
-        for i in self.M:
-            V += self.fréquence(i)*((i-self.moyenne())**2)
-        return round(V,2)
-
-    def écart_type(self):
-        V=sqrt(self.Variance())
-        return round(V,2)
-
-    def étendue(self):
-        L = sorted(self.X)
-        min=L[0]
-        max=L[len(L)-1]
-        return max-min
-
-    def mode(self):
-        max=0
-        j=0
-        for i in self.M:
-            if self.effectif(i)>max:
-                max=self.effectif(i)
-                j=i
-        return j
-
-    def asymétrie(self):
-        u=0
-        for i in self.M:
-            u+=self.fréquence(i)*((i-self.moyenne())**3)
-        o=self.Variance()**(3/2)
-        if u/o==0:
-            return "courbe symétrique"
-        elif u/o<0:
-            return "bosse décalé vers la droite"
-        elif u/o>0:
-            return "bosse décalé vers la gauche"
-
-    def applatissement(self):
-        u = 0
-        for i in self.M:
-            u += self.fréquence(i) * ((i - self.moyenne()) ** 4)
-        o=self.Variance()**2
-        if 2.5<=(u/o)<=3.5:
-            return "distribution normale"
-        elif u/o>3.5:
-            return "courbe en pic"
-        elif u/o<2.5:
-            return "courbe plate"
-
-    def __str__(self):
-        return "Attributs de la statistique : Moyenne : {} ; Mode : {} ; Médiane : {} ;\n Quartiles : {} ; Variance : {} ;\n Ecart-type : {} ; Etendue : {} ;\n Courbe : {} ; Distribution : {} .".format(
-            self.moyenne(), self.mode(), self.médiane(), self.Quartiles(), self.Variance(), self.écart_type(),
-            self.étendue(), self.applatissement(), self.asymétrie())
-
-
+import Stats as St
 
 class StatDouble():
     def __init__(self,NbObservation,SérieStatistique):
@@ -112,42 +14,97 @@ class StatDouble():
         X=[]
         for x in self.D:
             X.append(x[0])
-        self.X=Stats(self.O,X)
+        self.X= St.Stats(self.O,X,"brute")
         Y = []
         for x in self.D:
             Y.append(x[1])
-        self.Y=Stats(self.O,Y)
+        self.Y=St.Stats(self.O,Y,"brute")
 
-    def covariance(self):
+    def covariance_b(self):
         sum=0
-        for i in range(len(self.M)):
-            sum+= (self.X.X[i]-self.X.moyenne())*(self.Y.X[i]-self.Y.moyenne())
+        for i in range(len(self.D)):
+            sum+= (self.X.X[i]-self.X.moyenne_b())*(self.Y.X[i]-self.Y.moyenne_b())
         return sum/self.O
 
-    def correlation(self):
-        return self.covariance()/(self.X.écart_type()*self.Y.écart_type())
+    def correlation_b(self):
+        return self.covariance_b()/(self.X.écart_type_b()*self.Y.écart_type_b())
 
-    def regretion(self):
-        a=self.covariance()/self.X.Variance()
-        b=self.Y.moyenne()-((self.covariance()/self.X.Variance())*self.X.moyenne())
+    def regretion_b(self):
+        a=self.covariance_b()/self.X.Variance_b()
+        b=self.Y.moyenne_b()-((self.covariance_b()/self.X.Variance_b())*self.X.moyenne_b())
         DYX="Y = "+str(round(a,4))+"*X +"+str(round(b,4))
-        a = self.covariance() / self.Y.Variance()
-        b = self.X.moyenne() - ((self.covariance() / self.Y.Variance()) * self.Y.moyenne())
+        a = self.covariance_b() / self.Y.Variance_b()
+        b = self.X.moyenne_b() - ((self.covariance_b() / self.Y.Variance_b()) * self.Y.moyenne_b())
         DXY = "X = "+str(round(a,4))+"*Y +"+str(round(b,4))
         return (DYX,DXY)
 
+    def covariance_d(self):
+        L = sorted(self.X.X)
+        lx = []
+        for i in range(len(L)):
+            for j in range(L[i][1]):
+                lx.append(L[i][0])
+        L = sorted(self.Y.X)
+        ly = []
+        for i in range(len(L)):
+            for j in range(L[i][1]):
+                ly.append(L[i][0])
+        sum = 0
+        for i in range(len(lx)):
+            sum += (lx[i] - self.X.moyenne_d()) * (ly[i] - self.Y.moyenne_d())
+        return sum / self.O
+
+    def correlation_d(self):
+        return self.covariance_d() / (self.X.écart_type_d() * self.Y.écart_type_d())
+
+    def regretion_d(self):
+        a = self.covariance_d() / self.X.Variance_d()
+        b = self.Y.moyenne_d() - ((self.covariance_d() / self.X.Variance_d()) * self.X.moyenne_d())
+        DYX = "Y = " + str(round(a, 4)) + "*X +" + str(round(b, 4))
+        a = self.covariance_d() / self.Y.Variance_d()
+        b = self.X.moyenne_d() - ((self.covariance_d() / self.Y.Variance_d()) * self.Y.moyenne_d())
+        DXY = "X = " + str(round(a, 4)) + "*Y +" + str(round(b, 4))
+        return (DYX, DXY)
+
     def __str__(self):
-        return "Attributs de la première statistique : Moyenne : {} ; Mode : {} ; Médiane : {} ;\n Quartiles : {} ; Variance : {} ;\n Ecart-type : {} ; Etendue : {} ;\n Courbe : {} ; Distribution : {} .\n" \
-               "\nAttributs de la deuxième statistique : Moyenne : {} ; Mode : {} ; Médiane : {} ;\n Quartiles : {} ; Variance : {} ;\n Ecart-type : {} ; Etendue : {} ;\n Courbe : {} ; Distribution : {} .\n" \
-               "\nCovariance : {} ; Coefficient de Corrélation : {} ; Droites de Régression : de Y en X : {} ; de X en Y : {} .".format(
-            self.X.moyenne(), self.X.mode(), self.X.médiane(), self.X.Quartiles(), self.X.Variance(),
-            self.X.écart_type(),
-            self.X.étendue(), self.X.applatissement(), self.X.asymétrie(),self.Y.moyenne(), self.Y.mode(), self.Y.médiane(), self.Y.Quartiles(),
-            self.Y.Variance(),
-            self.Y.écart_type(),
-            self.Y.étendue(), self.Y.applatissement(), self.Y.asymétrie(),
-            self.covariance(),self.correlation(),self.regretion()[0],self.regretion()[1])
+        if self.X.T=="brute":
+            if self.Y.T=="brute":
+                return "Attributs de la première statistique : Moyenne : {} ; Mode : {} ; Médiane : {} ;\n Quartiles : {} ; Variance : {} ;\n Ecart-type : {} ; Etendue : {} ;\n Courbe : {} ; Distribution : {} .\n" \
+                       "\nAttributs de la deuxième statistique : Moyenne : {} ; Mode : {} ; Médiane : {} ;\n Quartiles : {} ; Variance : {} ;\n Ecart-type : {} ; Etendue : {} ;\n Courbe : {} ; Distribution : {} .\n" \
+                       "\nCovariance : {} ; Coefficient de Corrélation : {} ; Droites de Régression : de Y en X : {} ; de X en Y : {} .".format(
+                    self.X.moyenne_b(), self.X.mode_b(), self.X.médiane_b(), self.X.Quartiles_b(), self.X.Variance_b(),
+                    self.X.écart_type_b(),
+                    self.X.étendue_b(), self.X.applatissement_b(), self.X.asymétrie_b(), self.Y.moyenne_b(),
+                    self.Y.mode_b(), self.Y.médiane_b(), self.Y.Quartiles_b(),
+                    self.Y.Variance_b(),
+                    self.Y.écart_type_b(),
+                    self.Y.étendue_b(), self.Y.applatissement_b(), self.Y.asymétrie_b(),
+                    self.covariance_b(), self.correlation_b(), self.regretion_b()[0], self.regretion_b()[1])
+            else :
+                return "type de la série Y non valide ou type de Y différent de X"
+
+        if self.X.T=="dépouillée":
+            if self.Y.T=="dépouillée":
+                return "Attributs de la première statistique : Moyenne : {} ; Mode : {} ; Médiane : {} ;\n Quartiles : {} ; Variance : {} ;\n Ecart-type : {} ; Etendue : {} ;\n Courbe : {} ; Distribution : {} .\n" \
+                       "\nAttributs de la deuxième statistique : Moyenne : {} ; Mode : {} ; Médiane : {} ;\n Quartiles : {} ; Variance : {} ;\n Ecart-type : {} ; Etendue : {} ;\n Courbe : {} ; Distribution : {} .\n" \
+                       "\nCovariance : {} ; Coefficient de Corrélation : {} ; Droites de Régression : de Y en X : {} ; de X en Y : {} .".format(
+                    self.X.moyenne_d(), self.X.mode_d(), self.X.médiane_d(), self.X.Quartiles_d(), self.X.Variance_d(),
+                    self.X.écart_type_d(),
+                    self.X.étendue_d(), self.X.applatissement_d(), self.X.asymétrie_d(), self.Y.moyenne_d(),
+                    self.Y.mode_d(), self.Y.médiane_d(), self.Y.Quartiles_d(),
+                    self.Y.Variance_d(),
+                    self.Y.écart_type_d(),
+                    self.Y.étendue_d(), self.Y.applatissement_d(), self.Y.asymétrie_d(),
+                    self.covariance_d(), self.correlation_d(), self.regretion_d()[0], self.regretion_d()[1])
+
+            else :
+                return "type de la série Y non valide ou type de Y différent de X"
+
+        else :
+            return "type de la série X non valide"
 
 
 std=StatDouble(4,[(1,2),(3,4),(2,6),(1,3)])
+std.X.depouille()
+std.Y.depouille()
 print(std)
