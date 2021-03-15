@@ -104,7 +104,7 @@ class Stat():
                     claList.append([])
                     n+=1
         # claList=[[j for j in self.serie if (claScope[i]<=j<=claScope[i+1] if i==0 else claScope[i]<j<=claScope[i+1])] for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
-        return ClaStat(claList,claScope=claScope,completeSerie=self.serie)
+        return ClaStat(claList,claScope=claScope)
                 # def cla(self,*args): 
                 #     claScope=[self.pop[0]]+list(args)+[self.pop[-1]]
                 #     claList=[tuple([self.serie[j] for j in range(len(self.serie)) if (claScope[i]<=self.pop[j]<=claScope[i+1] if i==0 else claScope[i]<self.pop[j]<=claScope[i+1])]) for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
@@ -112,9 +112,8 @@ class Stat():
         # cla renvoie une instance de la classe Cla, derivee de la classe Stat, ou la serie est constituee 
         # des classes delimitees par les arguments *args de la fonction
 class ClaStat(Stat):
-    def __init__(self,stat,pStart=0,pEnd=None,pStep=1,claScope=[],completeSerie=None):
+    def __init__(self,stat,pStart=0,pEnd=None,pStep=1,claScope=[]):
         super(ClaStat,self).__init__(stat,pStart=0,pEnd=None,pStep=1)
-        self.completeSerie=completeSerie
         self.claScope=claScope
     def depo(self):
         l=[]
