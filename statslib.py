@@ -95,8 +95,16 @@ class Stat():
     def apla(self):     return (self.mmtctr(4)/self.mmtctr(2)**2)
         # apla donne le coefficient d'aplatissement (kurtosis)
     def cla(self,claScope=[]): 
-        claList=[[j for j in self.serie if (claScope[i]<=j<=claScope[i+1] if i==0 else claScope[i]<j<=claScope[i+1])] for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
-        return ClaStat(claList,claScope=claScope)
+        claList,n=[[]],0
+        for i in range(len(self.serie)-1):
+            claList[n].append(self.serie[i])
+            if self.serie[i+1]==self.serie[-1]:claList[n].append(self.serie[i+1])
+            for j in range(len(claScope)):
+                if self.serie[i]<=claScope[j]<=self.serie[i+1] or self.serie[i]>=claScope[j]>=self.serie[i+1]:
+                    claList.append([])
+                    n+=1
+        # claList=[[j for j in self.serie if (claScope[i]<=j<=claScope[i+1] if i==0 else claScope[i]<j<=claScope[i+1])] for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
+        return ClaStat(claList,claScope=claScope,completeSerie=self.serie)
                 # def cla(self,*args): 
                 #     claScope=[self.pop[0]]+list(args)+[self.pop[-1]]
                 #     claList=[tuple([self.serie[j] for j in range(len(self.serie)) if (claScope[i]<=self.pop[j]<=claScope[i+1] if i==0 else claScope[i]<self.pop[j]<=claScope[i+1])]) for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
@@ -104,8 +112,9 @@ class Stat():
         # cla renvoie une instance de la classe Cla, derivee de la classe Stat, ou la serie est constituee 
         # des classes delimitees par les arguments *args de la fonction
 class ClaStat(Stat):
-    def __init__(self,stat,pStart=0,pEnd=None,pStep=1,claScope=[]):
+    def __init__(self,stat,pStart=0,pEnd=None,pStep=1,claScope=[],completeSerie=None):
         super(ClaStat,self).__init__(stat,pStart=0,pEnd=None,pStep=1)
+        self.completeSerie=completeSerie
         self.claScope=claScope
     def depo(self):
         l=[]
@@ -114,5 +123,14 @@ class ClaStat(Stat):
                 l.append(inst.med())
         return l
     def histogram(self):
-        plt.hist(x=[0]+[self.ef(i+1)/abs(self.claScope[i]-self.claScope[i+1]) for i in range(len(self.serie))],bins=self.claScope)
+        print(self.depo())
+        # n, bins, patches = plt.hist(self.completeSerie, [self.ef(i+1) for i in range(len(self.serie))])
+        n,bins,patches=plt.hist(self.depo(),bins=len(self.depo())+1)
+        print(n)
+        print(bins)
         plt.show()
+        # plt.axis([min(self.claScope),max(self.claScope),0,10])#max(self.ef(i+1)/max(len(j) for j in self.serie) for i in range(len(self.serie)))])
+        # plt.hist(x=[0]+[self.ef(i+1)/abs(self.claScope[i]-self.claScope[i+1]) for i in range(len(self.serie))],bins=self.claScope)
+    #  def histogram(self):
+    #     plt.hist(x=[0]+[self.ef(i+1)/abs(self.claScope[i]-self.claScope[i+1]) for i in range(len(self.serie))],bins=self.claScope)
+    #     plt.show()
