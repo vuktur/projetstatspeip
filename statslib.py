@@ -4,21 +4,20 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 class Stat():
-    def __init__(self,stat,pStart=0,pEnd=None,pStep=1):
+    def __init__(self,stat,pStart=0,pStop=None,pStep=1):
         self.serie=[]
-        if (isinstance(stat,tuple)):
-            pass
+        if (isinstance(stat,tuple)) and callable(stat[0]):
+            self.createDouble(stat,pStart,pStop,pStep)
         if(isinstance(stat,list)):
             if(pStart==None):pStart=0
-            if(pEnd==None):pEnd=len(stat)
+            if(pStop==None):pStop=len(stat)
             self.serie=stat
         elif(callable(stat)):
-            try:self.serie=[stat(i) for i in np.arange(pStart,pEnd,pStep)]
+            try:self.serie=[stat(i) for i in np.arange(pStart,pStop,pStep)]
             except:raise
-        self.pop=np.arange(pStart,pEnd,pStep).tolist()
-        self.N=len(np.arange(pStart,pEnd,pStep))
-        if isinstance(self.serie[0],list): self.moda=sorted(list(dict.fromkeys((tuple(i) for i in self.serie))))
-        else: self.moda=sorted(list(dict.fromkeys(self.serie))) # <- modalites
+        self.pop=np.arange(pStart,pStop,pStep).tolist()
+        self.N=len(np.arange(pStart,pStop,pStep))
+        self.moda=sorted(list(dict.fromkeys(self.serie))) # <- modalites
     def __repr__(self):return(
         f"Valeur   |{'|'.join([str(Fraction(i).limit_denominator()) for i in self.moda])}\n"+
         f"Effectif |{'|'.join([' '*(len(str(Fraction(self.moda[i-1]).limit_denominator()))-1)+str(self.ef(i)) for i in range(1,len(self.moda)+1)])}\n\n"+
@@ -34,8 +33,7 @@ class Stat():
     def __exit__(self,*args):
         del self
         return True
-    def ef(self,n):
-        return sum(1 for i in self.serie if i==self.moda[n-1] and n>0)
+    def ef(self,n):     return sum(1 for i in self.serie if i==self.moda[n-1] and n>0)
         # ef renvoie l'effectif d'une certaine valeur
     def efC(self,n):    return sum(self.ef(i) for i in range(1,n+1))
         # efC fait la somme des effectifs pour les valeurs inferieures ou egales
@@ -106,9 +104,13 @@ class Stat():
         return StatCla(claList,claScope=claScope)
         # cla renvoie une instance de la classe Cla, derivee de la classe Stat, ou la serie est constituee 
         # des classes delimitees par les arguments *args de la fonction
+    def createDouble(self,stat,pStart,pStop,pStep):
+        return StatDbl(stat,pStart,pStop,pStep)
+
 class StatCla(Stat):
-    def __init__(self,stat,pStart=0,pEnd=None,pStep=1,claScope=[]):
-        super(StatCla,self).__init__(stat,pStart=0,pEnd=None,pStep=1)
+    def __init__(self,stat,pStart=0,pStop=None,pStep=1,claScope=[]):
+        super(StatCla,self).__init__(stat,pStart=0,pStop=None,pStep=1)
+        self.moda=sorted(list(dict.fromkeys((tuple(i) for i in self.serie))))
         self.claScope=claScope
         self.widths=[self.claScope[i+1]-self.claScope[i] for i in range(len(self.claScope)-1)]
         self.heights=[self.ef(i+1)/self.widths[i] for i in range(len(self.serie))]
@@ -126,3 +128,4 @@ class StatCla(Stat):
         plt.grid(axis='y',alpha=.7)
         plt.xticks(np.arange(min(self.claScope)-2,max(self.claScope)+3,1))#max(self.ef(i+1)/max(len(j) for j in self.serie) for i in range(len(self.serie)))])
         plt.show()
+class StatDbl():
