@@ -6,9 +6,7 @@
 
 Une statistique est une application d'une population $\Omega$ vers un ensemble de valeurs $C$.
 
-$$
-\left\{\begin{array}{ll} X: & \Omega \rightarrow C\\ & \omega \rightarrow X(\omega) \end{array} \right.
-$$
+$$ \left\{\begin{array}{ll} X: & \Omega \rightarrow C\\ & \omega \rightarrow X(\omega) \end{array} \right. $$
 
 - $\Omega$ : population finie d'individus $\omega$. On va mesurer/observer un caractère particulier sur ces individus.  
 **`self.pop`**  
@@ -16,13 +14,11 @@ $$
 - $C$ : ensemble des valeurs possibles du caractère, appelées aussi modalités.  
 **`self.moda`**  
 
-- $X$ : Statistique (parfois appelée aussi caractère). Application qui à tout individu associe la
-valeur de son caractère.  
+- $X$ : Statistique (parfois appelée aussi caractère). Application qui à tout individu associe la valeur de son caractère.  
 **`self.serie`**  
 
 <!---->
-- Une statistique peut être quantitative ou
-qualitative.
+- Une statistique peut être quantitative ou qualitative.
 - Une statistique quantitative peut être discrète ou continue.
 - Une statistique peut être multiple (à n paramètres).
 
@@ -35,46 +31,38 @@ qualitative.
 - $\Omega$ population finie de $N$ individus.
 - $C\subset R$
 
-**Première représentation :** Une série statistique est un $N$-uplet $X= (v_1,\,v_2,\,...,\,v_N)$  
+**Première représentation :** Une série statistique est un $N$-uplet $X= (v_1,\,v_2,\,...\,v_N)$  
 **Par exemple :** $X= (2.1,\,5.23,\,0.61,\,2.1,\,7.2,\,0.61)$  
 On parle alors de **série statistique brute**.
 
 **Seconde représentation :**  
 L'ensemble des valeurs observables de $X$ est fini. On peut écrire :
 
-$$
-X(\Omega)=\{x_1,\,x_2,\,...,\,x_p\}\;(1\leq p\leq N)
-$$
+$$ X(\Omega)=\{x_1,\,x_2,\,...\,x_p\}\;(1\leq p\leq N) $$
 
 pour la suite on supposera $x_1<x_2<...<x_p$.
 
-- Effectif $n_i=\#(X^−1 \{x_i\})$ : nombre de fois que la valeur $x_i$ a été observée dans la population
-ou nombre d'individus admettant $x_i$ comme valeur du caractère.  
+- Effectif $n_i=\#(X^−1 \{x_i\})$ : nombre de fois que la valeur $x_i$ a été observée dans la population ou nombre d'individus admettant $x_i$ comme valeur du caractère.  
 **`self.effectif(i)`**
 
-- Effectif cumulé $N_i=\sum^i_{j=1}n_j=\#(X^{-1}\{]−\infin,x_i]\})$ : nombre d'individus présentant une
-valeur de caractère plus petite que $x_i$, ou égale.On a la relation $N_i=N_{i−1}+n_i$ en posant $N_0=0$ et peut remarquer que $N_p=N$  
+- Effectif cumulé $N_i=\sum^i_{j=1}n_j=\#(X^{-1}\{]−\infin,x_i]\})$ : nombre d'individus présentant une valeur de caractère plus petite que $x_i$, ou égale. On a la relation $N_i=N_{i−1}+n_i$ en posant $N_0=0$ et peut remarquer que $N_p=N$  
 **`self.effectifCumule(i)`**
 
 - Fréquence $f_i=n_i/N$.  
   **`self.frequence(i)`**
 
-- Fréquence cumulée $F_i=N_i/N=\sum^i_{j=1} f_j=F_{i−1}+f_i$ en posant $F_0=0$. On remarque que
-$F_p=1$  
+- Fréquence cumulée $F_i=N_i/N=\sum^i_{j=1} f_j=F_{i−1}+f_i$ en posant $F_0=0$. On remarque que $F_p=1$  
 **`self.frequenceCumule(i)`**
 
 Une série statistique est une famille de la forme $(x_i,n_i)_{i\in [1,p]}$ ou $(x_i,f_i)_{i\in [1,p]}$  
-On parle parfois de **série statistique dépouillée** ou de **série statistique regroupée et
-ordonnée**.
+On parle parfois de **série statistique dépouillée** ou de **série statistique regroupée et ordonnée**.
 
 #### 1.2.2 Paramètres de position
 
 **Le mode**  
 C'est la valeur du caractère d'effectif maximal
 
-$$
-mode=x_i\text{ tq } n_i=\max_{1\leq j\leq p}(n_j)
-$$
+$$ mode=x_i\text{ tq } n_i=\max_{1\leq j\leq p}(n_j) $$
 
 Attention : il n'est pas forcément unique.
 
@@ -82,38 +70,27 @@ Attention : il n'est pas forcément unique.
 C'est la valeur du caractère qui sépare la population en deux parties égales.  
 Attention : parfois dificile à définir.
 
-$$
-\eta \text{ tq }\#\{\omega_i\,|\,X(\omega_i)<\eta \}=\#\{\omega_i\,|\,X(\omega_i)>\eta \}\\
-\eta \text{ tq }\#\{\omega_i\,|\,X(\omega_i)\leq \eta \}=\#\{\omega_i\,|\,X(\omega_i)\geq \eta \}\\
-\eta =x_i\text{ tq }N_{i−1}<N/2\leq N_i
-$$
+$$\eta \text{ tq }\#\{\omega_i\,|\,X(\omega_i)<\eta \}=\#\{\omega_i\,|\,X(\omega_i)>\eta \}\\ \eta \text{ tq }\#\{\omega_i\,|\,X(\omega_i)\leq \eta \}=\#\{\omega_i\,|\,X(\omega_i)\geq \eta \}\\ \eta =x_i\text{ tq }N_{i−1}<N/2\leq N_i $$
 
 **Les quantiles**  
 Dans le même esprit, on peut définir :
 
-- les quartiles : 3 valeurs qui découpent la population en 4 parties égales. Le deuxième quartile
-étant alors égal à la médiane.
+- les quartiles : 3 valeurs qui découpent la population en 4 parties égales. Le deuxième quartile étant alors égal à la médiane.
 - les déciles : 9 valeurs qui découpent la population en 10 parties égales.
 - les centiles : 99 valeurs qui découpent la population en 100 parties égales.
 - ou tout autre découpage.
 
-**La moyenne arithmétique**  
-$$
-m(X)=\bar{x}=\frac{1}{N}\sum^p_{i=1}(n_ix_i)=\sum^p_{i=1}(f_ix_i)=\frac{1}{N}\sum^N_{i=1}v_i
-$$
-Remarque : si on pose $n=(n_1,\,n_2,\,...,\,n_p)$ et $X=(x_1,\,x_2,\,...,\,x_p)$ alors :
-$$
-\sum^p_{i=1}(n_ix_i)=n\cdot X^t\text{ et }m(X)=\frac{1}{N}n\cdot X^t
-$$
+**La moyenne arithmétique**
+$$ m(X)=\bar{x}=\frac{1}{N}\sum^p_{i=1}(n_ix_i)=\sum^p_{i=1}(f_ix_i)=\frac{1}{N}\sum^N_{i=1}v_i $$
+
+Remarque : si on pose $n=(n_1,\,n_2,\,...\,n_p)$ et $X=(x_1,\,x_2,\,...\,x_p)$ alors :
+$$ \sum^p_{i=1}(n_ix_i)=n\cdot X^t\text{ et }m(X)=\frac{1}{N}n\cdot X^t $$
 
 #### 1.2.3 Paramètres de dispersion
 
 **L'étendue**  
 C'est la plage de valeur du caractère observée sur la population :
-$$
-w=\max_{1\leq i\leq p}(x_i)−\min_{1\leq i\leq p}(x_i)=\max_{1\leq i\leq N}(v_i)−\min_{1\leq i\leq N}(v_i)
-$$
-
+$$ w=\max_{1\leq i\leq p}(x_i)−\min_{1\leq i\leq p}(x_i)=\max_{1\leq i\leq N}(v_i)−\min_{1\leq i\leq N}(v_i) $$
 Attention : sensible aux erreurs de mesure.
 
 **Les quantiles**  
@@ -126,38 +103,26 @@ Intérêt : Élimine les mesures aberrantes.
 
 **L'écart arithmétique moyen** *(peu utilisé)*  
 Calcule la moyenne des écarts à la moyenne.
-$$
-E=\frac{1}{N}\sum_{1\leq i\leq p}n_i|x_i−\bar{x}|=\sum_{1\leq i\leq p}f_i|x_i−\bar{x}|=\frac{1}{N}\sum_{1\leq i\leq p}|v_i−\bar{x}|
-$$
+$$ E=\frac{1}{N}\sum_{1\leq i\leq p}n_i|x_i−\bar{x}|=\sum_{1\leq i\leq p}f_i|x_i−\bar{x}|=\frac{1}{N}\sum_{1\leq i\leq p}|v_i−\bar{x}| $$
 
 **L'écart quadratique moyen ou variance**  
 Calcule la moyenne des carrés des écarts à la moyenne.
-$$
-V(X)=\sigma^2_X=\frac{1}{N}\sum_{1\leq i\leq p}n_i(x_i−\bar{x})^2=\sum_{1\leq i\leq p}f_i(x_i−\bar{x})^2=\frac{1}{N}\sum_{1\leq i\leq p}(v_i−\bar{x})^2
-$$
+$$ V(X)=\sigma^2_X=\frac{1}{N}\sum_{1\leq i\leq p}n_i(x_i−\bar{x})^2=\sum_{1\leq i\leq p}f_i(x_i−\bar{x})^2=\frac{1}{N}\sum_{1\leq i\leq p}(v_i−\bar{x})^2 $$
 
 Relation de Koenig-Huygens
-$$
-\sigma^2_X=\left(\frac{1}{N}\sum_{1\leq i\leq p}n_i\cdot x_i^2\right)-\bar{x}^2=\left(\sum_{1\leq i\leq p}f_i\cdot x_i^2\right)-\bar{x}^2=\left(\frac{1}{N}\sum_{1\leq i\leq p}v_i^2\right)-\bar{x}^2
-$$
+$$ \sigma^2_X=\left(\frac{1}{N}\sum_{1\leq i\leq p}n_i\cdot x_i^2\right)-\bar{x}^2=\left(\sum_{1\leq i\leq p}f_i\cdot x_i^2\right)-\bar{x}^2=\left(\frac{1}{N}\sum_{1\leq i\leq p}v_i^2\right)-\bar{x}^2 $$
 
 **L'écart type**  
 C'est la racine carré de la variance : même dimension que le caractère étudié.
-$$
-\sigma_X=\sqrt{V(X)}=\sqrt{\frac{1}{N}\sum_{1\leq i\leq  p}n_i(x_i−\bar{x})^2}=\sqrt{\left(\sum_{1\leq i\leq p}f_i\cdot x_i^2\right)-\bar{x}^2}=...
-$$
+$$ \sigma_X=\sqrt{V(X)}=\sqrt{\frac{1}{N}\sum_{1\leq i\leq  p}n_i(x_i−\bar{x})^2}=\sqrt{\left(\sum_{1\leq i\leq p}f_i\cdot x_i^2\right)-\bar{x}^2}=... $$
 
 #### 1.2.4 Les moments
 
 **Moment d'ordre k**  
-$$
-m_k(X)=\frac{1}{N}\sum^p_{i=1}(n_i\cdot x_i^k)=\sum^p_{i=1}(f_i\cdot x_i^k)=\frac{1}{N}\sum^p_{i=1}v_i^k
-$$
+$$ m_k(X)=\frac{1}{N}\sum^p_{i=1}(n_i\cdot x_i^k)=\sum^p_{i=1}(f_i\cdot x_i^k)=\frac{1}{N}\sum^p_{i=1}v_i^k $$
 
 **Moment centré d'ordre k**  
-$$
-\mu_k(X)=\frac{1}{N}\sum^p_{i=1}(n_i\cdot (x_i-\bar{x})^k)=\sum^p_{i=1}(f_i\cdot (x_i-\bar{x})^k)=\frac{1}{N}\sum^p_{i=1}(v_i-\bar{x})^k
-$$
+$$ \mu_k(X)=\frac{1}{N}\sum^p_{i=1}(n_i\cdot (x_i-\bar{x})^k)=\sum^p_{i=1}(f_i\cdot (x_i-\bar{x})^k)=\frac{1}{N}\sum^p_{i=1}(v_i-\bar{x})^k $$
 
 Propriétés:
 
@@ -171,87 +136,67 @@ Propriétés:
 #### 1.2.5 Paramètres de formes
 
 **Premier coeffcient de Fisher : coeffcient d'asymétrie**  
-$$
-\delta=\frac{\mu_3}{\sigma^3}=\frac{\mu_3}{\mu_2^{3/2}}
-$$
+$$ \delta=\frac{\mu_3}{\sigma^3}=\frac{\mu_3}{\mu_2^{3/2}} $$
 
 - série symétrique $\rightarrow\delta=0$
-- grands écarts positifs % à la moyenne $\rightarrow\delta>0$ ("b osse décalée vers la gauche")
-- grands écarts négatifs % à la moyenne $\rightarrow\delta<0$ ("b osse décalée vers la droite")
+- grands écarts positifs % à la moyenne $\rightarrow\delta>0$ ("bosse décalée vers la gauche")
+- grands écarts négatifs % à la moyenne $\rightarrow\delta<0$ ("bosse décalée vers la droite")
 - le coeffcient d'asymétrie est considéré comme significatif lorsque $|\delta|>0.5$
 - S'applique essentiellement à une série unimodale.
 
 **Second coeffcient de Fisher : coeffcient d'aplatissement**
-$$
-\alpha=\frac{\mu_4}{\sigma^4}=\frac{\mu_4}{\mu^2_2}
-$$
+$$ \alpha=\frac{\mu_4}{\sigma^4}=\frac{\mu_4}{\mu^2_2} $$
 
 - Une grande valeur de $\alpha$ traduit un resserrement autour de la moyenne ("courbe en pic")
 - Une petite valeur de $\alpha$ traduit un étalement de la série ("courbe plate")
 - Si la distribution est normale alors $\alpha=3$
 - S'applique essentiellement à une série unimodale.
 
-#### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
+#### 1.2.6 Découpage en classes
 
-### 1.2.6 Découpageenclasses
+Lorsque $X$ est un caractère continu ou que les fréquences $f_i$ sont faibles ($p$ proche de $N$) on est amené à découper le domaine de valeurs de $X$ en classes (sous-intervalles).
 
-LorsqueXestuncaractèrecontinuouquelesfréquencesfisontfaibles(ppro chedeN)
-onestamenéàdécouperledomainedevaleursdeXenclasses(sous-intervalles).
+$$ C_1=[a_0,a_1],\,C_2=]a_1,a_2],\,...\,C_{p'}=]a_{p'−1},a_{p'}] $$
+avec $p'\leq p$ et $a_0\leq x_1<x_p\leq a_{p'}$
 
-C 1 = [a 0 ,a 1 ],C 2 =]a 1 ,a 2 ],...,Cp′=]ap′− 1 ,ap′]
-avecp′\leq  peta 0 \leq  x 1 < xp\leq  ap′
+**Intérêt :** Représentation graphique (histogramme) et mise en évidence d'une classe modale (classe de hauteur maximale dans l'histogramme)  
+$\rightarrow$ Les classes peuvent être éventuellement de largeurs différentes.
 
-Intérêt :Représentationgraphique(histogramme)etmiseenévidenced'uneclassemo dale
-(classedehauteurmaximaledansl'histogramme)
-\rightarrowLesclasses peuventêtreéventuellementdelargeursdifférentes.
+- On note alors $n_i$ l'effectif de la classe $C_i : n_i=\#\{X^{-1}]a_{i−1},a_i]\}$.
+- On peut ensuite définir $N_i$, $f_i$ et $F_i$ comme vu précédemment pour une série statistique dépouillée.
 
-- Onnotealorsnil'effectifdelaclasseCi:ni= #{X−^1 ]ai− 1 ,ai]}.
-- On peut ensuitedéfinirNi, fi et Fi commevuprécédemment pourune sériestatistique
-dé pouillée.
+La série est alors donnée sous la forme de la famille $((n_1,C_1),\,(n_2,C_2),\,...\,(n_{p'},C_{p'}))$
+On parle alors d'une série statistique **en classes** ou **regroupée en classes** ou encore,
+parfois, **classée**.
 
-Lasérieestalorsdonnéesouslaformedelafamille((n 1 ,C 1 ),(n 2 ,C 2 ),...(np′,Cp′))
-On parle alors d'une série statistique en classes ou regroup ée en classes ou encore,
-parfois,classée.
+- À toute série classée on peut faire correspondre une série statistique dépouillée $(x'_i,n_i)_{i\in [1,p']}$ où $x'_i$ est le centre de la classe $C_i(x'_i=(a_{i−1}+a_i)/2)$.
 
-- Àtoutesérieclasséeon peutfairecorres pondreunesériestatistiquedé pouillée(x′i,ni)i∈J 1 ,p′K
-oùx′iestlecentredelaclasseCi(x′i= (ai− 1 +ai)/ 2 ).
+#### 1.2.7 Histogramme
 
-#### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
+Lorsque la statistique est découpée en classes, on ne la représente plus par un diagramme
+en bâtons, mais par un histogramme. Chaque classe est représentée par un rectangle dont la
+base est proportionnelle à la largeur de la classe et la **surface** proportionnelle à l'effectif (ou, ce qui revient au même, à la fréquence) de la classe. C'est bien la surface et non la hauteur du
+rectangle qui est proportionnelle à l'effectif. Cette remarque prend toute son importance
+lorsque les classes sont de largeurs différentes.
 
-### 1.2.7 Histogramme
+`image`
 
-Lorsquelastatistiqueestdécoup éeenclasses,onnelareprésenteplusparundiagramme
-enbâtons,maisparunhistogramme.Chaqueclasseestreprésentéeparunrectangledontla
-baseestpro portionnelleàlalargeurdelaclasseetlasurfacepro portionnelleàl'effectif(ou,
-cequirevientaumême,àlafréquence)delaclasse.C'estbienlasurfaceetnonlahauteurdu
-rectangle qui est pro portionnelle à l'effectif. Cette remarque prend toute son im portance
-lorsquelesclassessontdelargeursdifférentes.
+**Exemple :** on travaille sur une statistique découpées selon les quatre classes suivantes :
+$[2,4],\,]4,9],\,]9,11],\,]11,12]$ et chaque classe est d'effectif $4$.  
+L'axe des ordonnées peut être vu comme une densité.
 
-#### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
+#### 1.2.8 La classe modale (paramètre de position)
 
-Exemple:ontravaillesurunestatistiquedécoup éesselon lesquatreclasses suivantes:
-[2,4],]4,9],]9,11],]11,12]etchaqueclasseestd'effectif4.
-L'axedesordonnées peutêtrevucommeunedensité.
+C'est la classe correspondant au rectangle le plus haut dans l'histogramme (on parle bien
+ici de hauteur et non de surface).Elle peut ne pas être unique. Il arrive qu'on définisse le mode
+de la statistique comme le milieu de la classe modale (cette définition n'est pas entièrement
+équivalente à celle donnée plus haut). Dans l'exemple précédent, la classe modale est la dernière
+(classe $]11,12]$) et le mode est $11.5$.
 
+### 1.3 Statistique double (bivariée)
 
-#### 1.2. STATISTIQUESIMPLE(UNIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
+#### 1.3.1 Notations
 
-### 1.2.8 Laclassemo dale(paramètre de position)
-
-C'estlaclassecorres pondantaurectangleleplushautdansl'histogramme(onparlebien
-icidehauteuretnondesurface).Elle peutnepasêtreunique.Ilarrivequ'ondéfinisselemo de
-delastatistiquecommelemilieudelaclassemo dale(cettedéfinitionn'estpasentièrement
-équivalenteàcelledonnéeplushaut).Dansl'exempleprécédent,laclassemo daleestladernière
-(classe]11,12])etlemo deest11,5.
-
-
-#### 1.3. STATISTIQUEDOUBLE(BIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
-
-## 1.3 Statistique double (bivariée)
-
-### 1.3.1 Notations
-
- 
 Onvaselimiteràdesstatistiquesquantitatives.
  
 - \Omega populationfiniedeNindividus.
@@ -270,10 +215,6 @@ Y : \Omega −\rightarrow R
 \omega 7−\rightarrow lasecondevaleurducoupleC(\omega)
 
 Parabusdelangage,onécritqueC= (X,Y).
-
-
-#### 1.3. STATISTIQUEDOUBLE(BIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
-
  
 LesensemblesdesvaleursobservablesdeXetY sontfinis.On peutécrire:
  
@@ -577,14 +518,14 @@ relationentreXetY,toutens'appuyantsurlatechniquedelarégressionlinéaire.
 
 Sionsoup çonneunerelationdelaformeY =βXα
 Enpassantaulogarithme,larelationdevient:ln(Y) = ln(β) +α\cdot ln(X)
-Oncalculealorsladroitederégressionsurlecouple(X′,Y′) = (ln(X),ln(Y))
-SilerésultatestY′=A\cdot X′+Betqueleco effcientdecorrélationestsatisfaisant
+Oncalculealorsladroitederégressionsurlecouple(X',Y') = (ln(X),ln(Y))
+SilerésultatestY'=A\cdot X'+Betqueleco effcientdecorrélationestsatisfaisant
 AlorsonadmetqueY 'eB\cdot XA(i.e.β=eBetα=A)
 
 Sionsoup çonneunerelationdelaformeY =βαX
 Enpassantaulogarithme,larelationdevient:ln(Y) = ln(β) + ln(α)\cdot X
-Oncalculealorsladroitederégressionsurlecouple(X′,Y′) = (X,ln(Y))
-SilerésultatestY′=A\cdot X′+Betqueleco effcientdecorrélationestsatisfaisant
+Oncalculealorsladroitederégressionsurlecouple(X',Y') = (X,ln(Y))
+SilerésultatestY'=A\cdot X'+Betqueleco effcientdecorrélationestsatisfaisant
 AlorsonadmetqueY 'eB\cdot (eA)X(i.e.β=eBetα=eA)
 
 
