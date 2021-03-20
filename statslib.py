@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 class Stat():
     def __init__(self,stat,pStart=0,pStop=None,pStep=1):
         self.serie=[]
-        if (isinstance(stat,tuple)) and callable(stat[0]):
+        if isinstance(stat,tuple) and (isinstance(stat[0],list) or callable(stat[0])):
             self.createDouble(stat,pStart,pStop,pStep)
         if(isinstance(stat,list)):
             if(pStart==None):pStart=0
