@@ -360,36 +360,10 @@ Si le résultat est $Y'=A\cdot X'+B$ et que le coeffcient de corrélation est sa
 
 ### 1.3.5 Régression polynomiale
 
-Y = (x 1 ,x 2 ,...,xN)etY = (y 1 ,y 2 ,...,yn)
-Onchercheunerelationdelaformeyi'P(xi)oùP(x) =
+$X=(x_1,\,x_2,\,...\,x_n)$ et $Y=(y_1,\,y_2,\,...\,y_n)$
+On cherche une relation de la forme $y_i\approx P(x_i)$ où $P(x)=\sum_{k=0}^n{a_kx^k}$  
+On pose $S_k=\sum_{i=1}^n{x_i^k}$ ($=n\cdot m_k(X)$) et $T_k=\sum_{i=1}^n{y_ix_i^k}$  
+Soit $M$ la matrice carrée d'ordre $n+1$ définie par : $[M]_{l,c}=S_{l+c−2}$  
+Soit $B$ le vecteur $^t(T_0,\,T_1,\,...\,T_n)$ et $A$ le vecteur d'inconnues $^t(a_0,\,a_1,\,...\,a_n)$
 
- 
-∑n
-k=0akx
- 
- 
-k
- 
-On poseSk=
-
-#### ∑N
-
- 
-i=1x
- 
- 
-k
-i (=N\cdot mk(X))etTk=
- 
-#### ∑N
-
- 
-i=1yix
- 
-k
-i
-SoitM lamatricecarréed'ordren+ 1définiepar:[M]`,c=S`+c− 2
-SoitBlevecteurt(T 0 ,T 1 ,...,Tn)
-EtsoitAlevecteurd'inconnuest(a 0 ,a 1 ,...,an)
-
-AestsolutiondusystèmeM\cdot A=B
+$A$ est solution du système $M\cdot A=B$
