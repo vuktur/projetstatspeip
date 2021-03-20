@@ -239,7 +239,7 @@ $$ f_{ij}=\frac{n_{ij}}{N} $$
 | $\vdots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\vdots$ |
 | $x_p$ | $n_{p1}$ | $\ldots$ | $n_{pj}$ | $\ldots$ | $n_{pq}$ | $n_{p\bull}$ |
 | $total$ | $n_{\bull 1}$ | $\ldots$ | $n_{\bull j}$ | $\ldots$ | $n_{\bull q}$ | $N$ |
-<!-- $$
+<!--
 \begin{tabular}{c||c|c|c|c||c}
 \hline
 X\backslash Y & y_1 & \ldots & y_j & \ldots & y_q & total \\
@@ -257,7 +257,7 @@ x_p & n_{p1} & \ldots & n_{pj} & \ldots & n_{pq} & n_{p\bull} \\
 total & n_{\bull 1} & \ldots & n_{\bull j} & \ldots & n_{\bull q} & N \\
 \hline
 \end{tabular}
-$$ -->
+-->
 | $X\backslash Y$ | $y_1$ | $\ldots$ | $y_j$ | $\ldots$ | $y_q$ | $total$ |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 | $x_1$ | $f_{11}$ | $\ldots$ | $f_{1j}$ | $\ldots$ | $f_{1q}$ | $f_{1\bull}$ |
@@ -266,7 +266,7 @@ $$ -->
 | $\vdots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\vdots$ |
 | $x_p$ | $f_{p1}$ | $\ldots$ | $f_{pj}$ | $\ldots$ | $f_{pq}$ | $f_{p\bull}$ |
 | $total$ | $f_{\bull 1}$ | $\ldots$ | $f_{\bull j}$ | $\ldots$ | $f_{\bull q}$ | $1$ |
-<!-- $$
+<!--
 \begin{tabular}{c||c|c|c|c||c}
 \hline
 X\backslash Y & y_1 & \ldots & y_j & \ldots & y_q & total \\
@@ -284,7 +284,7 @@ x_p & f_{p1} & \ldots & f_{pj} & \ldots & f_{pq} & f_{p\bull} \\
 total & f_{\bull 1} & \ldots & f_{\bull j} & \ldots & f_{\bull q} & N \\
 \hline
 \end{tabular}
-$$ -->
+-->
 
 #### 1.3.2 Covariance et coeffcient de corrélation
 
