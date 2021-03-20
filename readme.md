@@ -197,174 +197,96 @@ de la statistique comme le milieu de la classe modale (cette définition n'est p
 
 #### 1.3.1 Notations
 
-Onvaselimiteràdesstatistiquesquantitatives.
- 
-- \Omega populationfiniedeNindividus.
-- {UnestatistiquedoubleC estuneapplicationde\OmegadansR^2.
-    C: \Omega −\rightarrow R^2
-       \omega 7−\rightarrow C(\omega)
+On va se limiter à des statistiques quantitatives.
 
-C(\omega)estdelaforme(x,y).On peutdéfinirdeuxstatistiquessimplesàpartirdeC
+- $\Omega$ population finie de $N$ individus.
+- Une statistique double $C$ est une application de $\Omega$ dans $\R^2$.
 
-Première{ statistiquemarginale
-X: \Omega −\rightarrow R
-\omega 7−\rightarrow lapremièrevaleurducoupleC(\omega)
+$$ \left\{\begin{array}{ll} C: & \Omega \rightarrow \R^2\\ & \omega \rightarrow C(\omega) \end{array} \right. $$
 
-Seconde{ statistiquemarginale
-Y : \Omega −\rightarrow R
-\omega 7−\rightarrow lasecondevaleurducoupleC(\omega)
+$C(\omega)$ est de la forme $(x,y)$. On peut définir deux statistiques simples à partir de $C$
 
-Parabusdelangage,onécritqueC= (X,Y).
- 
-LesensemblesdesvaleursobservablesdeXetY sontfinis.On peutécrire:
- 
- 
-X(\Omega) ={x 1 ,x 2 ,...,xp} parordrecroissant
- 
- 
-Y(\Omega) ={y 1 ,y 2 ,...,xq} parordrecroissant
- 
-avec 1 \leq  p\leq  N, 1 \leq  q\leq  Netapriorip 6 =q
+**Première statistique marginale**
+$$ \left\{\begin{array}{ll} X: & \Omega \rightarrow \R\\ & \omega \rightarrow \text{la première valeur du couple }C(\omega) \end{array} \right. $$
 
-Effectifsetfréquences
+**Seconde statistique marginale**
+$$ \left\{\begin{array}{ll} Y: & \Omega \rightarrow \R\\ & \omega \rightarrow \text{la seconde valeur du couple }C(\omega) \end{array} \right. $$
 
-- Effectifnij = #(C−^1 {(xi,yj)}): nombred'individus admettant (xi,yj)commevaleurdu
-caractèreC
-- Effectifni• = #(X−^1 {xi}): nombred'individusadmettant xi commepremièrevaleurdu
-caractèreC ounombred'individusadmettantxicommevaleurducaractèreX
-    Remarque:ni•=
+Par **abus de langage**, on écrit que $C=(X,Y)$.
 
-#### ∑
+Les ensembles des valeurs observables de $X$ et $Y$ sont finis. On peut écrire :
+$$ X(\Omega)=\{x_1,\,x_2,\,...\,x_p\}\text{ par ordre croissant}\\Y(\Omega)=\{y_1,\,y_2,\,...\,y_q\}\text{ par ordre croissant} $$
 
- 
-1 \leq  j\leq  qnij
- 
-- Effectifn•j = #(Y−^1 {yj}): nombre d'individus admettantyj commeseconde valeurdu
-caractèreC ounombred'individusadmettantyjcommevaleurducaractèreY
-    Remarque:n•j=
+avec $1\leq p\leq N,\;1\leq q\leq N$ et a priori $p\neq q$
 
-#### ∑
+**Effectifs et fréquences**  
 
- 
-1 \leq  i\leq  pnij
- 
-OndéfinitégalementleseffectifscumulésNi•etN•jainsiquelesfréquencesfij,fi•,f•j,Fi•et
-F•j endivisantleseffectifscorres pondantsparN.Ainsi,parexemple
+- Effectif $n_{ij}=\#(C^{-1}\{(x_i,y_j)\})$ : nombre d'individus admettant $(x_i,y_j)$ comme valeur du caractère $C$
+- Effectif $n_{i\bull}=\#(X^{-1}\{x_i\})$ : nombre d'individus admettant $x_i$ comme première valeur du caractère $C$ ou nombre d'individus admettant $x_i$ comme valeur du caractère $X$  
+    >Remarque : $n_{i\bull}=\sum_{1\leq j\leq q}n_{ij}$
+- Effectif $n_{i\bull}=\#(Y^{-1}\{y_i\})$ : nombre d'individus admettant $y_i$ comme première valeur du caractère $C$ ou nombre d'individus admettant $y_i$ comme valeur du caractère $Y$  
+    >Remarque : $n_{i\bull}=\sum_{1\leq j\leq q}n_{ij}$
 
- 
-fij=
- 
-#### 1
+On définit également les effectifs cumulés $N_{i\bull}$ et $N_{\bull i}$ ainsi que les fréquences $f_{ij}$, $f_{i\bull}$, $f_{\bull j}$, $F_{i\bull}$, et $F_{\bull j}$ en divisant les effectifs correspondants par $N$. Ainsi, par exemple :
+$$ f_{ij}=\frac{n_{ij}}{N} $$
 
-#### N
+**Tableau de contingence**  
+| $X\backslash Y$ | $y_1$ | $\ldots$ | $y_j$ | $\ldots$ | $y_q$ | $total$ |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| $x_1$ | $n_{11}$ | $\ldots$ | $n_{1j}$ | $\ldots$ | $n_{1q}$ | $n_{1\bull}$ |
+| $\vdots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\vdots$ |
+| $x_i$ | $n_{i1}$ | $\ldots$ | $n_{ij}$ | $\ldots$ | $n_{iq}$ | $n_{i\bull}$ |
+| $\vdots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\vdots$ |
+| $x_p$ | $n_{p1}$ | $\ldots$ | $n_{pj}$ | $\ldots$ | $n_{pq}$ | $n_{p\bull}$ |
+| $total$ | $n_{\bull 1}$ | $\ldots$ | $n_{\bull j}$ | $\ldots$ | $n_{\bull q}$ | $N$ |
+<!-- $$
+\begin{tabular}{c||c|c|c|c||c}
+\hline
+X\backslash Y & y_1 & \ldots & y_j & \ldots & y_q & total \\
+\hline
+x_1 & n_{11} & \ldots & n_{1j} & \ldots & n_{1q} & n_{1\bull} \\
+\hline
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots & \vdots \\
+\hline
+x_i & n_{i1} & \ldots & n_{ij} & \ldots & n_{iq} & n_{i\bull} \\
+\hline
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots & \vdots \\
+\hline
+x_p & n_{p1} & \ldots & n_{pj} & \ldots & n_{pq} & n_{p\bull} \\
+\hline\hline
+total & n_{\bull 1} & \ldots & n_{\bull j} & \ldots & n_{\bull q} & N \\
+\hline
+\end{tabular}
+$$ -->
+| $X\backslash Y$ | $y_1$ | $\ldots$ | $y_j$ | $\ldots$ | $y_q$ | $total$ |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| $x_1$ | $f_{11}$ | $\ldots$ | $f_{1j}$ | $\ldots$ | $f_{1q}$ | $f_{1\bull}$ |
+| $\vdots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\vdots$ |
+| $x_i$ | $f_{i1}$ | $\ldots$ | $f_{ij}$ | $\ldots$ | $f_{iq}$ | $f_{i\bull}$ |
+| $\vdots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\ddots$ | $\vdots$ | $\vdots$ |
+| $x_p$ | $f_{p1}$ | $\ldots$ | $f_{pj}$ | $\ldots$ | $f_{pq}$ | $f_{p\bull}$ |
+| $total$ | $f_{\bull 1}$ | $\ldots$ | $f_{\bull j}$ | $\ldots$ | $f_{\bull q}$ | $1$ |
+<!-- $$
+\begin{tabular}{c||c|c|c|c||c}
+\hline
+X\backslash Y & y_1 & \ldots & y_j & \ldots & y_q & total \\
+\hline
+x_1 & f_{11} & \ldots & f_{1j} & \ldots & f_{1q} & f_{1\bull} \\
+\hline
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots & \vdots \\
+\hline
+x_i & f_{i1} & \ldots & f_{ij} & \ldots & f_{iq} & f_{i\bull} \\
+\hline
+\vdots & \vdots & \ddots & \vdots & \ddots & \vdots & \vdots \\
+\hline
+x_p & f_{p1} & \ldots & f_{pj} & \ldots & f_{pq} & f_{p\bull} \\
+\hline\hline
+total & f_{\bull 1} & \ldots & f_{\bull j} & \ldots & f_{\bull q} & N \\
+\hline
+\end{tabular}
+$$ -->
 
- 
-nij
- 
-
-#### 1.3. STATISTIQUEDOUBLE(BIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
-
- 
-Tableaudecontingence
- 
- 
-X\Y y 1 ... yj ... yq total
-x 1 n 11 ... n 1 j ... n 1 q n 1 •
-..
-.
- 
-#### ..
-
-#### .
-
-#### ..
-
-#### .
-
-#### ..
-
-#### .
-
-#### ..
-
-#### .
-
- 
-xi ni 1 ... nij ... niq ni•
-..
-.
- 
-#### ..
-
-#### .
-
-#### ..
-
-#### .
-
-#### ..
-
-#### .
-
-#### ..
-
-#### .
-
- 
-xp np 1 ... npj ... npj n 1 •
-total n• 1 ... n•j ... n•q N
- 
- 
-X\Y y 1 ... yj ... yq total
-x 1 f 11 ... f 1 j ... f 1 q f 1 •
-..
-.
- 
-#### ..
-
-#### .
-
-#### ..
-
-#### .
-
-#### ..
-
-#### .
-
-#### ..
-
-#### .
-
- 
-xi fi 1 ... fij ... fiq fi•
-..
-.
- 
-#### ..
-
-#### .
-
-#### ..
-
-#### .
-
-#### ..
-
-#### .
-
-#### ..
-
-#### .
-
- 
-xp fp 1 ... fpj ... fpj f 1 •
-total f• 1 ... f•j ... f•q 1
- 
-
-#### 1.3. STATISTIQUEDOUBLE(BIVARIÉE)CHAPITRE1. STATISTIQUESDESCRIPTIVES
-
-### 1.3.2 Covarianceetco effcientdecorrélation
+#### 1.3.2 Covariance et coeffcient de corrélation
 
 Covariance
 ElledonneunemesuredulienexistantentrelesdeuxcaractèresXetY.
