@@ -128,4 +128,12 @@ class StatCla(Stat):
         plt.grid(axis='y',alpha=.7)
         plt.xticks(np.arange(min(self.claScope)-2,max(self.claScope)+3,1))#max(self.ef(i+1)/max(len(j) for j in self.serie) for i in range(len(self.serie)))])
         plt.show()
+
+class OnlyTwoStatsError(Exception):
+    def __init__(self):
+        super().__init__("You only can analyse two stats at the time for now...")
+
 class StatDbl():
+    def __init__(self,stat,pStart,pStop,pStep):
+        if len(stat)>2: raise OnlyTwoStatsError()
+        else
