@@ -193,7 +193,7 @@ base est proportionnelle à la largeur de la classe et la **surface** proportion
 rectangle qui est proportionnelle à l'effectif. Cette remarque prend toute son importance
 lorsque les classes sont de largeurs différentes.
 
-`image`
+![Histogramme](Figure_1.png)
 
 Exemple : on travaille sur une statistique découpées selon les quatre classes suivantes :
 $[2,4],\,]4,9],\,]9,11],\,]11,12]$ et chaque classe est d'effectif $4$.  
@@ -256,25 +256,7 @@ $$ f_{ij}=\frac{n_{ij}}{N} $$
 |    $\vdots$     |   $\vdots$    | $\ddots$ |   $\vdots$    | $\ddots$ |   $\vdots$    |   $\vdots$   |
 |      $x_p$      |   $n_{p1}$    | $\ldots$ |   $n_{pj}$    | $\ldots$ |   $n_{pq}$    | $n_{p\bull}$ |
 |     $total$     | $n_{\bull 1}$ | $\ldots$ | $n_{\bull j}$ | $\ldots$ | $n_{\bull q}$ |     $N$      |
-<!--
-\begin{tabular}{c||c|c|c|c||c}
-\hline
-X\backslash Y & y_1 & \ldots & y_j & \ldots & y_q & total \\
-\hline
-x_1 & n_{11} & \ldots & n_{1j} & \ldots & n_{1q} & n_{1\bull} \\
-\hline
-\vdots & \vdots & \ddots & \vdots & \ddots & \vdots & \vdots \\
-\hline
-x_i & n_{i1} & \ldots & n_{ij} & \ldots & n_{iq} & n_{i\bull} \\
-\hline
-\vdots & \vdots & \ddots & \vdots & \ddots & \vdots & \vdots \\
-\hline
-x_p & n_{p1} & \ldots & n_{pj} & \ldots & n_{pq} & n_{p\bull} \\
-\hline\hline
-total & n_{\bull 1} & \ldots & n_{\bull j} & \ldots & n_{\bull q} & N \\
-\hline
-\end{tabular}
--->
+
 | $X\backslash Y$ |     $y_1$     | $\ldots$ |     $y_j$     | $\ldots$ |     $y_q$     |   $total$    |
 | :-------------: | :-----------: | :------: | :-----------: | :------: | :-----------: | :----------: |
 |      $x_1$      |   $f_{11}$    | $\ldots$ |   $f_{1j}$    | $\ldots$ |   $f_{1q}$    | $f_{1\bull}$ |
@@ -283,25 +265,6 @@ total & n_{\bull 1} & \ldots & n_{\bull j} & \ldots & n_{\bull q} & N \\
 |    $\vdots$     |   $\vdots$    | $\ddots$ |   $\vdots$    | $\ddots$ |   $\vdots$    |   $\vdots$   |
 |      $x_p$      |   $f_{p1}$    | $\ldots$ |   $f_{pj}$    | $\ldots$ |   $f_{pq}$    | $f_{p\bull}$ |
 |     $total$     | $f_{\bull 1}$ | $\ldots$ | $f_{\bull j}$ | $\ldots$ | $f_{\bull q}$ |     $1$      |
-<!--
-\begin{tabular}{c||c|c|c|c||c}
-\hline
-X\backslash Y & y_1 & \ldots & y_j & \ldots & y_q & total \\
-\hline
-x_1 & f_{11} & \ldots & f_{1j} & \ldots & f_{1q} & f_{1\bull} \\
-\hline
-\vdots & \vdots & \ddots & \vdots & \ddots & \vdots & \vdots \\
-\hline
-x_i & f_{i1} & \ldots & f_{ij} & \ldots & f_{iq} & f_{i\bull} \\
-\hline
-\vdots & \vdots & \ddots & \vdots & \ddots & \vdots & \vdots \\
-\hline
-x_p & f_{p1} & \ldots & f_{pj} & \ldots & f_{pq} & f_{p\bull} \\
-\hline\hline
-total & f_{\bull 1} & \ldots & f_{\bull j} & \ldots & f_{\bull q} & N \\
-\hline
-\end{tabular}
--->
 
 ### 1.3.2 Covariance et coeffcient de corrélation
 

@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 class Stat():
     def __init__(self,stat,pStart=0,pStop=None,pStep=1):
         self.serie=[]
-        if isinstance(stat,tuple) and (isinstance(stat[0],list) or callable(stat[0])):
+        if isinstance(stat,tuple):
+            print('aaa')
             self.createDouble(stat,pStart,pStop,pStep)
         if(isinstance(stat,list)):
-            if(pStart==None):pStart=0
             if(pStop==None):pStop=len(stat)
             self.serie=stat
         elif(callable(stat)):
@@ -17,19 +17,19 @@ class Stat():
             except:raise
         self.pop=np.arange(pStart,pStop,pStep).tolist()
         self.N=len(np.arange(pStart,pStop,pStep))
-        self.moda=sorted(list(dict.fromkeys(self.serie))) # <- modalites
+        if not isinstance(self[0],list): 
+            self.moda=sorted(list(dict.fromkeys(self.serie)))
     def __repr__(self):return(
         f"Valeur   |{'|'.join([str(Fraction(i).limit_denominator()) for i in self.moda])}\n"+
         f"Effectif |{'|'.join([' '*(len(str(Fraction(self.moda[i-1]).limit_denominator()))-1)+str(self.ef(i)) for i in range(1,len(self.moda)+1)])}\n\n"+
         f"Moyenne : {self.moy()} , Mode : {self.mode()} , Médiane : {self.med()}\nVariance : {self.variance()} , Ecart-type : {self.ecarttyp()} , Etendue : {self.etendue()}\nCourbe : {self.apla()} , Distribution : {self.asym()}")
         # repr renvoie lors du print un tableau avec les modalites dans l'ordre croissant
         # et leur effectif.
-    def __iter__(self): 
-        yield from self.serie
-    def __getitem__(self,n):
-        return self.serie[n]
-    def __enter__(self):
-        return self
+    def __iter__(self): yield from self.serie
+    def __getitem__(self,n): #return self.serie[n]
+        try: return self.serie[n]
+        except: pass
+    def __enter__(self): return self
     def __exit__(self,*args):
         del self
         return True
@@ -43,16 +43,13 @@ class Stat():
         # frC fait le somme des frequences pour les valeurs inferieures ou egales
     def mode(self):
         m=[self.moda[i] for i in range(len(self.moda)) if self.ef(i+1)==max([self.ef(j+1) for j in range(len(self.moda))])]
-        if len(m)==1:return m[0]
-        else:return m
+        if len(m)==1:   return m[0]
+        else:           return m
         # mode renvoie la valeur la plus fréquente
     def med(self):      return self.quan(2)[0]
-            # l=len(self.serie())
-            # s=sorted(self.serie())
-            # return (s[l//2] if l%2!=0 else (s[l//2]+s[l//2-1])/2)
         # med renvoie la médiane : la valeur de la serie telle qu'il y a autant de valeurs 
         # d'un cote que de l'autre (suivie d'une autre facon, sans utiliser les quantiles)
-    def quan(self,n):#return Stat.staticQuan(self.serie,n)
+    def quan(self,n): 
         q=[]
         s=sorted(self.serie)
         if(self):
@@ -61,26 +58,16 @@ class Stat():
                 b=(a-a%.5+.5 if (a%.5<.25 if a>len(s)/2 else a%.5<=.25) else a-a%.5+1)
                 q.append(s[int(b)-1] if b%1==0 else (s[int(b)]+s[int(b)-1])/2)
         return q
-    # @staticmethod
-    # def staticQuan(liste,n):
-    #     q=[]
-    #     s=sorted(liste)
-    #     for i in range(1,n):
-    #         a=(i*len(s)/n)
-    #         b=(a-a%.5+.5 if (a%.5<.25 if a>len(s)/2 else a%.5<=.25) else a-a%.5+1)
-    #         q.append(s[int(b)-1] if b%1==0 else (s[int(b)]+s[int(b)-1])/2)
-    #     return q
-            # def quan(self,n):return [(sorted(self.serie)[int(((i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+.5 if ((i*len(sorted(self.serie))/n)%.5<.25 if (i*len(sorted(self.serie))/n)>len(sorted(self.serie))/2 else (i*len(sorted(self.serie))/n)%.5<=.25) else (i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+1))-1] if ((i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+.5 if ((i*len(sorted(self.serie))/n)%.5<.25 if (i*len(sorted(self.serie))/n)>len(sorted(self.serie))/2 else (i*len(sorted(self.serie))/n)%.5<=.25) else (i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+1)%1==0 else (sorted(self.serie)[int(((i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+.5 if ((i*len(sorted(self.serie))/n)%.5<.25 if (i*len(sorted(self.serie))/n)>len(sorted(self.serie))/2 else (i*len(sorted(self.serie))/n)%.5<=.25) else (i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+1))]+sorted(self.serie)[int(((i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+.5 if ((i*len(sorted(self.serie))/n)%.5<.25 if (i*len(sorted(self.serie))/n)>len(sorted(self.serie))/2 else (i*len(sorted(self.serie))/n)%.5<=.25) else (i*len(sorted(self.serie))/n)-(i*len(sorted(self.serie))/n)%.5+1))-1])/2) for i in range(1,n)]
         # quan renvoie les quantiles d'ordre n : les valeurs séparant la série en n parties
         # de meme effectif
-    def moy(self):      return self.mmt(1)#sum(i for i in self.serie)/self.N
+    def moy(self):      return self.mmt(1)
         # moy rnevoie la moyenne arithmetique de la serie : la somme des valeurs divisee 
         # par la taille de l'echantillon
     def etendue(self):  return max(self.serie)-min(self.serie)
         # etendue renvoie l'ecart entre la plus petite et la plus grande valeur de la serie
     def ecartmoy(self): return sum(abs(i-self.mmt(1)) for i in self.serie)/self.N
         # ecartmoy renvoie l'ecart moyen : la dispersion des valeurs autour de la moyenne
-    def variance(self): return self.mmtctr(2)#sum((i-self.mmt(1))**2 for i in self.serie)/self.N
+    def variance(self): return self.mmtctr(2)
         # variance donne la variance de la serie, utilisee pour calculer l'ecart type
     def ecarttyp(self): return (abs(self.variance()))**(1/2)
         # ecarttyp donne l'ecart type, une mesure de disperssion des valeurs
@@ -129,11 +116,20 @@ class StatCla(Stat):
         plt.xticks(np.arange(min(self.claScope)-2,max(self.claScope)+3,1))#max(self.ef(i+1)/max(len(j) for j in self.serie) for i in range(len(self.serie)))])
         plt.show()
 
-class OnlyTwoStatsError(Exception):
+class OnlyTwoError(Exception):
     def __init__(self):
         super().__init__("You only can analyse two stats at the time for now...")
+class DifferentType(Exception):
+    def __init__(self):
+        super().__init__("The two stats must be of the same type (two functions or two lists)")
+class DifferentLengh(Exception):
+    def __init__(self):
+        super().__init__("The two lists must have the same size...")
 
 class StatDbl():
     def __init__(self,stat,pStart,pStop,pStep):
-        if len(stat)>2: raise OnlyTwoStatsError()
-        else
+        if len(stat)>2: raise OnlyTwoError()
+        if len(stat[0])!=len(stat[1]): raise DifferentLengh()
+        self.serie=(Stat(stat[0]),Stat(stat[1]))
+
+        else: raise DifferentType()
