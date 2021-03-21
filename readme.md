@@ -99,7 +99,7 @@ C'est la plage de valeur du caractère observée sur la population :
 $$ w=\max_{1\leq i\leq p}(x_i)−\min_{1\leq i\leq p}(x_i)=\max_{1\leq i\leq N}(v_i)−\min_{1\leq i\leq N}(v_i) $$
 Attention : sensible aux erreurs de mesure.
 
-#### **Les quantiles**
+#### **Les intervalles interquantiles**
 
 Dans le même ordre d'idée que l'étendue, on peut donner l'intervalle séparant le plus petit et
 le plus grand décile (80% de la population) ou celui séparant le quartile inférieur $Q_I$ et le

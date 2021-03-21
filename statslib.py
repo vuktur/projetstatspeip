@@ -7,8 +7,7 @@ class Stat():
     def __init__(self,stat,pStart=0,pStop=None,pStep=1):
         self.serie=[]
         if isinstance(stat,tuple):
-            print('aaa')
-            self.createDouble(stat,pStart,pStop,pStep)
+            raise DoubleTryError()
         if(isinstance(stat,list)):
             if(pStop==None):pStop=len(stat)
             self.serie=stat
@@ -33,7 +32,7 @@ class Stat():
     def __exit__(self,*args):
         del self
         return True
-    def ef(self,n):     return sum(1 for i in self.serie if i==self.moda[n-1] and n>0)
+    def ef(self,n):     return sum(1 for i in self.serie if i==self.serie[n-1] and n>0)
         # ef renvoie l'effectif d'une certaine valeur
     def efC(self,n):    return sum(self.ef(i) for i in range(1,n+1))
         # efC fait la somme des effectifs pour les valeurs inferieures ou egales
@@ -116,22 +115,32 @@ class StatCla(Stat):
         plt.xticks(np.arange(min(self.claScope)-2,max(self.claScope)+3,1))#max(self.ef(i+1)/max(len(j) for j in self.serie) for i in range(len(self.serie)))])
         plt.show()
 
+class DoubleTryError(Exception):
+    def __init__(self):
+        super().__init__("You can use StatDbl instead of Stat to analyse two stats at the time")
 class OnlyTwoError(Exception):
     def __init__(self):
         super().__init__("You only can analyse two stats at the time for now...")
 # class DifferentType(Exception):
 #     def __init__(self):
 #         super().__init__("The two stats must be of the same type (two functions or two lists)")
-class DifferentLengh(Exception):
+class DifferentLenghError(Exception):
     def __init__(self):
         super().__init__("The two lists must have the same size...")
 
 class StatDbl():
-    def __init__(self,stat,pStart,pStop,pStep):
+    def __init__(self,stat,pStart=0,pStop=None,pStep=1):
         if len(stat)>2: raise OnlyTwoError()
-        if len(stat[0])!=len(stat[1]): raise DifferentLengh()
+        if len(stat[0])!=len(stat[1]): raise DifferentLenghError()
         self.serie=(Stat(stat[0],pStart,pStop,pStep),Stat(stat[1],pStart,pStop,pStep))
-    def ef(self,m='.',n='.'):     return sum(1 for (i,j) in range(len(self.serie[0])) if i==self.serie[0].moda[m-1] and j==self.serie[1].moda[n-1] and m>0 and n>0)
+    def ef(self,m='.',n='.'): 
+        return sum(1 
+                    for i in range(len(self.serie[0].serie)) 
+                    if all([
+                        (m=='.' or (self.serie[0][i]==self.serie[0][m-1] and m>0)), 
+                        (n=='.' or (self.serie[1][i]==self.serie[1][n-1] and n>0))
+                    ])
+                )
         # ef renvoie l'effectif d'un certain couple
     def efC(self,m='.',n='.'):    return sum(self.ef(i) for i in range(1,n+1))
         # efC fait la somme des effectifs pour les valeurs inferieures ou egales

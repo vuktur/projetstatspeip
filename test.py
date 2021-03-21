@@ -1,4 +1,4 @@
-from statslib import Stat
+from statslib import Stat,StatDbl
 from random import randint
 import numpy as np
 import scipy.stats as st
@@ -42,5 +42,6 @@ from math import pi, sqrt, exp
 # print(classes1.depo())
 # classes1.histogram()
 
-exdouble=Stat(([1,3,4,3,6,7,3,5,1,2,8,9,0,0,5,7],[53,32,63,13,84,3,46,39,27,14,38,92,75,68,10,29]))
-print(exdouble.serie)
+# exdouble=StatDbl(([1,3,4,3,6,7,3,5,1,2,8,9,0,0,5,3],[53,32,63,13,84,3,46,39,27,14,38,92,75,68,10,84]))
+exdouble=StatDbl(([1,2,3,4,3],[1,2,3,4,3]))
+print(exdouble.ef(3,'.'))
