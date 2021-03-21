@@ -119,9 +119,9 @@ class StatCla(Stat):
 class OnlyTwoError(Exception):
     def __init__(self):
         super().__init__("You only can analyse two stats at the time for now...")
-class DifferentType(Exception):
-    def __init__(self):
-        super().__init__("The two stats must be of the same type (two functions or two lists)")
+# class DifferentType(Exception):
+#     def __init__(self):
+#         super().__init__("The two stats must be of the same type (two functions or two lists)")
 class DifferentLengh(Exception):
     def __init__(self):
         super().__init__("The two lists must have the same size...")
@@ -130,6 +130,12 @@ class StatDbl():
     def __init__(self,stat,pStart,pStop,pStep):
         if len(stat)>2: raise OnlyTwoError()
         if len(stat[0])!=len(stat[1]): raise DifferentLengh()
-        self.serie=(Stat(stat[0]),Stat(stat[1]))
-
-        else: raise DifferentType()
+        self.serie=(Stat(stat[0],pStart,pStop,pStep),Stat(stat[1],pStart,pStop,pStep))
+    def ef(self,m='.',n='.'):     return sum(1 for (i,j) in range(len(self.serie[0])) if i==self.serie[0].moda[m-1] and j==self.serie[1].moda[n-1] and m>0 and n>0)
+        # ef renvoie l'effectif d'un certain couple
+    def efC(self,m='.',n='.'):    return sum(self.ef(i) for i in range(1,n+1))
+        # efC fait la somme des effectifs pour les valeurs inferieures ou egales
+    def fr(self,m='.',n='.'):     return (self.ef(n)/self.N if n>0 else 0)
+        # fr renvoie la frequence a laquelle aparait une valeur donnee
+    def frC(self,m='.',n='.'):    return sum(self.fr(i) for i in range(1,n+1))
+        # frC fait le somme des frequences pour les valeurs inferieures ou egales
