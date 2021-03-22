@@ -93,6 +93,7 @@ Dans le même esprit, on peut définir :
 <p align="center"><img src="/svgs/ce40a5369133d61caa40c4beb743b41f.svg?invert_in_darkmode" align=middle width=353.32083435pt height=47.806078649999996pt/></p>  
 
 >`moyenne`  
+
 Remarque : si on pose <img src="/svgs/7685763f4490468237d95f4d0979209e.svg?invert_in_darkmode" align=middle width=133.04728139999997pt height=24.65753399999998pt/> et <img src="/svgs/dc22bdb0ee16a1b736295db4ad0bca79.svg?invert_in_darkmode" align=middle width=136.67340554999998pt height=24.65753399999998pt/> alors :
 <p align="center"><img src="/svgs/f762ac4295d4bc1d55e719963c9df35a.svg?invert_in_darkmode" align=middle width=280.3509027pt height=45.67365495pt/></p>
 
@@ -104,6 +105,7 @@ C'est la plage de valeur du caractère observée sur la population :
 <p align="center"><img src="/svgs/39b4e0b84a65070d92fdfc266955a245.svg?invert_in_darkmode" align=middle width=333.13530525pt height=25.1935035pt/></p>
 
 >`etendue`  
+
 Attention : sensible aux erreurs de mesure.
 
 #### **Les intervalles interquantiles**
