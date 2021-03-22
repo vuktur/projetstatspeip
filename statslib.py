@@ -126,21 +126,36 @@ class StatDbl():
         self.N=self.serie[0].N
     def effectif(self,m='.',n='.'): 
         return sum(1 
-                    for i in range(len(self.serie[0].serie)) 
+                    for i in range(self.N) 
                     if all([
                         (m=='.' or (self.serie[0][i]==self.serie[0][m-1] and m>0)), 
                         (n=='.' or (self.serie[1][i]==self.serie[1][n-1] and n>0))
                     ])
                 )
         # effectif renvoie l'effectif d'un certain couple
-    def effectifC(self,m='.',n='.'):    return sum(self.effectif(i) for i in range(1,n+1))
+    # def effectifC(self,m='.',n='.'):    return sum(self.effectif(i) for i in range(1,n+1))
         # effectifC fait la somme des effectifs pour les valeurs inferieures ou egales
     def frequence(self,m='.',n='.'):     return self.effectif(m,n)/self.N
         # frequence renvoie la frequence a laquelle aparait une valeur donnee
-    def frequenceC(self,m='.',n='.'):    return sum(self.frequence(i) for i in range(1,n+1))
+    # def frequenceC(self,m='.',n='.'):    return sum(self.frequence(i) for i in range(1,n+1))
         # frequenceC fait le somme des frequences pour les valeurs inferieures ou egales
     def contingence(self):
-        pass
+        data=[[self.effectif(i,j) for j in range(1,self.N+1)]+[self.effectif(i,'.')] for i in range(1,self.N+1)]+[[self.effectif('.',j) for j in range(1,self.N+1)]+[self.N]]
+        print(data)
+        text=[[f"{j}" for j in i] for i in data]
+        print(text)
+        rows=[f'{i}' for i in self.serie[0]]+['t']
+        columns=[f'{j}' for j in self.serie[1]]+['t']
+        colors=plt.cm.YlOrRd(np.linspace(0,0.5,max(max(data))+1))
+        colorsmap=[[colors[data[j]] for j in range(len(data[i]))] for i in range(len(data))]
+        plt.table(cellText=text,
+                  rowLabels=rows,
+                  colLabels=columns,
+                  cellColours=colorsmap,
+                  loc='center'
+                 )
+        plt.axis('off')
+        plt.show()
     def covariance(self):
         pass
     def correlation(self):
