@@ -7,13 +7,13 @@ Une statistique est une application d'une population $\Omega$ vers un ensemble d
 $$ \left\{\begin{array}{rl} X: & \Omega \rightarrow C\\ & \omega \rightarrow X(\omega) \end{array} \right. $$
 
 - $\Omega$ : population finie d'individus $\omega$. On va mesurer/observer un caractère particulier sur ces individus.  
-**`self.pop`**  
+    >`population`  
 
 - $C$ : ensemble des valeurs possibles du caractère, appelées aussi modalités.  
-**`self.moda`**  
+    >`modalites`  
 
 - $X$ : Statistique (parfois appelée aussi caractère). Application qui à tout individu associe la valeur de son caractère.  
-**`self.serie`**  
+    >`serie`  
 
 <!---->
 - Une statistique peut être quantitative ou qualitative.
@@ -24,7 +24,7 @@ $$ \left\{\begin{array}{rl} X: & \Omega \rightarrow C\\ & \omega \rightarrow X(\
 
 ### 1.2.1 Notations
 
->On va se limiter à des statistiques quantitatives.
+On va se limiter à des statistiques quantitatives.
 
 - $\Omega$ population finie de $N$ individus.
 - $C\subset R$
@@ -44,16 +44,16 @@ $$ X(\Omega)=\{x_1,\,x_2,\,...\,x_p\}\;(1\leq p\leq N) $$
 pour la suite on supposera $x_1<x_2<...<x_p$.
 
 - Effectif $n_i=\#(X^−1 \{x_i\})$ : nombre de fois que la valeur $x_i$ a été observée dans la population ou nombre d'individus admettant $x_i$ comme valeur du caractère.  
-**`self.effectif(i)`**
+    >`effectif(i)`  
 
 - Effectif cumulé $N_i=\sum^i_{j=1}n_j=\#(X^{-1}\{]−\infin,x_i]\})$ : nombre d'individus présentant une valeur de caractère plus petite que $x_i$, ou égale. On a la relation $N_i=N_{i−1}+n_i$ en posant $N_0=0$ et peut remarquer que $N_p=N$  
-**`self.effectifCumule(i)`**
+    >`effectifC(i)`  
 
 - Fréquence $f_i=n_i/N$.  
-  **`self.frequence(i)`**
+    >`frequence(i)`  
 
 - Fréquence cumulée $F_i=N_i/N=\sum^i_{j=1} f_j=F_{i−1}+f_i$ en posant $F_0=0$. On remarque que $F_p=1$  
-**`self.frequenceCumule(i)`**
+    >`frequenceC(i)`  
 
 Une série statistique est une famille de la forme $(x_i,n_i)_{i\in [1,p]}$ ou $(x_i,f_i)_{i\in [1,p]}$  
 On parle parfois de **série statistique dépouillée** ou de **série statistique regroupée et ordonnée**.
@@ -62,7 +62,8 @@ On parle parfois de **série statistique dépouillée** ou de **série statistiq
 
 #### **Le mode**
 
-C'est la valeur du caractère d'effectif maximal
+C'est la valeur du caractère d'effectif maximal  
+>`mode`  
 
 $$ mode=x_i\text{ tq } n_i=\max_{1\leq j\leq p}(n_j) $$
 
@@ -71,7 +72,8 @@ Attention : il n'est pas forcément unique.
 #### **La médiane**
 
 C'est la valeur du caractère qui sépare la population en deux parties égales.  
-Attention : parfois dificile à définir.
+Attention : parfois dificile à définir.  
+>`mediane`  
 
 $$\eta \text{ tq }\#\{\omega_i\,|\,X(\omega_i)<\eta \}=\#\{\omega_i\,|\,X(\omega_i)>\eta \}\\ \eta \text{ tq }\#\{\omega_i\,|\,X(\omega_i)\leq \eta \}=\#\{\omega_i\,|\,X(\omega_i)\geq \eta \}\\ \eta =x_i\text{ tq }N_{i−1}<N/2\leq N_i $$
 
@@ -84,10 +86,12 @@ Dans le même esprit, on peut définir :
 - les centiles : 99 valeurs qui découpent la population en 100 parties égales.
 - ou tout autre découpage.
 
+>`quantile(n)`  
+
 #### **La moyenne arithmétique**
 
 $$ m(X)=\bar{x}=\frac{1}{N}\sum^p_{i=1}(n_ix_i)=\sum^p_{i=1}(f_ix_i)=\frac{1}{N}\sum^N_{i=1}v_i $$
-
+>`moyenne`  
 Remarque : si on pose $n=(n_1,\,n_2,\,...\,n_p)$ et $X=(x_1,\,x_2,\,...\,x_p)$ alors :
 $$ \sum^p_{i=1}(n_ix_i)=n\cdot X^t\text{ et }m(X)=\frac{1}{N}n\cdot X^t $$
 
@@ -97,6 +101,7 @@ $$ \sum^p_{i=1}(n_ix_i)=n\cdot X^t\text{ et }m(X)=\frac{1}{N}n\cdot X^t $$
 
 C'est la plage de valeur du caractère observée sur la population :
 $$ w=\max_{1\leq i\leq p}(x_i)−\min_{1\leq i\leq p}(x_i)=\max_{1\leq i\leq N}(v_i)−\min_{1\leq i\leq N}(v_i) $$
+>`etendue`  
 Attention : sensible aux erreurs de mesure.
 
 #### **Les intervalles interquantiles**
@@ -112,11 +117,13 @@ Intérêt : Élimine les mesures aberrantes.
 
 Calcule la moyenne des écarts à la moyenne.
 $$ E=\frac{1}{N}\sum_{1\leq i\leq p}n_i|x_i−\bar{x}|=\sum_{1\leq i\leq p}f_i|x_i−\bar{x}|=\frac{1}{N}\sum_{1\leq i\leq p}|v_i−\bar{x}| $$
+>`ecartMoyen`  
 
 #### **L'écart quadratique moyen ou variance**
 
 Calcule la moyenne des carrés des écarts à la moyenne.
 $$ V(X)=\sigma^2_X=\frac{1}{N}\sum_{1\leq i\leq p}n_i(x_i−\bar{x})^2=\sum_{1\leq i\leq p}f_i(x_i−\bar{x})^2=\frac{1}{N}\sum_{1\leq i\leq p}(v_i−\bar{x})^2 $$
+>`variance`  
 
 Relation de Koenig-Huygens
 $$ \sigma^2_X=\left(\frac{1}{N}\sum_{1\leq i\leq p}n_i\cdot x_i^2\right)-\bar{x}^2=\left(\sum_{1\leq i\leq p}f_i\cdot x_i^2\right)-\bar{x}^2=\left(\frac{1}{N}\sum_{1\leq i\leq p}v_i^2\right)-\bar{x}^2 $$
@@ -125,16 +132,19 @@ $$ \sigma^2_X=\left(\frac{1}{N}\sum_{1\leq i\leq p}n_i\cdot x_i^2\right)-\bar{x}
 
 C'est la racine carré de la variance : même dimension que le caractère étudié.
 $$ \sigma_X=\sqrt{V(X)}=\sqrt{\frac{1}{N}\sum_{1\leq i\leq  p}n_i(x_i−\bar{x})^2}=\sqrt{\left(\sum_{1\leq i\leq p}f_i\cdot x_i^2\right)-\bar{x}^2}=... $$
+>`ecartType`  
 
 ### 1.2.4 Les moments
 
 #### **Moment d'ordre k**
 
 $$ m_k(X)=\frac{1}{N}\sum^p_{i=1}(n_i\cdot x_i^k)=\sum^p_{i=1}(f_i\cdot x_i^k)=\frac{1}{N}\sum^p_{i=1}v_i^k $$
+>`moment(k)`  
 
 #### **Moment centré d'ordre k**
 
 $$ \mu_k(X)=\frac{1}{N}\sum^p_{i=1}(n_i\cdot (x_i-\bar{x})^k)=\sum^p_{i=1}(f_i\cdot (x_i-\bar{x})^k)=\frac{1}{N}\sum^p_{i=1}(v_i-\bar{x})^k $$
+>`momentCentre(k)`  
 
 Propriétés:
 
@@ -150,6 +160,7 @@ Propriétés:
 #### **Premier coeffcient de Fisher : coeffcient d'asymétrie**
 
 $$ \delta=\frac{\mu_3}{\sigma^3}=\frac{\mu_3}{\mu_2^{3/2}} $$
+>`asymetrie()`  
 
 - série symétrique $\rightarrow\delta=0$
 - grands écarts positifs % à la moyenne $\rightarrow\delta>0$ ("bosse décalée vers la gauche")
@@ -160,6 +171,7 @@ $$ \delta=\frac{\mu_3}{\sigma^3}=\frac{\mu_3}{\mu_2^{3/2}} $$
 #### **Second coeffcient de Fisher : coeffcient d'aplatissement**
 
 $$ \alpha=\frac{\mu_4}{\sigma^4}=\frac{\mu_4}{\mu^2_2} $$
+>`aplatissement()`  
 
 - Une grande valeur de $\alpha$ traduit un resserrement autour de la moyenne ("courbe en pic")
 - Une petite valeur de $\alpha$ traduit un étalement de la série ("courbe plate")
@@ -168,7 +180,8 @@ $$ \alpha=\frac{\mu_4}{\sigma^4}=\frac{\mu_4}{\mu^2_2} $$
 
 ### 1.2.6 Découpage en classes
 
-Lorsque $X$ est un caractère continu ou que les fréquences $f_i$ sont faibles ($p$ proche de $N$) on est amené à découper le domaine de valeurs de $X$ en classes (sous-intervalles).
+Lorsque $X$ est un caractère continu ou que les fréquences $f_i$ sont faibles ($p$ proche de $N$) on est amené à découper le domaine de valeurs de $X$ en classes (sous-intervalles).  
+>`classer([limites des classes])`  
 
 $$ C_1=[a_0,a_1],\,C_2=]a_1,a_2],\,...\,C_{p'}=]a_{p'−1},a_{p'}] $$
 avec $p'\leq p$ et $a_0\leq x_1<x_p\leq a_{p'}$
@@ -240,10 +253,10 @@ avec $1\leq p\leq N,\;1\leq q\leq N$ et a priori $p\neq q$
 - Effectif $n_{ij}=\#(C^{-1}\{(x_i,y_j)\})$ : nombre d'individus admettant $(x_i,y_j)$ comme valeur du caractère $C$
 - Effectif $n_{i\bull}=\#(X^{-1}\{x_i\})$ : nombre d'individus admettant $x_i$ comme première valeur du caractère $C$ ou nombre d'individus admettant $x_i$ comme valeur du caractère $X$  
     >Remarque : $n_{i\bull}=\sum_{1\leq j\leq q}n_{ij}$
-- Effectif $n_{i\bull}=\#(Y^{-1}\{y_i\})$ : nombre d'individus admettant $y_i$ comme première valeur du caractère $C$ ou nombre d'individus admettant $y_i$ comme valeur du caractère $Y$  
-    >Remarque : $n_{i\bull}=\sum_{1\leq j\leq q}n_{ij}$
+- Effectif $n_{\bull j}=\#(Y^{-1}\{y_i\})$ : nombre d'individus admettant $y_i$ comme seconde valeur du caractère $C$ ou nombre d'individus admettant $y_i$ comme valeur du caractère $Y$  
+    >Remarque : $n_{\bull j}=\sum_{1\leq i\leq q}n_{ij}$
 
-On définit également les effectifs cumulés $N_{i\bull}$ et $N_{\bull i}$ ainsi que les fréquences $f_{ij}$, $f_{i\bull}$, $f_{\bull j}$, $F_{i\bull}$, et $F_{\bull j}$ en divisant les effectifs correspondants par $N$. Ainsi, par exemple :
+On définit également les effectifs cumulés $N_{i\bull}$ et $N_{\bull j}$ ainsi que les fréquences $f_{ij}$, $f_{i\bull}$, $f_{\bull j}$, $F_{i\bull}$, et $F_{\bull j}$ en divisant les effectifs correspondants par $N$. Ainsi, par exemple :
 $$ f_{ij}=\frac{n_{ij}}{N} $$
 
 #### **Tableau de contingence**
