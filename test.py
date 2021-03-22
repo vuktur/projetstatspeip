@@ -42,8 +42,12 @@ from math import pi, sqrt, exp
 # print(classes1.depo())
 # classes1.histogram()
 
-exdouble=StatDbl(([1,3,4,3,6,7,3,5,1,2,8,9,0,0,5,3],[53,32,63,13,84,3,46,39,27,14,38,92,75,68,10,84]))
+# exdouble=StatDbl(([1,3,4,3,6,7,3,5,1,2,8,9,0,0,5,3],[53,32,63,13,84,3,46,39,27,14,38,92,75,68,10,84]))
 # exdouble=StatDbl(([1,2,3,4,3],[1,2,3,4,3]))
+exdouble=StatDbl(([1,2,3,4,3],[5,7,3,2,5]))
+# exdouble=StatDbl(([1,1,1,2,2],[1,1,1,2,2]))
+
 # print(exdouble.ef(3,'.'))
-print(exdouble.effectif(1,1))
-exdouble.contingence()
+# print(exdouble.effectif(1,1))
+# exdouble.contingence()
+print(exdouble.covariance())

@@ -141,22 +141,22 @@ class StatDbl():
         # frequenceC fait le somme des frequences pour les valeurs inferieures ou egales
     def contingence(self):
         data=[[self.effectif(i,j) for j in range(1,self.N+1)]+[self.effectif(i,'.')] for i in range(1,self.N+1)]+[[self.effectif('.',j) for j in range(1,self.N+1)]+[self.N]]
-        print(data)
         text=[[f"{j}" for j in i] for i in data]
-        print(text)
-        rows=[f'{i}' for i in self.serie[0]]+['t']
-        columns=[f'{j}' for j in self.serie[1]]+['t']
-        colors=plt.cm.YlOrRd(np.linspace(0,0.5,max(max(data))+1))
-        colorsmap=[[colors[data[j]] for j in range(len(data[i]))] for i in range(len(data))]
-        plt.table(cellText=text,
-                  rowLabels=rows,
-                  colLabels=columns,
-                  cellColours=colorsmap,
-                  loc='center'
-                 )
+        rows=[f'{i}' for i in self.serie[0]]+['.']
+        columns=[f'{j}' for j in self.serie[1]]+['.']
+        colors=plt.cm.YlOrRd(np.linspace(0,0.5,max(max(i[:-1] for i in data[:-1]))+2))
+        colorsmap=[]
+        for i in range(len(data)-1):
+            colorsmap.append([])
+            for j in range(len(data[i])-1):
+                colorsmap[i].append(colors[data[i][j]])
+            colorsmap[i].append(np.array([1,1,1,1]))
+        colorsmap.append([np.array([1,1,1,1]) for _ in range(len(data[0]))])
+        plt.table(cellText=text,rowLabels=rows,colLabels=columns,cellColours=colorsmap,loc='center')
         plt.axis('off')
         plt.show()
-    def covariance(self):
-        pass
-    def correlation(self):
-        pass
+    def covariance(self,*args): 
+        print(args)
+        if args==() or args==(0,1):
+            return (sum(self.effectif(i,j)*(self.serie[0][i]-self.serie[0].moyenne)*(self.serie[1][j]-self.serie[1].moyenne if args==() or 0 in args) for j in range(self.N) for i in range(self.N))/self.N)
+    def correlation(self): return 
