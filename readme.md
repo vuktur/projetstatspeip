@@ -90,7 +90,8 @@ Dans le même esprit, on peut définir :
 
 #### **La moyenne arithmétique**
 
-<p align="center"><img src="/svgs/ce40a5369133d61caa40c4beb743b41f.svg?invert_in_darkmode" align=middle width=353.32083435pt height=47.806078649999996pt/></p>
+<p align="center"><img src="/svgs/ce40a5369133d61caa40c4beb743b41f.svg?invert_in_darkmode" align=middle width=353.32083435pt height=47.806078649999996pt/></p>  
+
 >`moyenne`  
 Remarque : si on pose <img src="/svgs/7685763f4490468237d95f4d0979209e.svg?invert_in_darkmode" align=middle width=133.04728139999997pt height=24.65753399999998pt/> et <img src="/svgs/dc22bdb0ee16a1b736295db4ad0bca79.svg?invert_in_darkmode" align=middle width=136.67340554999998pt height=24.65753399999998pt/> alors :
 <p align="center"><img src="/svgs/f762ac4295d4bc1d55e719963c9df35a.svg?invert_in_darkmode" align=middle width=280.3509027pt height=45.67365495pt/></p>
@@ -101,6 +102,7 @@ Remarque : si on pose <img src="/svgs/7685763f4490468237d95f4d0979209e.svg?inver
 
 C'est la plage de valeur du caractère observée sur la population :
 <p align="center"><img src="/svgs/39b4e0b84a65070d92fdfc266955a245.svg?invert_in_darkmode" align=middle width=333.13530525pt height=25.1935035pt/></p>
+
 >`etendue`  
 Attention : sensible aux erreurs de mesure.
 
@@ -117,12 +119,14 @@ Intérêt : Élimine les mesures aberrantes.
 
 Calcule la moyenne des écarts à la moyenne.
 <p align="center"><img src="/svgs/f65690ad72dcf7e6fcf35a4fe8b7d401.svg?invert_in_darkmode" align=middle width=373.62640754999995pt height=43.6202118pt/></p>
+
 >`ecartMoyen`  
 
 #### **L'écart quadratique moyen ou variance**
 
 Calcule la moyenne des carrés des écarts à la moyenne.
-<p align="center"><img src="/svgs/7d4012064076fd01288d3a4d08f4766e.svg?invert_in_darkmode" align=middle width=474.8084847pt height=43.6202118pt/></p>
+<p align="center"><img src="/svgs/7d4012064076fd01288d3a4d08f4766e.svg?invert_in_darkmode" align=middle width=474.8084847pt height=43.6202118pt/></p>  
+
 >`variance`  
 
 Relation de Koenig-Huygens
@@ -132,6 +136,7 @@ Relation de Koenig-Huygens
 
 C'est la racine carré de la variance : même dimension que le caractère étudié.
 <p align="center"><img src="/svgs/453f55182660ce930e8d58277da7f275.svg?invert_in_darkmode" align=middle width=486.19555875pt height=69.0417915pt/></p>
+
 >`ecartType`  
 
 ### 1.2.4 Les moments
@@ -139,11 +144,13 @@ C'est la racine carré de la variance : même dimension que le caractère étudi
 #### **Moment d'ordre k**
 
 <p align="center"><img src="/svgs/7a130c5d59b510e4373c4832a9116a64.svg?invert_in_darkmode" align=middle width=362.2753464pt height=45.67365495pt/></p>
+
 >`moment(k)`  
 
 #### **Moment centré d'ordre k**
 
 <p align="center"><img src="/svgs/a8b10e6a9b072c10852c1f5ad6468934.svg?invert_in_darkmode" align=middle width=497.65089659999995pt height=45.67365495pt/></p>
+
 >`momentCentre(k)`  
 
 Propriétés:
@@ -160,6 +167,7 @@ Propriétés:
 #### **Premier coeffcient de Fisher : coeffcient d'asymétrie**
 
 <p align="center"><img src="/svgs/cb3e478992ac3cd014877484c6320f57.svg?invert_in_darkmode" align=middle width=105.60552089999999pt height=37.94230605pt/></p>
+
 >`asymetrie()`  
 
 - série symétrique <img src="/svgs/c2e5ae93c3285eed27016a596aac766e.svg?invert_in_darkmode" align=middle width=59.06941424999998pt height=22.831056599999986pt/>
@@ -171,6 +179,7 @@ Propriétés:
 #### **Second coeffcient de Fisher : coeffcient d'aplatissement**
 
 <p align="center"><img src="/svgs/e83a22a4c47a0104d6c7ae7f11be1ec1.svg?invert_in_darkmode" align=middle width=94.96623344999999pt height=33.85762545pt/></p>
+
 >`aplatissement()`  
 
 - Une grande valeur de <img src="/svgs/c745b9b57c145ec5577b82542b2df546.svg?invert_in_darkmode" align=middle width=10.57650494999999pt height=14.15524440000002pt/> traduit un resserrement autour de la moyenne ("courbe en pic")
