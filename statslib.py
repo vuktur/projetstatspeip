@@ -16,14 +16,15 @@ class Stat():
             except:raise
         self.population=np.arange(pStart,pStop,pStep).tolist()
         self.N=len(np.arange(pStart,pStop,pStep))
-        self.modalites=sorted(list(dict.fromkeys(self.serie)))
-        self.mode=self.modeFunction()
-        self.mediane=self.quantile(2)[0]
-        self.moyenne=self.moment(1)
-        self.etendue=max(self.serie)-min(self.serie)
-        self.ecartMoyen=sum(abs(i-self.moment(1)) for i in self.serie)/self.N
-        self.variance=self.momentCentre(2)
-        self.ecartType=abs(self.variance)**(1/2)
+        if not isinstance(self.serie[0],list):
+            self.modalites=sorted(list(dict.fromkeys(self.serie)))
+            self.mode=self.modeFunction()
+            self.mediane=self.quantile(2)[0]
+            self.moyenne=self.moment(1)
+            self.etendue=max(self.serie)-min(self.serie)
+            self.ecartMoyen=sum(abs(i-self.moment(1)) for i in self.serie)/self.N
+            self.variance=self.momentCentre(2)
+            self.ecartType=abs(self.variance)**(1/2)
     def __repr__(self):return(
         f"Valeur   |{'|'.join([str(Fraction(i).limit_denominator()) for i in self.modalites])}\n"+
         f"Effectif |{'|'.join([' '*(len(str(Fraction(self.modalites[i-1]).limit_denominator()))-1)+str(self.effectif(i)) for i in range(1,len(self.modalites)+1)])}\n\n"+
@@ -47,11 +48,13 @@ class Stat():
     def frequenceC(self,n):    return sum(self.frequence(i) for i in range(1,n+1))
         # frequenceC fait le somme des frequences pour les valeurs inferieures ou egales
     def modeFunction(self):
+        if isinstance(self.serie[0],list): return None
         m=[self.modalites[i] for i in range(len(self.modalites)) if self.effectif(i+1)==max([self.effectif(j+1) for j in range(len(self.modalites))])]
         if len(m)==1:   return m[0]
         else:           return m
         # mode renvoie la valeur la plus fréquente
     def quantile(self,n): 
+        if isinstance(self.serie[0],list): return None
         q=[]
         s=sorted(self.serie)
         if(self):
@@ -68,7 +71,9 @@ class Stat():
     def variance2(self): return sum(((i-self.moment(1))**2)*(self.N/(self.N-1)) for i in self.serie)/self.N
     def ecarttyp2(self): return (abs(self.variance2()))**(1/2)
     # corrigés a n/(n-1)
-    def moment(self,k):    return sum(i**k for i in self.serie)/self.N
+    def moment(self,k): 
+        if isinstance(self.serie[0],list): return None
+        return sum(i**k for i in self.serie)/self.N
         # moment donne le moment d'ordre k, une autre valeur de disperssion
     def momentCentre(self,k): return sum((i-self.moment(1))**k for i in self.serie)/self.N
         # momentCentre donne le moment centre d'ordre k, cette fois ci autour de la moyenne
@@ -76,38 +81,38 @@ class Stat():
         # asymetrie donne le coefficient d'asymetrie (skewness)
     def aplatissement(self):     return (self.momentCentre(4)/self.momentCentre(2)**2)
         # aplatissement donne le coefficient d'aplatissement (kurtosis)
-    def classer(self,claScope=[]): 
-        claScope=sorted(claScope)
-        claList=[[j for j in sorted(self.serie) if (claScope[i]<=j<=claScope[i+1] if i==0 else claScope[i]<j<=claScope[i+1])] for i in range(len(claScope)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
-        return StatCla(claList,claScope=claScope)
+    def classer(self,bacs=[]): 
+        bacs=sorted(bacs)
+        claList=[[j for j in sorted(self.serie) if (bacs[i]<=j<=bacs[i+1] if i==0 else bacs[i]<j<=bacs[i+1])] for i in range(len(bacs)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
+        return StatClasse(claList,bacs=bacs)
         # classer renvoie une instance de la classe Cla, derivee de la classe Stat, ou la serie est constituee 
         # des classes delimitees par les arguments *args de la fonction
 
-class StatCla(Stat):
-    def __init__(self,stat,pStart=0,pStop=None,pStep=1,claScope=[]):
-        super(StatCla,self).__init__(stat,pStart=0,pStop=None,pStep=1)
+class StatClasse(Stat):
+    def __init__(self,stat,pStart=0,pStop=None,pStep=1,bacs=[]):
+        super(StatClasse,self).__init__(stat,pStart=0,pStop=None,pStep=1)
         self.modalites=sorted(list(dict.fromkeys((tuple(i) for i in self.serie))))
-        self.claScope=claScope
-        self.widths=[self.claScope[i+1]-self.claScope[i] for i in range(len(self.claScope)-1)]
+        self.bacs=bacs
+        self.widths=[self.bacs[i+1]-self.bacs[i] for i in range(len(self.bacs)-1)]
         self.heights=[self.effectif(i+1)/self.widths[i] for i in range(len(self.serie))]
     def effectif(self,n):      return len(self.serie[n-1])
     def mode(self):      return max(self.heights)
-    def claMod(self):    return [self.serie[i] for i in range(len(self.serie)) if self.heights[i]==self.mode()]
-    def depo(self):
+    def classeModale(self):    return [self.serie[i] for i in range(len(self.serie)) if self.heights[i]==self.mode()]
+    def depouiller(self):
         l=[]
         for i in self.serie:
             with Stat(i) as inst:
                 l.append(inst.mediane())
         return l
-    def histogram(self):
-        plt.bar([(self.claScope[i+1]+self.claScope[i])/2 for i in range(len(self.claScope)-1)],height=self.heights,width=self.widths,color='#4287f5',edgecolor='#0041a8',linewidth=1,alpha=.7)
+    def histogramme(self):
+        plt.bar([(self.bacs[i+1]+self.bacs[i])/2 for i in range(len(self.bacs)-1)],height=self.heights,width=self.widths,color='#4287f5',edgecolor='#0041a8',linewidth=1,alpha=.7)
         plt.grid(axis='y',alpha=.7)
-        plt.xticks(np.arange(min(self.claScope)-2,max(self.claScope)+3,1))#max(self.effectif(i+1)/max(len(j) for j in self.serie) for i in range(len(self.serie)))])
+        plt.xticks(np.arange(min(self.bacs)-2,max(self.bacs)+3,1))#max(self.effectif(i+1)/max(len(j) for j in self.serie) for i in range(len(self.serie)))])
         plt.show()
 
 class DoubleTryError(Exception):
     def __init__(self):
-        super().__init__("You can use StatDbl instead of Stat to analyse two stats at the time")
+        super().__init__("You can use StatDouble instead of Stat to analyse two stats at the time")
 class OnlyTwoError(Exception):
     def __init__(self):
         super().__init__("You only can analyse two stats at the time for now...")
@@ -118,7 +123,7 @@ class DifferentLenghError(Exception):
     def __init__(self):
         super().__init__("The two lists must have the same size...")
 
-class StatDbl():
+class StatDouble():
     def __init__(self,stat,pStart=0,pStop=None,pStep=1):
         if len(stat)>2: raise OnlyTwoError()
         if len(stat[0])!=len(stat[1]): raise DifferentLenghError()
@@ -156,7 +161,9 @@ class StatDbl():
         plt.axis('off')
         plt.show()
     def covariance(self,*args): 
-        print(args)
-        if args==() or args==(0,1):
-            return (sum(self.effectif(i,j)*(self.serie[0][i]-self.serie[0].moyenne)*(self.serie[1][j]-self.serie[1].moyenne if args==() or 0 in args) for j in range(self.N) for i in range(self.N))/self.N)
-    def correlation(self): return 
+        return (sum(
+            self.effectif((i if args==() or 0 in args else '.'),(j if args==() or 1 in args else '.'))*
+            (self.serie[0][i]-self.serie[0].moyenne if args==() or 0 in args else 1)*
+            (self.serie[1][j]-self.serie[1].moyenne if args==() or 1 in args else 1) 
+            for j in range(self.N) for i in range(self.N))/self.N)
+    def correlation(self): return 0
