@@ -2,7 +2,7 @@
 
 ## 1.1 Généralités
 
-Une statistique est une application d'une population <img src="https://rawgit.com/VK0537/projetstatspeip/viktor/svgs/9432d83304c1eb0dcb05f092d30a767f.svg?invert_in_darkmode" align=middle width=11.87217899999999pt height=22.465723500000017pt/> vers un ensemble de valeurs <img src="https://rawgit.com/VK0537/projetstatspeip/viktor/svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92464304999999pt height=22.465723500000017pt/>.
+Une statistique est une application d'une population <img src="/svgs/9432d83304c1eb0dcb05f092d30a767f.svg?invert_in_darkmode" align=middle width=11.87217899999999pt height=22.465723500000017pt/> vers un ensemble de valeurs <img src="https://rawgit.com/VK0537/projetstatspeip/viktor/svgs/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode" align=middle width=12.92464304999999pt height=22.465723500000017pt/>.
 
 <p align="center"><img src="https://rawgit.com/VK0537/projetstatspeip/viktor/svgs/816e5284cdfa5b04058a245bc2516b9f.svg?invert_in_darkmode" align=middle width=135.93580935pt height=39.452455349999994pt/></p>
 
