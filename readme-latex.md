@@ -309,11 +309,11 @@ Cette droite passe par le point $(x,y)$
 
 #### **Droite de régression de X en Y**
 
-On cherche la droite d'équation $X=\alpha X+\beta$ approchant "au mieux" le nuage de points de la
+On cherche la droite d'équation $X=\alpha Y+\beta$ approchant "au mieux" le nuage de points de la
 statistique double $C$.
-$$ \left\{\begin{array}{rl} a= & \frac{\sigma_{XY}}{\sigma^2_Y} \\ b= & \bar{x}-\bar{y}\frac{\sigma_{XY}}{\sigma^2_Y} \end{array} \right. $$
+$$ \left\{\begin{array}{rl} \alpha= & \frac{\sigma_{XY}}{\sigma^2_Y} \\ \beta= & \bar{x}-\bar{y}\frac{\sigma_{XY}}{\sigma^2_Y} \end{array} \right. $$
 
-Cette droite passe par le point $(x,y)$
+Cette droite passe par le point $(\bar{x},\bar{y})$
 
 Les deux droites sont confondues ssi $a=\frac{1}{\alpha}\Leftrightarrow \frac{\sigma^2_{XY}}{\sigma^2_X\sigma^2_Y}=1\Leftrightarrow \rho^2_{XY}=1$
 
