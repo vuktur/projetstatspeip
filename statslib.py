@@ -2,7 +2,7 @@ from fractions import Fraction
 import numpy as np
 # from decimal import Decimal, ROUND_HALF_UP
 import matplotlib.pyplot as plt
-
+#=================================================================================================================
 class Stat():
     def __init__(self,stat,pStart=0,pStop=None,pStep=1):
         self.serie=[]
@@ -72,7 +72,7 @@ class Stat():
         bacs=sorted(bacs)
         claList=[[j for j in sorted(self.serie) if (bacs[i]<=j<=bacs[i+1] if i==0 else bacs[i]<j<=bacs[i+1])] for i in range(len(bacs)-1)] # str(Fraction(self.serie[j]).limit_denominator()) 
         return StatClass(claList,bacs=bacs)
-
+#=================================================================================================================
 class StatClass(Stat):
     def __init__(self,stat,pStart=0,pStop=None,pStep=1,bacs=[]):
         super().__init__(stat,pStart,pStop,pStep)
@@ -98,23 +98,20 @@ class StatClass(Stat):
         plt.grid(axis='y',alpha=.7)
         plt.xticks(np.arange(min(self.bacs)-2,max(self.bacs)+3,1))
         plt.show()
-
-class OnlyTwoError(Exception):
-    def __init__(self):
-        super().__init__("You only can analyse two stats at the time for now...")
+#=================================================================================================================
 class DifferentLenghError(Exception):
     def __init__(self):
         super().__init__("The two lists must have the same lengh...")
-
+#=================================================================================================================
 class StatDouble():
     def __init__(self,X,Y,pStart=0,pStop=None,pStep=1):
-        if len(X)!=len(Y): raise DifferentLenghError()
+        if len(X)!=len(Y): raise ValueError(f'bad input shape ({len(X)}, {len(Y)})')
         self.X=Stat(X,pStart,pStop,pStep)
         self.Y=Stat(Y,pStart,pStop,pStep)
         self.N=self.X.N
     def __iter__(self): yield from ((self.X[i],self.Y[i]) for i in self.N)
     def __getitem__(self,n): 
-        try: return ((self.X[i],self.Y[i]) for i in self.N)[n]
+        try: return [(self.X[i],self.Y[i]) for i in self.N][n]
         except: pass
     def __enter__(self): return self
     def __exit__(self,*args):
@@ -143,24 +140,44 @@ class StatDouble():
         plt.show()
     def covar(self): return sum((self.X[i]-self.X.mean)*(self.Y[i]-self.Y.mean) for i in range(self.N))/(self.N)
     def correlation(self): return self.covar()/(self.X.stdDev*self.Y.stdDev)
-    def showGraph(self,*args): 
-        args
-        self.scatter()
-        plt.show()
-    def scatter(self): return plt.scatter(self.X.serie,self.Y.serie,c='#F00')
-    def regressionLin(self,called=False):
+    # def scatter(self): return plt.scatter(self.X.serie,self.Y.serie,c='#F00')
+    def regressionLin(self):
+        t=np.arange(min(self.X.serie),max(self.X.serie)+1)
         a=self.covar()/self.X.stdDev**2
         b=self.Y.mean-self.X.mean*a
+        plt.plot(t,a*t+b,'b-')
+        plt.scatter(self.X.serie,self.Y.serie,c='#F00')
+        plt.show()
+    def regressionLog(self,type=None): 
+        for i in range(self.N):
+            if self.X[i]<=0 or self.Y[i]<=0: 
+                raise RuntimeWarning('invalid value encountered in log')
         t=np.arange(min(self.X.serie),max(self.X.serie)+1)
-        graph=plt.plot(t,a*t+b,'b-')
-        if called: return graph
-        else: self.showGraph(graph)
-    def regressionLog(self,type=1): 
-        with StatDouble([(np.log(i) if i>0 else 0) for i in self.X],[(np.log(j) if j>0 else 0) for j in self.Y]) as s: 
-            a=s.covar()/s.X.stdDev**2
-            b=s.Y.mean-s.X.mean*a
-        t=np.arange(min(self.X.serie),max(self.X.serie)+1)
-        graph=plt.plot(t,np.exp(b)*np.exp(a)**t,'b-')
-        self.showGraph(graph)
+        if type!=2:
+            with StatDouble([np.log(i) for i in self.X],[np.log(j) for j in self.Y]) as s: 
+                a=s.covar()/s.X.stdDev**2
+                b=s.Y.mean-s.X.mean*a
+                plt.plot(t,np.exp(b)*t**a,'b-')
+        if type!=1:
+            with StatDouble(self.X.serie,[np.log(j) for j in self.Y]) as s: 
+                a=s.covar()/s.X.stdDev**2
+                b=s.Y.mean-s.X.mean*a
+                plt.plot(t,np.exp(b)*np.exp(a)**t,'g-')
+        plt.scatter(self.X.serie,self.Y.serie,c='#F00')
+        plt.show()
     def regressionPoly(self): 
-        pass
+        t=np.arange(min(self.X.serie),max(self.X.serie)+1)
+        m=np.array([[sum(x**(i+j) for x in self.X) for i in range(self.N+1)] for j in range(self.N+1)])
+        b=[sum(self.Y[i]*self.X[i]**k for i in range(self.N)) for k in range(self.N+1)]
+        a=np.linalg.solve(m,b)
+        # for i in range(self.N):
+        #     a[i]=?
+        #-----------------------------------
+        # for i in range(self.N):
+        #     sum(a[j]*m[i][j] for j in range(self.N))                        =b[i]
+        #     sum(a[j]*m[i][j] for j in range(self.N))                        =sum(self.Y[j]*self.X[j]**i for j in range(self.N))
+        #     sum(a[j]*sum(x**(i+j) for x in self.X) for j in range(self.N))  =sum(self.Y[j]*self.X[j]**i for j in range(self.N))
+        #-----------------------------------
+        plt.plot(t,sum(a[i]*t**i for i in self.N),'b-')
+        plt.scatter(self.X.serie,self.Y.serie,c='#F00')
+        plt.show()
