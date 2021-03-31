@@ -2,6 +2,8 @@ from fractions import Fraction
 import numpy as np
 # from decimal import Decimal, ROUND_HALF_UP
 import matplotlib.pyplot as plt
+
+from numpy.linalg import LinAlgError
 #=================================================================================================================
 class Stat():
     def __init__(self,stat,pStart=0,pStop=None,pStep=1):
@@ -100,8 +102,8 @@ class StatClass(Stat):
         plt.show()
 #=================================================================================================================
 class DifferentLenghError(Exception):
-    def __init__(self):
-        super().__init__("The two lists must have the same lengh...")
+    def __init__(self): 
+        super().__init__("Les deux listes doivent avoir la même taille...")
 #=================================================================================================================
 class StatDouble():
     def __init__(self,X,Y,pStart=0,pStop=None,pStep=1):
@@ -123,10 +125,10 @@ class StatDouble():
     def freq(self,m='.',n='.'):     return self.count(m,n)/self.N
     # def freqC(self,m='.',n='.'):    return sum(self.freq(i) for i in range(1,n+1))
     def contingence(self):
-        data=([[self.count(i,j) for j in self.Y]+[self.count(i,'.')] for i in self.X]+[[self.count('.',j) for j in self.Y]+[self.N]])
+        data=([[self.count(i,j) for j in self.Y.moda]+[self.count(i,'.')] for i in self.X.moda]+[[self.count('.',j) for j in self.Y.moda]+[self.N]])
         text=[[f"{j}" for j in i] for i in data]
-        rows=[f'{i}' for i in self.X]+['.']
-        columns=[f'{j}' for j in self.Y]+['.']
+        rows=[f'{i}' for i in self.X.moda]+['.']
+        columns=[f'{j}' for j in self.Y.moda]+['.']
         colors=plt.cm.YlOrRd(np.linspace(0,0.5,max(max(i[:-1] for i in data[:-1]))+2))
         colorsmap=[]
         for i in range(len(data)-1):
@@ -140,44 +142,40 @@ class StatDouble():
         plt.show()
     def covar(self): return sum((self.X[i]-self.X.mean)*(self.Y[i]-self.Y.mean) for i in range(self.N))/(self.N)
     def correlation(self): return self.covar()/(self.X.stdDev*self.Y.stdDev)
-    # def scatter(self): return plt.scatter(self.X.serie,self.Y.serie,c='#F00')
+    def scatter(self): return plt.scatter(self.X.serie,self.Y.serie,c='#F00')
     def regressionLin(self):
-        t=np.arange(min(self.X.serie),max(self.X.serie)+1)
+        t=np.array([min(self.X.serie),max(self.X.serie)+1])
         a=self.covar()/self.X.stdDev**2
         b=self.Y.mean-self.X.mean*a
         plt.plot(t,a*t+b,'b-')
-        plt.scatter(self.X.serie,self.Y.serie,c='#F00')
+        self.scatter()
         plt.show()
-    def regressionLog(self,type=None): 
+    def regressionLog(self,type=None,prec=50): 
         for i in range(self.N):
-            if self.X[i]<=0 or self.Y[i]<=0: 
-                raise RuntimeWarning('invalid value encountered in log')
-        t=np.arange(min(self.X.serie),max(self.X.serie)+1)
-        if type!=2:
+            if self.Y[i]<=0: raise RuntimeWarning('Valeur de log invalide (inf. ou égale à 0)')
+            if self.X[i]<=0: 
+                if type==1: raise RuntimeWarning('Valeur de log invalide (inf. ou égale à 0)')
+                if type==None: type=2
+        t=np.linspace(min(self.X.serie),max(self.X.serie),prec)
+        if type!=2:   #type 1
             with StatDouble([np.log(i) for i in self.X],[np.log(j) for j in self.Y]) as s: 
                 a=s.covar()/s.X.stdDev**2
                 b=s.Y.mean-s.X.mean*a
                 plt.plot(t,np.exp(b)*t**a,'b-')
-        if type!=1:
+        if type!=1:   #type 2
             with StatDouble(self.X.serie,[np.log(j) for j in self.Y]) as s: 
                 a=s.covar()/s.X.stdDev**2
                 b=s.Y.mean-s.X.mean*a
                 plt.plot(t,np.exp(b)*np.exp(a)**t,'g-')
-        plt.scatter(self.X.serie,self.Y.serie,c='#F00')
+        self.scatter()
         plt.show()
-    def regressionPoly(self): 
-        t=np.arange(min(self.X.serie),max(self.X.serie)+1)
-        m=np.array([[sum(x**(i+j) for x in self.X) for i in range(self.N+1)] for j in range(self.N+1)])
-        b=[sum(self.Y[i]*self.X[i]**k for i in range(self.N)) for k in range(self.N+1)]
-        a=np.linalg.solve(m,b)
-        # for i in range(self.N):
-        #     a[i]=?
-        #-----------------------------------
-        # for i in range(self.N):
-        #     sum(a[j]*m[i][j] for j in range(self.N))                        =b[i]
-        #     sum(a[j]*m[i][j] for j in range(self.N))                        =sum(self.Y[j]*self.X[j]**i for j in range(self.N))
-        #     sum(a[j]*sum(x**(i+j) for x in self.X) for j in range(self.N))  =sum(self.Y[j]*self.X[j]**i for j in range(self.N))
-        #-----------------------------------
-        plt.plot(t,sum(a[i]*t**i for i in self.N),'b-')
-        plt.scatter(self.X.serie,self.Y.serie,c='#F00')
+    def regressionPoly(self,prec=50): 
+        u=np.linspace(min(self.X.serie),max(self.X.serie),prec)
+        m=np.array([[sum(x**(i+j) for x in self.X) for i in range(self.N+1)] for j in range(self.N+1)],dtype='float')
+        b=np.array([sum(self.Y[i]*self.X[i]**k for i in range(self.N)) for k in range(self.N+1)],dtype='float')
+        try:a=np.linalg.solve(m,b)
+        except LinAlgError: raise LinAlgError("La matrice qui résulte des séries est singulière.")
+        for i in range(self.N+1):print(f"{a[i]}x^({i})+",end='')
+        plt.plot(u,sum(a[i]*u**i for i in range(self.N+1)),'b-')
+        self.scatter()
         plt.show()
