@@ -2,7 +2,6 @@ from fractions import Fraction
 import numpy as np
 # from decimal import Decimal, ROUND_HALF_UP
 import matplotlib.pyplot as plt
-
 from numpy.linalg import LinAlgError
 #=================================================================================================================
 class Stat():
@@ -142,15 +141,18 @@ class StatDouble():
         plt.show()
     def covar(self): return sum((self.X[i]-self.X.mean)*(self.Y[i]-self.Y.mean) for i in range(self.N))/(self.N)
     def correlation(self): return self.covar()/(self.X.stdDev*self.Y.stdDev)
-    def scatter(self): return plt.scatter(self.X.serie,self.Y.serie,c='#F00')
+    def scatter(self,called=False): 
+        s=plt.scatter(self.X.serie,self.Y.serie,c='#F00')
+        if not called: plt.show()
+        return s
     def regressionLin(self):
         t=np.array([min(self.X.serie),max(self.X.serie)+1])
         a=self.covar()/self.X.stdDev**2
         b=self.Y.mean-self.X.mean*a
         plt.plot(t,a*t+b,'b-')
-        self.scatter()
+        self.scatter(True)
         plt.show()
-    def regressionLog(self,type=None,prec=50): 
+    def regressionLog(self,type=None,prec=200): 
         for i in range(self.N):
             if self.Y[i]<=0: raise RuntimeWarning('Valeur de log invalide (inf. ou égale à 0)')
             if self.X[i]<=0: 
@@ -167,9 +169,9 @@ class StatDouble():
                 a=s.covar()/s.X.stdDev**2
                 b=s.Y.mean-s.X.mean*a
                 plt.plot(t,np.exp(b)*np.exp(a)**t,'g-')
-        self.scatter()
+        self.scatter(True)
         plt.show()
-    def regressionPoly(self,prec=50): 
+    def regressionPoly(self,deg=1,prec=200): 
         u=np.linspace(min(self.X.serie),max(self.X.serie),prec)
         m=np.array([[sum(x**(i+j) for x in self.X) for i in range(self.N+1)] for j in range(self.N+1)],dtype='float')
         b=np.array([sum(self.Y[i]*self.X[i]**k for i in range(self.N)) for k in range(self.N+1)],dtype='float')
@@ -177,5 +179,5 @@ class StatDouble():
         except LinAlgError: raise LinAlgError("La matrice qui résulte des séries est singulière.")
         for i in range(self.N+1):print(f"{a[i]}x^({i})+",end='')
         plt.plot(u,sum(a[i]*u**i for i in range(self.N+1)),'b-')
-        self.scatter()
+        self.scatter(True)
         plt.show()
