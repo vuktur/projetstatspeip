@@ -12,65 +12,46 @@ class Stats():
                     self.M.append(x)
             if self.T == "dépouillée":
                 self.M.append(x[0])
+    # def effectif(self,i): return self.X.count(i)
+    # def fréquence(self,i): return self.effectif(i)/self.O
 
-    # def effectif(self,i):
-    #     return self.X.count(i)
+    # def moyenne_b(self):
+    #     moy = 0
+    #     for i in self.M:
+    #         moy += self.fréquence(i)*i
+    #     return round(moy,2)
 
-    # def fréquence(self,i):
-    #     return self.effectif(i)/self.O
+    # def médiane_b(self):
+    #     L=sorted(self.X)
+    #     if len(L)%2==0:
+    #         return round((L[round(len(L)/2)]+L[round(len(L)/2)-1])/2)
+    #     else :
+    #         return L[round(len(L)/2)]
 
-    def moyenne_b(self):
-        moy = 0
-        for i in self.M:
-            moy += self.fréquence(i)*i
-        return round(moy,2)
+    # def Quartiles_b(self):
+    #     L = sorted(self.X)
+    #     if len(L)>=3:
+    #         if len(L) % 2 == 0:
+    #             p=round((L[round(len(L)/4)]+L[round(len(L)/4)-1])/2)
+    #             d=round((L[round(len(L)/2)]+L[round(len(L)/2)-1])/2)
+    #             t=round((L[round(len(L)/4)*3]+L[(round(len(L)/4)*3)-1])/2)
+    #         else:
+    #             p=L[round(len(L)/4)]
+    #             d=L[round(len(L)/2)]
+    #             t=L[round(len(L)/4*3)]
+    #     else:
+    #         print("Il n'y a pas assez d'observations")
+    #     return (p,d,t)
 
-    def médiane_b(self):
-        L=sorted(self.X)
-        if len(L)%2==0:
-            return round((L[round(len(L)/2)]+L[round(len(L)/2)-1])/2)
-        else :
-            return L[round(len(L)/2)]
+    # def Variance_b(self):
+    #     V=0
+    #     for i in self.M:
+    #         V += self.fréquence(i)*((i-self.moyenne_b())**2)
+    #     return round(V,2)
 
-    def Quartiles_b(self):
-        L = sorted(self.X)
-        if len(L)>=3:
-            if len(L) % 2 == 0:
-                p=round((L[round(len(L)/4)]+L[round(len(L)/4)-1])/2)
-                d=round((L[round(len(L)/2)]+L[round(len(L)/2)-1])/2)
-                t=round((L[round(len(L)/4)*3]+L[(round(len(L)/4)*3)-1])/2)
-            else:
-                p=L[round(len(L)/4)]
-                d=L[round(len(L)/2)]
-                t=L[round(len(L)/4*3)]
-        else:
-            print("Il n'y a pas assez d'observations")
-        return (p,d,t)
-
-    def Variance_b(self):
-        V=0
-        for i in self.M:
-            V += self.fréquence(i)*((i-self.moyenne_b())**2)
-        return round(V,2)
-
-    def écart_type_b(self):
-        V=sqrt(self.Variance_b())
-        return round(V,2)
-
-    def étendue_b(self):
-        L = sorted(self.X)
-        min=L[0]
-        max=L[len(L)-1]
-        return max-min
-
-    def mode_b(self):
-        max=0
-        j=0
-        for i in self.M:
-            if self.effectif(i)>max:
-                max=self.effectif(i)
-                j=i
-        return j
+    # def écart_type_b(self):
+    #     V=sqrt(self.Variance_b())
+    #     return round(V,2)
 
     def asymétrie_b(self):
         u=0
