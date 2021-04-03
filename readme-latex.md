@@ -7,7 +7,7 @@ Une statistique est une application d'une population $\Omega$ vers un ensemble d
 $$ \left\{\begin{array}{rl} X: & \Omega \rightarrow C\\ & \omega \rightarrow X(\omega) \end{array} \right. $$
 
 - $\Omega$ : population finie d'individus $\omega$. On va mesurer/observer un caractère particulier sur ces individus.  
-    >`population`  
+    >`pop`  
 
 - $C$ : ensemble des valeurs possibles du caractère, appelées aussi modalités.  
     >`modalites`  

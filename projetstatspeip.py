@@ -25,12 +25,11 @@ class Stat():
             self.moyenne=self.moment(1)
             self.etendue=max(self.serie)-min(self.serie)
             self.variance=self.momentCentre(2)
-            self.ecarttype=abs(self.variance)**(1/2)
-            self.ecartmoyen=sum(abs(i-self.moment(1)) for i in self.serie)/self.N
+            self.ecartType=abs(self.variance)**(1/2)
+            self.ecartMoyen=sum(abs(i-self.moment(1)) for i in self.serie)/self.N
 
     def __repr__(self):return(
-        # np.array2string(np.array([[i for i in self.modalites],[self.effectif(i) for i in self.modalites]]))+'\n'+
-        f"Moyenne : {self.moyenne} , Mode : {self.mode} , Médiane : {self.mediane}\nVariance : {self.variance} , Ecart-type : {self.ecarttype} , Etendue : {self.etendue}\nCourbe : {self.applatissement()} , Distribution : {self.asymetrie()}")
+        f"Moyenne : {self.moyenne} , Mode : {self.mode} , Médiane : {self.mediane}\nVariance : {self.variance} , Ecart-type : {self.ecartType} , Etendue : {self.etendue}\nCourbe : {self.applatissement()} , Distribution : {self.asymetrie()}")
 
     def __iter__(self): yield from self.serie
 
@@ -178,7 +177,7 @@ class StatDouble():
         return sum((self.X[i]-self.X.moyenne)*(self.Y[i]-self.Y.moyenne) for i in range(self.N))/(self.N)
 
     def correlation(self): 
-        return self.covar()/(self.X.ecarttype*self.Y.ecarttype)
+        return self.covar()/(self.X.ecartType*self.Y.ecartType)
 
     def scatter(self,called=False): 
         s=plt.scatter(self.X.serie,self.Y.serie,c='#F00')
@@ -187,7 +186,7 @@ class StatDouble():
 
     def regressionLin(self):
         t=np.array([min(self.X.serie),max(self.X.serie)+1])
-        a=self.covar()/self.X.ecarttype**2
+        a=self.covar()/self.X.ecartType**2
         b=self.Y.moyenne-self.X.moyenne*a
         plt.plot(t,a*t+b,'b-')
         self.scatter(True)
@@ -202,12 +201,12 @@ class StatDouble():
         t=np.linspace(min(self.X.serie),max(self.X.serie),prec)
         if type!=2:   #type 1
             with StatDouble([np.log(i) for i in self.X],[np.log(j) for j in self.Y]) as s: 
-                a=s.covar()/s.X.ecarttype**2
+                a=s.covar()/s.X.ecartType**2
                 b=s.Y.moyenne-s.X.moyenne*a
                 plt.plot(t,np.exp(b)*t**a,'b-')
         if type!=1:   #type 2
             with StatDouble(self.X.serie,[np.log(j) for j in self.Y]) as s: 
-                a=s.covar()/s.X.ecarttype**2
+                a=s.covar()/s.X.ecartType**2
                 b=s.Y.moyenne-s.X.moyenne*a
                 plt.plot(t,np.exp(b)*np.exp(a)**t,'g-')
         self.scatter(True)
