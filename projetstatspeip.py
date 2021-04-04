@@ -17,7 +17,7 @@ class Stat():
             try:self.serie=[statistique(i) for i in np.arange(populationStart,populationStop,populationStep)]
             except:raise
         self.pop=np.arange(populationStart,populationStop,populationStep).tolist()
-        self.N=len(np.arange(populationStart,populationStop,populationStep))
+        self.N=len(self.pop)
         if not isinstance(self.serie[0],list): #si ce n'est pas une stat classee
             self.modalites=sorted(list(dict.fromkeys(self.serie)))
             self.mode=[i for i in self.modalites if self.effectif(i)==max(self.effectif(j) for j in self.modalites)]
