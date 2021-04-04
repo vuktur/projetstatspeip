@@ -166,23 +166,23 @@ class StatDouble():
         plt.axis('off')
         plt.show()
 
-    def covar(self): 
+    def covariance(self): 
         return sum((self.X[i]-self.X.moyenne)*(self.Y[i]-self.Y.moyenne) for i in range(self.N))/(self.N)
 
     def correlation(self): 
-        return self.covar()/(self.X.ecartType*self.Y.ecartType)
+        return self.covariance()/(self.X.ecartType*self.Y.ecartType)
 
-    def scatter(self,called=False): 
+    def nuage(self,called=False): 
         s=plt.scatter(self.X.serie,self.Y.serie,c='#F00')
         if not called: plt.show()
         return s
 
     def regressionLin(self):
         t=np.array([min(self.X.serie),max(self.X.serie)+1])
-        a=self.covar()/self.X.ecartType**2
+        a=self.covariance()/self.X.ecartType**2
         b=self.Y.moyenne-self.X.moyenne*a
         plt.plot(t,a*t+b,'b-')
-        self.scatter(True)
+        self.nuage(True)
         plt.show()
 
     def regressionLog(self,type=None,prec=200): 
@@ -194,15 +194,15 @@ class StatDouble():
         t=np.linspace(min(self.X.serie),max(self.X.serie),prec)
         if type!=2:   #type 1
             with StatDouble([np.log(i) for i in self.X],[np.log(j) for j in self.Y]) as s: 
-                a=s.covar()/s.X.ecartType**2
+                a=s.covariance()/s.X.ecartType**2
                 b=s.Y.moyenne-s.X.moyenne*a
                 plt.plot(t,np.exp(b)*t**a,'b-')
         if type!=1:   #type 2
             with StatDouble(self.X.serie,[np.log(j) for j in self.Y]) as s: 
-                a=s.covar()/s.X.ecartType**2
+                a=s.covariance()/s.X.ecartType**2
                 b=s.Y.moyenne-s.X.moyenne*a
                 plt.plot(t,np.exp(b)*np.exp(a)**t,'g-')
-        self.scatter(True)
+        self.nuage(True)
         plt.show()
 
     def regressionPoly(self,deg=1,prec=200): 
@@ -213,5 +213,5 @@ class StatDouble():
         except LinAlgError: raise LinAlgError("La matrice qui résulte des séries est singulière.")
         for i in range(self.N+1):print(f"{a[i]}x^({i})+",end='')
         plt.plot(u,sum(a[i]*u**i for i in range(self.N+1)),'b-')
-        self.scatter(True)
+        self.nuage(True)
         plt.show()
