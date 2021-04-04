@@ -29,7 +29,7 @@ class Stat():
             self.ecartMoyen=sum(abs(i-self.moment(1)) for i in self.serie)/self.N
 
     def __repr__(self):return(
-        f"Moyenne : {self.moyenne} , Mode : {self.mode} , Médiane : {self.mediane}\nVariance : {self.variance} , Ecart-type : {self.ecartType} , Etendue : {self.etendue}\nCourbe : {self.applatissement()} , Distribution : {self.asymetrie()}")
+        f"Moyenne : {self.moyenne} , Mode : {self.mode} , Médiane : {self.mediane}\nVariance : {self.variance} , Ecart-type : {self.ecartType} , Etendue : {self.etendue}\nCourbe : {self.aplatissement()} , Distribution : {self.asymetrie()}")
 
     def __iter__(self): yield from self.serie
 
@@ -74,7 +74,7 @@ class Stat():
     def asymetrie(self): 
         return (self.momentCentre(3)/self.momentCentre(2)**(3/2))
 
-    def applatissement(self): 
+    def aplatissement(self): 
         return (self.momentCentre(4)/self.momentCentre(2)**2)
 
     def classer(self,bacs=[]): 
