@@ -92,13 +92,6 @@ class StatClassee(Stat):
         self.widths=[self.bacs[i+1]-self.bacs[i] for i in range(len(self.bacs)-1)]
         self.heights=[self.effectif(i)/self.widths[i] for i in range(len(self.serie))]
 
-    def __enter__(self): 
-        return self
-
-    def __exit__(self,*args):
-        del self
-        return True
-
     def effectif(self,n): 
         return len(self.serie[n])
 
