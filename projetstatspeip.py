@@ -8,19 +8,22 @@ from numpy.linalg import LinAlgError
 #=================================================================================================================
 
 class Stat():
-    def __init__(self,statistique,populationStart=0,populationStop=10,populationStep=1):
+    def __init__(self,statistique,populationStart=0,populationStop=None,populationStep=1):
         self.serie=[]
         if(isinstance(statistique,list)): #si c'est une liste
             if(populationStop==None):populationStop=len(statistique)
             self.serie=statistique
         elif(callable(statistique)): #si c'est une fonction
-            try:self.serie=[statistique(i) for i in np.arange(populationStart,populationStop,populationStep)]
+            if populationStop==None:populationStop=10
+            try:self.serie=[statistique(i) for i in 
+                            np.arange(populationStart,populationStop,populationStep)]
             except:raise
         self.pop=np.arange(populationStart,populationStop,populationStep).tolist()
         self.N=len(self.pop)
         if not isinstance(self.serie[0],list): #si ce n'est pas une stat classee
             self.modalites=sorted(list(dict.fromkeys(self.serie)))
-            self.mode=[i for i in self.modalites if self.effectif(i)==max(self.effectif(j) for j in self.modalites)]
+            self.mode=[i for i in self.modalites 
+                       if self.effectif(i)==max(self.effectif(j) for j in self.modalites)]
             self.mediane=self.quantile(2)[0]
             self.moyenne=self.moment(1)
             self.etendue=max(self.serie)-min(self.serie)
@@ -47,7 +50,8 @@ class Stat():
         return self.serie.count(n)
 
     def effectifC(self,n): 
-        return sum(self.effectif(i) for i in sorted(self.modalites) if i<=n)
+        return sum(self.effectif(i) 
+                   for i in sorted(self.modalites) if i<=n)
 
     def frequence(self,n): 
         return (self.effectif(n)/self.N)
@@ -60,6 +64,25 @@ class Stat():
         q,s=[],sorted(self.serie)
         for i in range(1,n):
             a=(i*len(s)/n)
+            b=(a-a%.5+.5 if (a%.5<.25 if a>len(s)/2 else a%.5<=.25) else a-a%.5+1)
+            q.append(s[int(b)-1] if b%1==0 else (s[int(b)]+s[int(b)-1])/2)
+        return q
+
+    def quantile(self,n): 
+        if isinstance(self.serie[0],list): return None
+        q,s=[],sorted(self.serie)
+        for i in range(1,n):
+            a=(i*len(s)/n)
+            if a>len(s)/2:                  #si la valeur est supperieure a la moitié
+                if a%.5<.25:                    #alors on teste si a 
+                    b=a-a%.5+.5
+                else: 
+                    b=a-a%.5+1
+            else:                           #si la valeur est inferieure a la moitié
+                if a%.5<=.25: #c'est le <= qui change
+                    b=a-a%.5+.5
+                else:
+                    b=a-a%.5+1
             b=(a-a%.5+.5 if (a%.5<.25 if a>len(s)/2 else a%.5<=.25) else a-a%.5+1)
             q.append(s[int(b)-1] if b%1==0 else (s[int(b)]+s[int(b)-1])/2)
         return q
@@ -211,7 +234,6 @@ class StatDouble():
         b=np.array([sum(self.Y[i]*self.X[i]**k for i in range(self.N)) for k in range(self.N+1)],dtype='float')
         try:a=np.linalg.solve(m,b)
         except LinAlgError: raise LinAlgError("La matrice qui résulte des séries est singulière.")
-        for i in range(self.N+1):print(f"{a[i]}x^({i})+",end='')
         plt.plot(u,sum(a[i]*u**i for i in range(self.N+1)),'b-')
         self.nuage(True)
         plt.show()
