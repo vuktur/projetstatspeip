@@ -101,7 +101,7 @@ class StatClassee(Stat):
     def classeModale(self): 
         return [self.serie[i] for i in range(len(self.serie)) if self.heights[i]==self.mode()]
 
-    def depouiller(self):
+    def brut(self):
         l=[]
         for i in self.serie:
             with Stat(i) as inst:
