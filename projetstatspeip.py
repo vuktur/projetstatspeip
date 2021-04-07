@@ -68,25 +68,6 @@ class Stat():
             q.append(s[int(b)-1] if b%1==0 else (s[int(b)]+s[int(b)-1])/2)
         return q
 
-    def quantile(self,n): 
-        if isinstance(self.serie[0],list): return None
-        q,s=[],sorted(self.serie)
-        for i in range(1,n):
-            a=(i*self.N/n)
-            if a>self.N/2:                  #si la valeur est supperieure a la moitié
-                if a%.5<.25:                    #alors on teste si a 
-                    b=a-a%.5+.5
-                else: 
-                    b=a-a%.5+1
-            else:                           #si la valeur est inferieure a la moitié
-                if a%.5<=.25: #c'est le <= qui change
-                    b=a-a%.5+.5
-                else:
-                    b=a-a%.5+1
-            b=(a-a%.5+.5 if (a%.5<.25 if a>self.N/2 else a%.5<=.25) else a-a%.5+1)
-            q.append(s[int(b)-1] if b%1==0 else (s[int(b)]+s[int(b)-1])/2)
-        return q
-
     def moment(self,k): 
         if isinstance(self.serie[0],list): return None
         return sum(i**k for i in self.serie)/self.N
